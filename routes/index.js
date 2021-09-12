@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const multer = require('multer');
 const Book = require('../models/book');
 const routeGuard = require('./../middleware/route-guard');
 
@@ -53,4 +54,18 @@ router.post('/results', (req, res, next) => {
     });
 });
 
+router.post('/private/:id/delete', (req, res, next) => {
+  const id = req.params.id;
+  Book.findOneAndDelete({ id })
+    .then((publication) => {
+      if (publication) {
+        res.redirect('/private');
+      } else {
+        throw new Error('NOT_ALLOWED_TO_DELETE_PUBLICATION');
+      }
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
 module.exports = router;

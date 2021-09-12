@@ -11,8 +11,8 @@ const schema = new mongoose.Schema({
     type: String
   },
   image: {
-    data: Buffer,
-    contentType: String
+    path: String,
+    originalName: String
   },
   review: {
     type: String,
