@@ -1,7 +1,30 @@
-<h1>Your Result</h1>
+<h1>Your Results</h1>
+<div class='results-data'>
   {{#each books}}
-   <h3>{{title}}</h3>
-   <h3>{{subtitle}}</h3>
-   <img src={{image}} src={{title}}/>
+    <h3>{{title}}</h3>
+    <h3>{{subtitle}}</h3>
+    <img src={{image}} style='width: 150px;' src={{title}} />
+
+    <form method='POST'>
+      <input
+        type='text'
+        name='title'
+        id='input-title'
+        value='{{title}}'
+        placeholder='Title'
+        style='display: none;'
+      />
+
+      <input
+        type='text'
+        name='subtitle'
+        id='input-subtitle'
+        value='{{subtitle}}'
+        placeholder='subtitle'
+        style='display: none;'
+      />
+
+      <button>Add</button>
+    </form>
   {{/each}}
 </div>
