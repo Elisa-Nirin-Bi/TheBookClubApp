@@ -15,6 +15,12 @@ const schema = new mongoose.Schema({
   },
   passwordHashAndSalt: {
     type: String
+  },
+  bio: {
+    type: String
+  },
+  profilePhoto: {
+    type: File
   }
 });
 
