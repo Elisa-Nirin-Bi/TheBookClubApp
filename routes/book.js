@@ -7,15 +7,13 @@ const multer = require('multer');
 const Book = require('../models/book');
 const routeGuard = require('./../middleware/route-guard');
 
-router.get('/', (req, res, next) => {
-  res.render('home', { title: 'Hello World!' });
-});
+const bookRouter = express.Router();
 
-router.get('/search-book', routeGuard, (req, res, next) => {
+bookRouter.get('/search-book', routeGuard, (req, res, next) => {
   res.render('search-book');
 });
 
-router.get('/results', (req, res) => {
+bookRouter.get('/results', (req, res) => {
   const topic = req.query.topic;
   axios
     .get(`https://api.itbook.store/1.0/search/${topic}`)
@@ -29,7 +27,7 @@ router.get('/results', (req, res) => {
     });
 });
 
-router.get('/private', (req, res, next) => {
+bookRouter.get('/private', (req, res, next) => {
   Book.find({})
     .then((books) => {
       res.render('private', { books });
@@ -39,7 +37,7 @@ router.get('/private', (req, res, next) => {
     });
 });
 
-router.post('/results', (req, res, next) => {
+bookRouter.post('/results', (req, res, next) => {
   const { title, subtitle, image } = req.body;
   Book.create({
     title,
@@ -54,7 +52,7 @@ router.post('/results', (req, res, next) => {
     });
 });
 
-router.get('/private/:id/edit', (req, res, next) => {
+bookRouter.get('/private/:id/edit', (req, res, next) => {
   const id = req.params.id;
   Book.findById(id)
     .then((book) => {
@@ -65,7 +63,7 @@ router.get('/private/:id/edit', (req, res, next) => {
     });
 });
 
-router.post('/private/:id/edit', (req, res, next) => {
+bookRouter.post('/private/:id/edit', (req, res, next) => {
   const id = req.params.id;
   const title = req.body.title;
   const subtitle = req.body.subtitle;
@@ -79,7 +77,7 @@ router.post('/private/:id/edit', (req, res, next) => {
     });
 });
 
-router.post('/private/:id/delete', (req, res, next) => {
+bookRouter.post('/private/:id/delete', (req, res, next) => {
   const id = req.params.id;
   Book.findOneAndDelete({ id })
     .then(() => {
@@ -89,4 +87,4 @@ router.post('/private/:id/delete', (req, res, next) => {
       next(error);
     });
 });
-module.exports = router;
+module.exports = bookRouter;
