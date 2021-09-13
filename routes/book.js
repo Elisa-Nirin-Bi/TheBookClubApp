@@ -13,7 +13,7 @@ bookRouter.get('/search-book', routeGuard, (req, res, next) => {
   res.render('search-book');
 });
 
-bookRouter.get('/results', (req, res) => {
+bookRouter.get('/results', routeGuard, (req, res) => {
   const topic = req.query.topic;
   axios
     .get(`https://api.itbook.store/1.0/search/${topic}`)
@@ -27,7 +27,7 @@ bookRouter.get('/results', (req, res) => {
     });
 });
 
-bookRouter.get('/private', (req, res, next) => {
+bookRouter.get('/private', routeGuard, (req, res, next) => {
   Book.find({})
     .then((books) => {
       res.render('private', { books });
@@ -37,7 +37,7 @@ bookRouter.get('/private', (req, res, next) => {
     });
 });
 
-bookRouter.post('/results', (req, res, next) => {
+bookRouter.post('/results', routeGuard, (req, res, next) => {
   const { title, subtitle, image } = req.body;
   Book.create({
     title,
@@ -52,7 +52,7 @@ bookRouter.post('/results', (req, res, next) => {
     });
 });
 
-bookRouter.get('/private/:id/edit', (req, res, next) => {
+bookRouter.get('/private/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   Book.findById(id)
     .then((book) => {
@@ -63,7 +63,7 @@ bookRouter.get('/private/:id/edit', (req, res, next) => {
     });
 });
 
-bookRouter.post('/private/:id/edit', (req, res, next) => {
+bookRouter.post('/private/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const title = req.body.title;
   const subtitle = req.body.subtitle;
@@ -77,7 +77,7 @@ bookRouter.post('/private/:id/edit', (req, res, next) => {
     });
 });
 
-bookRouter.post('/private/:id/delete', (req, res, next) => {
+bookRouter.post('/private/:id/delete', routeGuard, (req, res, next) => {
   const id = req.params.id;
   Book.findOneAndDelete({ id })
     .then(() => {
