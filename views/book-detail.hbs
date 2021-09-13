@@ -1,0 +1,14 @@
+{{#each book}}
+
+  <h3>{{title}}</h3>
+  <h3>{{subtitle}}</h3>
+{{/each}}
+
+<form method='POST'>
+
+  <label for='review-input'>Your Review</label>
+  <input id='review-input' type='text' name='review' placeholder='Review' />
+
+  <button>Add Review</button>
+
+</form>

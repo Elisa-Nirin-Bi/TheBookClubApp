@@ -1,5 +1,18 @@
-<h1>Private</h1>
-<p>This page should only be accessible to authenticated users.</p>
+<h1>Profile</h1>
 <span><strong>Name</strong>: {{user.name}}</span>
 <br />
 <span><strong>Email</strong>: {{user.email}}</span>
+
+<div class='added-books'>
+  {{#each books}}
+    <h3>{{title}}</h3>
+    <h3>{{subtitle}}</h3>
+    <img src={{image}} style='width: 150px;' src={{title}} />
+    <h3>{{review}}</h3>
+    <a class='btn' href='/private/{{this._id}}/edit'>Add Review</a>
+    <form method='POST' action='/private/{{this._id}}/delete'>
+      <button type='submit'>Delete Book</button>
+    </form>
+  {{/each}}
+
+</div>
