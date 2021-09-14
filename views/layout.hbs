@@ -22,7 +22,7 @@
         <nav class='nav nav-masthead justify-content-center float-md-end'>
           <a class='nav-link active' aria-current='page' href='/'>Home</a>
           {{#if user}}
-          <a class='nav-link' href='/profile/{{user._id}}'>{{user.name}}'s Profile</a>
+          <a class='nav-link' href='/profile/{{user.id}}'>{{user.name}}'s Profile</a>
           <a class='nav-link' href='/search-book'>Search Book</a>
           <a class='nav-link' href='/search-user'>Search User</a>
           <form action='/authentication/sign-out' method='POST'>

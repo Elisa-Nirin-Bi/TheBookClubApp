@@ -19,8 +19,8 @@
     <span class='fa fa-star'></span>
   <h3>{{review}}</h3>
   </p>
-  <a class='btn' href='/private/{{this._id}}/edit'>Add Review</a>
-  <form method='POST' action='/private/{{this._id}}/delete'>
+  <a class='btn' href='/booklist/{{this._id}}/edit'>Add Review</a>
+  <form method='POST' action="/booklist/{{this._id}}/delete">
     <button type='submit'>Delete Book</button>
   </form>
   {{/each}}

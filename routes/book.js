@@ -5,6 +5,7 @@ const router = express.Router();
 const axios = require('axios');
 const multer = require('multer');
 const Book = require('../models/book');
+// const User = require('../models/user');
 const routeGuard = require('./../middleware/route-guard');
 
 const bookRouter = express.Router();
@@ -27,10 +28,11 @@ bookRouter.get('/results', routeGuard, (req, res) => {
     });
 });
 
-bookRouter.get('/private', routeGuard, (req, res, next) => {
+bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
+  const id = req.params.id;
   Book.find({})
     .then((books) => {
-      res.render('private', { books });
+      res.render('user-book-list', { books });
     })
     .catch((error) => {
       next(error);
@@ -38,6 +40,7 @@ bookRouter.get('/private', routeGuard, (req, res, next) => {
 });
 
 bookRouter.post('/results', routeGuard, (req, res, next) => {
+  const id = req.user._id;
   const { title, subtitle, image } = req.body;
   Book.create({
     title,
@@ -45,14 +48,14 @@ bookRouter.post('/results', routeGuard, (req, res, next) => {
     image
   })
     .then(() => {
-      res.redirect('private');
+      res.redirect(`/booklist/${id}`);
     })
     .catch((error) => {
       next(error);
     });
 });
 
-bookRouter.get('/private/:id/edit', routeGuard, (req, res, next) => {
+bookRouter.get('/booklist/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   Book.findById(id)
     .then((book) => {
@@ -63,25 +66,27 @@ bookRouter.get('/private/:id/edit', routeGuard, (req, res, next) => {
     });
 });
 
-bookRouter.post('/private/:id/edit', routeGuard, (req, res, next) => {
+bookRouter.post('/booklist/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
+  const userId = req.user._id;
   const title = req.body.title;
   const subtitle = req.body.subtitle;
   const review = req.body.review;
-  Book.findOneAndUpdate(id, { title, subtitle, review })
+  Book.findByIdAndUpdate(id, { title, subtitle, review })
     .then(() => {
-      res.redirect('/private');
+      res.redirect(`/booklist/${userId}`);
     })
     .catch((error) => {
       next(error);
     });
 });
 
-bookRouter.post('/private/:id/delete', routeGuard, (req, res, next) => {
+bookRouter.post('/booklist/:id/delete', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  Book.findOneAndDelete({ id })
+  const userId = req.user._id;
+  Book.findByIdAndDelete(id)
     .then(() => {
-      res.redirect('/private');
+      res.redirect(`/booklist/${userId}`);
     })
     .catch((error) => {
       next(error);
