@@ -23,4 +23,27 @@ router.get('/profile/:id', routeGuard, (req, res, next) => {
     });
 });
 
+router.get('/edit-profile/:id', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  User.findById(id)
+    .then((profile) => {
+      res.render('edit-profile');
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/edit-profile/:id', routeGuard, (req, res, next) => {
+  const id = req.user._id;
+  const { name, email, bio } = req.body;
+  User.findByIdAndUpdate(id, { name, email, bio })
+    .then(() => {
+      res.redirect(`/profile/${id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 module.exports = router;

@@ -1,36 +1,38 @@
-<h1>Profile</h1>
-<span><strong>Name</strong>: {{user.name}}</span>
-<br />
-<span><strong>Email</strong>: {{user.email}}</span>
+<h1>{{user.name}}'s Book List</h1>
+
 
 <div class='added-books'>
   {{#each books}}
-    <h1>Hi</h1>
-    <h3>{{title}}</h3>
-    <h3>{{subtitle}}</h3>
-    <img src={{image}} style='width: 150px;' src={{title}} />
-    <p>
-      <style>
-        .checked { color: orange; }
-      </style>
-      <span class='fa fa-star'></span>
-      <span class='fa fa-star'></span>
-      <span class='fa fa-star'></span>
-      <span class='fa fa-star'></span>
-      <span class='fa fa-star'></span>
-      <h3>{{review}}</h3>
-    </p>
-    <a class='btn' href='/private/{{this._id}}/edit'>Add Review</a>
-    <form method='POST' action='/private/{{this._id}}/delete'>
-      <button type='submit'>Delete Book</button>
-    </form>
+  <h3>{{title}}</h3>
+  <h3>{{subtitle}}</h3>
+  <img src={{image}} style='width: 150px;' src={{title}} />
+  <p>
+    <style>
+      .checked {
+        color: orange;
+      }
+    </style>
+    <span class='fa fa-star'></span>
+    <span class='fa fa-star'></span>
+    <span class='fa fa-star'></span>
+    <span class='fa fa-star'></span>
+    <span class='fa fa-star'></span>
+  <h3>{{review}}</h3>
+  </p>
+  <a class='btn' href='/private/{{this._id}}/edit'>Add Review</a>
+  <form method='POST' action='/private/{{this._id}}/delete'>
+    <button type='submit'>Delete Book</button>
+  </form>
   {{/each}}
 
 </div>
 
 <script>
-  let star = document.getElementsByTagName('span'); for(let i = 0; i <
-  star.length; i++) { star[i].addEventListener('click', function (e) {
-  console.log('love'); e.target.classList.add("checked") })}
+  let star = document.getElementsByTagName('span'); for (let i = 0; i <
+    star.length; i++) {
+    star[i].addEventListener('click', function (e) {
+      console.log('love'); e.target.classList.add("checked")
+    })
+  }
 
 </script>
