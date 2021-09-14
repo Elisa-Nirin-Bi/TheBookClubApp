@@ -18,10 +18,10 @@ const schema = new mongoose.Schema({
   },
   bio: {
     type: String
-  },
-  profilePhoto: {
-    type: File
-  }
+  } //,
+  // profilePhoto: {
+  //   type: DataView
+  // }
 });
 
 const User = mongoose.model('User', schema);
