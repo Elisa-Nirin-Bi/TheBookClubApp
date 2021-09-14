@@ -18,17 +18,10 @@ const schema = new mongoose.Schema({
   },
   bio: {
     type: String
-<<<<<<< HEAD
-  } //,
-  // profilePhoto: {
-  //   type: DataView
-  // }
-=======
   },
   profilePhoto: {
     type: Buffer
   }
->>>>>>> 021b1e4295aa11c2669768df042dfb70ad1ed263
 });
 
 const User = mongoose.model('User', schema);
