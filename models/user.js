@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
     type: String
   },
   profilePhoto: {
-    type: File
+    type: Buffer
   }
 });
 
