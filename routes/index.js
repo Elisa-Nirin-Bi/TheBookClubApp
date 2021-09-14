@@ -23,8 +23,4 @@ router.get('/profile/:id', routeGuard, (req, res, next) => {
     });
 });
 
-router.get('/private', routeGuard, (req, res, next) => {
-  res.render('private');
-});
-
 module.exports = router;
