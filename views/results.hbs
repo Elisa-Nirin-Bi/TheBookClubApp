@@ -3,9 +3,9 @@
   {{#each books}}
     <h3>{{title}}</h3>
     <h3>{{subtitle}}</h3>
-    <img src={{image}} style='width: 150px;' src={{title}} />
+    <img id='img-id' src={{image}} style='width: 150px;' alt={{title}} />
 
-    <form method='POST'>
+    <form method='POST' enctype='multipart/form-data'>
       <input
         type='text'
         name='title'
@@ -21,6 +21,13 @@
         id='input-subtitle'
         value='{{subtitle}}'
         placeholder='subtitle'
+        style='display: none;'
+      />
+
+      <input
+        type='text'
+        name='image'
+        value='{{image}}'
         style='display: none;'
       />
 

@@ -5,8 +5,14 @@ const router = express.Router();
 const axios = require('axios');
 const multer = require('multer');
 const Book = require('../models/book');
-// const User = require('../models/user');
 const routeGuard = require('./../middleware/route-guard');
+const cloudinary = require('cloudinary');
+const multerStorageCloudinary = require('multer-storage-cloudinary');
+
+const storage = new multerStorageCloudinary.CloudinaryStorage({
+  cloudinary: cloudinary.v2
+});
+const upload = multer({ storage });
 
 const bookRouter = express.Router();
 
@@ -39,21 +45,26 @@ bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
     });
 });
 
-bookRouter.post('/results', routeGuard, (req, res, next) => {
-  const id = req.user._id;
-  const { title, subtitle, image } = req.body;
-  Book.create({
-    title,
-    subtitle,
-    image
-  })
-    .then(() => {
-      res.redirect(`/booklist/${id}`);
+bookRouter.post(
+  '/results',
+  routeGuard,
+  upload.single('image'),
+  (req, res, next) => {
+    const id = req.user._id;
+    const { title, subtitle, image } = req.body;
+    Book.create({
+      title,
+      subtitle,
+      image
     })
-    .catch((error) => {
-      next(error);
-    });
-});
+      .then((books) => {
+        res.redirect(`/booklist/${id}`);
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
 
 bookRouter.get('/booklist/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
