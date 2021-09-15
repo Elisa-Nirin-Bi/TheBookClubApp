@@ -1,9 +1,10 @@
 <h1>{{user.name}}'s Book List</h1>
-
+<br />
 <div class='added-books'>
   {{#each books}}
-    <h6>{{title}}</h6>
-    <h7>{{subtitle}}</h7>
+    <h5>{{title}}</h5>
+    <h6>{{subtitle}}</h6>
+    <br />
     <img src={{image}} style='width: 150px;' alt='{{title}}' />
 
     <p>
@@ -15,7 +16,10 @@
       <span class='fa fa-star'></span>
       <span class='fa fa-star'></span>
       <span class='fa fa-star'></span>
-      <h3>{{review}}</h3>
+      <br />
+      <i>
+        <h7>{{review}}</h7>
+      </i>
     </p>
     <a class='btn' href='/booklist/{{this._id}}/edit'>Add Review</a>
     <form method='POST' action='/booklist/{{this._id}}/delete'>

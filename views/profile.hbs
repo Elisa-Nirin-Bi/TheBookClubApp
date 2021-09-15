@@ -1,19 +1,25 @@
 <h1>{{user.name}}'s Profile</h1>
 <span><strong>Name</strong>: {{user.name}}</span>
 <span><strong>Email</strong>: {{user.email}}</span>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <h3>About Me</h3>
-<br>
+<br />
 <p>
-    {{user.bio}}
+  {{user.bio}}
 </p>
 
-<a href="/booklist/{{user._id}}">My Book List</a>
-<a href="/edit-profile">Edit Profile</a>
+<a href='/booklist/{{user._id}}'>My Book List</a>
+
+{{! to rework the below }}
+{{#each customList}}
+  <a href='/{{this.customList}}/{{user._id}}'>{{this.customList}}</a>
+{{/each}}
+
+<a href='/edit-profile'>Edit Profile</a>

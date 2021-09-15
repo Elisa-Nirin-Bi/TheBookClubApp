@@ -21,6 +21,9 @@ const schema = new mongoose.Schema({
   },
   profilePhoto: {
     type: Buffer
+  },
+  customList: {
+    type: Array
   }
 });
 

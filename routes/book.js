@@ -16,10 +16,12 @@ const upload = multer({ storage });
 
 const bookRouter = express.Router();
 
+// to get to the page to search for books
 bookRouter.get('/search-book', routeGuard, (req, res, next) => {
   res.render('search-book');
 });
 
+// to display results yielded from search
 bookRouter.get('/results', routeGuard, (req, res) => {
   const topic = req.query.topic;
   axios
@@ -34,6 +36,21 @@ bookRouter.get('/results', routeGuard, (req, res) => {
     });
 });
 
+/*
+// to display books added to other book lists
+bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  Book.find({bookList})
+    .then((books) => {
+      res.render('user-book-list', { books });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+*/
+
+// to display books added to main book list
 bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
   Book.find({})
@@ -45,17 +62,19 @@ bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
     });
 });
 
+// to create books from search results to main book list
 bookRouter.post(
   '/results',
   routeGuard,
   upload.single('image'),
   (req, res, next) => {
     const id = req.user._id;
-    const { title, subtitle, image } = req.body;
+    const { title, subtitle, image, bookList } = req.body;
     Book.create({
       title,
       subtitle,
-      image
+      image,
+      bookList
     })
       .then((books) => {
         res.redirect(`/booklist/${id}`);
@@ -66,7 +85,8 @@ bookRouter.post(
   }
 );
 
-bookRouter.get('/booklist/:id/edit', routeGuard, (req, res, next) => {
+// to get to page to add a review
+bookRouter.get('/bookList/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   Book.findById(id)
     .then((book) => {
@@ -77,13 +97,12 @@ bookRouter.get('/booklist/:id/edit', routeGuard, (req, res, next) => {
     });
 });
 
-bookRouter.post('/booklist/:id/edit', routeGuard, (req, res, next) => {
+// to create the book review
+bookRouter.post('/bookList/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const userId = req.user._id;
-  const title = req.body.title;
-  const subtitle = req.body.subtitle;
-  const review = req.body.review;
-  Book.findByIdAndUpdate(id, { title, subtitle, review })
+  const { review, bookList } = req.body;
+  Book.findByIdAndUpdate(id, { review, bookList })
     .then(() => {
       res.redirect(`/booklist/${userId}`);
     })
@@ -92,9 +111,11 @@ bookRouter.post('/booklist/:id/edit', routeGuard, (req, res, next) => {
     });
 });
 
-bookRouter.post('/booklist/:id/delete', routeGuard, (req, res, next) => {
+// to delete a book from main book list
+bookRouter.post('/bookList/:id/delete', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const userId = req.user._id;
+  const bookList = req.body.bookList;
   Book.findByIdAndDelete(id)
     .then(() => {
       res.redirect(`/booklist/${userId}`);

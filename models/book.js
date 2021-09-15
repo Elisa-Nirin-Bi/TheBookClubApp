@@ -16,6 +16,10 @@ const schema = new mongoose.Schema({
   review: {
     type: String,
     maxlength: 300
+  },
+  bookList: {
+    type: String,
+    default: 'booklist'
   }
 });
 
