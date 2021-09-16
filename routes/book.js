@@ -25,11 +25,12 @@ bookRouter.get('/search-book', routeGuard, (req, res, next) => {
 bookRouter.get('/results', routeGuard, (req, res) => {
   const topic = req.query.topic;
   axios
-    .get(`https://api.itbook.store/1.0/search/${topic}`)
+    .get(`https://www.googleapis.com/books/v1/volumes?q=${topic}`)
     .then((resp) => {
       res.render('results', {
-        books: resp.data.books
+        books: resp.data.items
       });
+      console.log(resp.data.items);
     })
     .catch((error) => {
       console.log(error);
@@ -71,10 +72,11 @@ bookRouter.post(
   upload.single('image'),
   (req, res, next) => {
     const id = req.user._id;
-    const { title, subtitle, image, bookList } = req.body;
+    const { title, authors, publisher, image, bookList } = req.body;
     Book.create({
       title,
-      subtitle,
+      authors,
+      publisher,
       image,
       bookList: `booklist/${id}`,
       creator: id
