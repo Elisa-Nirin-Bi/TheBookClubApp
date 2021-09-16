@@ -54,8 +54,10 @@ bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
 bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
   Book.find({})
+    .populate('creator')
     .then((books) => {
       res.render('user-book-list', { books });
+      console.log(books);
     })
     .catch((error) => {
       next(error);
@@ -74,7 +76,8 @@ bookRouter.post(
       title,
       subtitle,
       image,
-      bookList
+      bookList: `booklist/${id}`,
+      creator: id
     })
       .then((books) => {
         res.redirect(`/booklist/${id}`);

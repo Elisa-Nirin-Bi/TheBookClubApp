@@ -20,6 +20,11 @@ const schema = new mongoose.Schema({
   bookList: {
     type: String,
     default: 'booklist'
+  },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
   }
 });
 
