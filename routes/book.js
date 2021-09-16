@@ -54,7 +54,7 @@ bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
 // to display books added to main book list
 bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  Book.find({})
+  Book.find({ creator: req.user._id })
     .populate('creator')
     .then((books) => {
       res.render('user-book-list', { books });
