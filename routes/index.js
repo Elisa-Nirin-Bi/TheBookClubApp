@@ -40,7 +40,6 @@ router.get('/create-list', routeGuard, (req, res, next) => {
 
 /*
 let customList = [];
-
 router.post('/create-list', routeGuard, (req, res, next) => {
   const id = req.user._id;
   const customListInput = req.body.customList;

@@ -7,7 +7,11 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  subtitle: {
+  authors: {
+    type: String,
+    required: true
+  },
+  publisher: {
     type: String
   },
   image: {

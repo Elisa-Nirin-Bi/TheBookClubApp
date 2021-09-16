@@ -1,26 +1,29 @@
 <h1>Your Results</h1>
 <div class='results-data'>
   {{#each books}}
-    <h3>{{title}}</h3>
-    <h3>{{subtitle}}</h3>
-    <img id='img-id' src={{image}} style='width: 150px;' alt={{title}} />
-
+    <h4>{{volumeInfo.title}}</h4>
+    <h4>{{volumeInfo.authors}}</h4>
+    <h6>{{volumeInfo.publisher}}</h6>
+    <img
+      src='{{volumeInfo.imageLinks.smallThumbnail}}'
+      alt='{{volumeInfo.title}}'
+    />
     <form method='POST' enctype='multipart/form-data'>
       <input
         type='text'
         name='title'
         id='input-title'
-        value='{{title}}'
+        value='{{volumeInfo.title}}'
         placeholder='Title'
         style='display: none;'
       />
 
       <input
         type='text'
-        name='subtitle'
-        id='input-subtitle'
-        value='{{subtitle}}'
-        placeholder='subtitle'
+        name='authors'
+        id='input-authors'
+        value='{{volumeInfo.authors}}'
+        placeholder='authors'
         style='display: none;'
       />
       <input
@@ -34,8 +37,17 @@
 
       <input
         type='text'
+        name='publisher'
+        id='input-publisher'
+        value='{{volumeInfo.publisher}}'
+        placeholder='publisher'
+        style='display: none;'
+      />
+
+      <input
+        type='text'
         name='image'
-        value='{{image}}'
+        value='{{volumeInfo.imageLinks.smallThumbnail}}'
         style='display: none;'
       />
 
