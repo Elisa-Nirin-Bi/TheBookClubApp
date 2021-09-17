@@ -21,7 +21,14 @@
         <h7>{{review}}</h7>
       </i>
     </p>
-    <a class='btn' href='/booklist/{{this._id}}/edit'>Add Review</a>
+    {{#if review}}
+      <a class='btn' href='/booklist/{{this._id}}/edit'>Change Review</a>
+      <a class='btn' href='/booklist/{{this._id}}/addcomment'>Add a comment to
+        the review</a>
+    {{else}}
+      <a class='btn' href='/booklist/{{this._id}}/edit'>Add Review</a>
+    {{/if}}
+
     <form method='POST' action='/booklist/{{this._id}}/delete'>
       <button type='submit'>Delete Book</button>
     </form>
