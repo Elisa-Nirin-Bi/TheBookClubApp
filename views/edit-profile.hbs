@@ -1,16 +1,41 @@
-<form method="POST">
-    <h3>My Bio</h3>
-    <br>
-    <br>
-    <label for="update-name">New Name</label>
-    <input type="text" name="name" id="update-name" placeholder="Input new name" value="{{user.name}}" required>
-    <br>
+{{> profileNavbar}}
 
-    <label for="update-email">New Email</label>
-    <input id="update-email" type="email" name="email" placeholder="Input new email" value="{{user.email}}" required>
-    <br>
+<form method='POST' enctype='multipart/form-data'>
+  <h3>My Bio</h3>
+  <br />
 
-    {{!-- <label for="update-password">New Password</label>
+  <label for='upload-profile-pic'>Upload a Profile Picture</label>
+  <input
+    id='upload-profile-pic'
+    type='file'
+    name='profilePhoto'
+    accept='image/*'
+  />
+
+  <br />
+  <label for='update-name'>New Name</label>
+  <input
+    type='text'
+    name='name'
+    id='update-name'
+    placeholder='Input new name'
+    value='{{user.name}}'
+    required
+  />
+  <br />
+
+  <label for='update-email'>New Email</label>
+  <input
+    id='update-email'
+    type='email'
+    name='email'
+    placeholder='Input new email'
+    value='{{user.email}}'
+    required
+  />
+  <br />
+
+  {{!-- <label for="update-password">New Password</label>
     <input id="update-password" type="password" name="passwordHashAndSalt" placeholder="Input new password">
 
     <br>
@@ -20,21 +45,21 @@
     <input id="update-password" type="password" name="passwordHashAndSalt" placeholder="Confirm new password">
     {{/if}} --}}
 
-    <br>
+  <br />
 
-    <label for="input-bio">Edit Bio</label>
-    <br>
-    <textarea id="input-bio" name="bio" rows="5" cols="48" maxlength="750"
-        placeholder="Write a few words about yourself!"></textarea>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <button class="btn">Update Profile</button>
+  <label for='input-bio'>Edit Bio</label>
+  <br />
+  <textarea
+    id='input-bio'
+    name='bio'
+    rows='5'
+    cols='48'
+    maxlength='750'
+    placeholder='Write a few words about yourself!'
+  ></textarea>
+  <br />
+
+  <br />
+  <br />
+  <button>Update Profile</button>
 </form>

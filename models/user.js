@@ -20,10 +20,11 @@ const schema = new mongoose.Schema({
     type: String
   },
   profilePhoto: {
-    type: Buffer
+    type: String
   },
-  customList: {
-    type: Array
+  userLists: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'List'
   }
 });
 

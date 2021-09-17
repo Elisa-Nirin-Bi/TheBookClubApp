@@ -2,6 +2,7 @@
 
 const path = require('path');
 const express = require('express');
+const hbs = require('hbs');
 const createError = require('http-errors');
 const connectMongo = require('connect-mongo');
 const expressSession = require('express-session');
@@ -11,10 +12,14 @@ const serveFavicon = require('serve-favicon');
 const basicAuthenticationDeserializer = require('./middleware/basic-authentication-deserializer.js');
 const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js');
 const bookRouter = require('./routes/book');
+const commentRouter = require('./routes/comment');
+const listRouter = require('./routes/list');
 const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 
 const app = express();
+
+hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -54,6 +59,8 @@ app.use(bindUserToViewLocals);
 
 app.use('/', baseRouter);
 app.use('/', bookRouter);
+app.use('/', listRouter);
+app.use('/', commentRouter);
 app.use('/authentication', authenticationRouter);
 
 // Catch missing routes and forward to error handler

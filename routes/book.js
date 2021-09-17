@@ -1,18 +1,11 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
 const axios = require('axios');
-const multer = require('multer');
 const Book = require('../models/book');
+const List = require('../models/list');
 const routeGuard = require('./../middleware/route-guard');
-const cloudinary = require('cloudinary');
-const multerStorageCloudinary = require('multer-storage-cloudinary');
-
-const storage = new multerStorageCloudinary.CloudinaryStorage({
-  cloudinary: cloudinary.v2
-});
-const upload = multer({ storage });
+const upload = require('./../middleware/file-upload');
 
 const bookRouter = express.Router();
 
@@ -52,10 +45,12 @@ bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
 */
 
 // to display books added to main book list
-bookRouter.get('/booklist/:id', routeGuard, (req, res, next) => {
-  const id = req.params.id;
+bookRouter.get('/booklist/:listName', routeGuard, (req, res, next) => {
+  const listName = req.params.listName;
+  console.log(listName);
   Book.find({ creator: req.user._id })
     .populate('creator')
+    // .populate('bookList')
     .then((books) => {
       res.render('user-book-list', { books });
       console.log(books);
@@ -72,17 +67,25 @@ bookRouter.post(
   upload.single('image'),
   (req, res, next) => {
     const id = req.user._id;
-    const { title, authors, publisher, image, bookList } = req.body;
-    Book.create({
-      title,
-      authors,
-      publisher,
-      image,
-      bookList: `booklist/${id}`,
-      creator: id
+    const { title, authors, publisher, image } = req.body;
+    // let bookList = 'poop';
+    List.create({
+      // listName: // bookList,
+      listCreator: id
     })
+      .then((list) => {
+        Book.create({
+          title,
+          authors,
+          publisher,
+          image,
+          bookList: list,
+          creator: id
+        });
+      })
       .then((books) => {
         res.redirect(`/booklist/${id}`);
+        // res.redirect(`/booklist/${bookList}`);
       })
       .catch((error) => {
         next(error);
@@ -106,8 +109,8 @@ bookRouter.get('/bookList/:id/edit', routeGuard, (req, res, next) => {
 bookRouter.post('/bookList/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const userId = req.user._id;
-  const { review, bookList } = req.body;
-  Book.findByIdAndUpdate(id, { review, bookList })
+  const { review } = req.body;
+  Book.findByIdAndUpdate(id, { review })
     .then(() => {
       res.redirect(`/booklist/${userId}`);
     })
@@ -120,7 +123,6 @@ bookRouter.post('/bookList/:id/edit', routeGuard, (req, res, next) => {
 bookRouter.post('/bookList/:id/delete', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const userId = req.user._id;
-  const bookList = req.body.bookList;
   Book.findByIdAndDelete(id)
     .then(() => {
       res.redirect(`/booklist/${userId}`);
