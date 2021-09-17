@@ -22,9 +22,9 @@ const schema = new mongoose.Schema({
   profilePhoto: {
     type: String
   },
-  customList: {
-    type: String,
-    default: 'booklist'
+  userLists: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'List'
   }
 });
 

@@ -1,4 +1,13 @@
+{{> profileNavbar}}
+
 <h1>{{user.name}}'s Profile</h1>
+
+{{#if user.profilePhoto}}
+  <figure>
+    <img src='{{user.profilePhoto}}' width='90' height='120px' alt='profPic' />
+  </figure>
+{{/if}}
+
 <span><strong>Name</strong>: {{user.name}}</span>
 <span><strong>Email</strong>: {{user.email}}</span>
 <br />
@@ -15,11 +24,8 @@
   {{user.bio}}
 </p>
 
-<a href='/booklist/{{user._id}}'>My Book List</a>
-
-{{! to rework the below }}
-{{#each customList}}
-  <a href='/{{this.customList}}/{{user._id}}'>{{this.customList}}</a>
+{{#each userList}}
+<a href='/booklist/{{user._id}}'>{{listName}}</a>
 {{/each}}
 
 <a href='/edit-profile'>Edit Profile</a>
