@@ -6,6 +6,7 @@ const axios = require('axios');
 const bcryptjs = require('bcryptjs');
 const Book = require('../models/book');
 const User = require('../models/user');
+const List = require('../models/list');
 const routeGuard = require('./../middleware/route-guard');
 const upload = require('./../middleware/file-upload');
 
@@ -16,9 +17,9 @@ router.get('/', (req, res, next) => {
 // to rework - not working correctly:
 router.get('/profile/:id', routeGuard, (req, res, next) => {
   const id = req.user._id;
-  User.findById(id)
-    .then((userList) => {
-      res.render('profile', { userList });
+  User.find({ id })
+    .then((lists) => {
+      res.render('profile', { lists });
     })
     .catch((error) => {
       next(error);

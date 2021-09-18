@@ -21,7 +21,7 @@ listRouter.post('/create-list', routeGuard, (req, res, next) => {
     listName,
     listCreator: id
   })
-    .then((list) => {
+    .then((lists) => {
       res.redirect(`/profile/${id}`);
     })
     .catch((error) => {
