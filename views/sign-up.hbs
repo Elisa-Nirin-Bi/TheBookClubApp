@@ -1,11 +1,41 @@
 {{> signUpNavbar}}
+<main class="form-signin">
+
+    <img class="mb-4" src=".././images/logo.jpg" alt="logo" width="72" >
 
 <form action="/authentication/sign-up" method="POST">
-  <label for="input-name">Name</label>
-  <input type="text" id="input-name" name="name" placeholder="Your Name" />
-  <label for="input-email">Email</label>
-  <input type="email" id="input-email" name="email" placeholder="Your Email" />
-  <label for="input-password">Password</label>
-  <input type="password" name="password" id="input-password" placeholder="A Strong Password" />
-  <button>Sign Up</button>
+  <h1 class="h2 mb-5 fw-light">Create an account</h1>
+  
+  <div class="form-floating">
+  {{!-- <label for="floatingInput">Name</label> --}}
+  <input type="text"   
+  class='form-control'
+  id='floatingInput'  
+  name="name" 
+  placeholder="Your Name" />
+  </div>
+  {{!-- <label for="floatingEmail">Email</label> --}}
+  <div class="form-floating">
+  <input type="email" 
+  id="floatingEmail" 
+  class="form-control"
+  name="email" 
+  placeholder="Your Email" />
+  </div>
+
+  <div class="form-floating"> 
+  {{!-- <label for="floatingPassword">Password</label> --}}
+  <input type="password" 
+  name="password" 
+  class="form-control"
+  id="floatingPassword" 
+  placeholder="A strong Password" />
+  </div>
+
+  <button class="w-100 btn btn-lg btn-primary">Sign Up</button>
+<div class="checkbox mt-3 mb-3">
+      <span>Already a member? Please sign in <a href=/authentication/sign-in>here.</a></span>
+    </div>
+
 </form>
+</main>

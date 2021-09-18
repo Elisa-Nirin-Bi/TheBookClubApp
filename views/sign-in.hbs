@@ -2,6 +2,9 @@
 {{> signInNavbar}}
 <main class="form-signin">
 
+  <div class="$red-500 mb-4">
+  {{message}}
+</div>
     <img class="mb-4" src=".././images/logo.jpg" alt="logo" width="72" >
 <form action='/authentication/sign-in' method='POST'>
     <h1 class="h2 mb-5 fw-light">Please sign in</h1>
@@ -34,5 +37,9 @@
     </div>
 
   <button class="w-100 btn btn-lg btn-primary">Sign In</button>
+
+  <div class="checkbox mt-3 mb-3">
+      <span>No account yet? <a href=/authentication/sign-up>Sign up </a>to this amazing website</span>
+    </div>
 </form>
 </main>
