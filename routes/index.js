@@ -13,8 +13,31 @@ router.get('/', (req, res, next) => {
   res.render('home', { title: 'Hello World!' });
 });
 
-// to rework - not working correctly:
+router.get('/search-user', (req, res, next) => {
+  User.find({})
+    .then((users) => {
+      res.render('search-user', {
+        users
+      });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 router.get('/profile/:id', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  User.findById(id)
+    .then((user) => {
+      res.render('profile', { user });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+// to rework - not working correctly:
+/*router.get('/profile/:id', routeGuard, (req, res, next) => {
   const id = req.user._id;
   User.findById(id)
     .then((userList) => {
@@ -23,7 +46,7 @@ router.get('/profile/:id', routeGuard, (req, res, next) => {
     .catch((error) => {
       next(error);
     });
-});
+});*/
 
 router.get('/edit-profile', routeGuard, (req, res, next) => {
   res.render('edit-profile');
