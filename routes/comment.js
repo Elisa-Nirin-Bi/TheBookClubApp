@@ -1,15 +1,14 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
 const axios = require('axios');
 const Book = require('../models/book');
 const routeGuard = require('./../middleware/route-guard');
 
-const bookRouter = express.Router();
+const commentRouter = express.Router();
 
 // to get to page to add a comment
-bookRouter.get('/bookList/:id/edit', routeGuard, (req, res, next) => {
+commentRouter.get('/bookList/:id/edit', routeGuard, (req, res, next) => {
   const id = req.params.id;
   Book.findById(id)
     .then((book) => {
@@ -21,7 +20,7 @@ bookRouter.get('/bookList/:id/edit', routeGuard, (req, res, next) => {
 });
 
 // to create the book comment on a review
-bookRouter.post('/bookList/:id/addcomment', routeGuard, (req, res, next) => {
+commentRouter.post('/bookList/:id/addcomment', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const userId = req.user._id;
   const { review, bookList } = req.body;

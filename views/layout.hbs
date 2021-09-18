@@ -25,15 +25,19 @@
   <body class='d-flex h-100 text-center text-white bg-dark'>
 
     <div class='cover-container d-flex w-100 h-100 p-3 mx-auto flex-column'>
-
-      <header class='mb-auto'>
+      {{!-- <header class='mb-auto'>
         <div>
           {{! <h3 class='float-md-start mb-0'>The book club</h3> }}
           <nav class='nav nav-masthead justify-content-center float-md-end'>
             <a class='nav-link active' aria-current='page' href='/'>Home</a>
             {{#if user}}
-              <a class='nav-link' href='/profile/{{user.id}}'>{{user.name}}'s
-                Profile</a>
+              <a class='nav-link' href='/profile/{{user.id}}'><img
+                  src='{{user.profilePhoto}}'
+                  width='18'
+                  height='24'
+                  alt='profPic'
+                />
+                {{user.name}}'s Profile</a>
               <a class='nav-link' href='/create-list'>Organize Books</a>
               <a class='nav-link' href='/search-book'>Search Book</a>
               <a class='nav-link' href='/search-user'>Search User</a>
@@ -46,7 +50,7 @@
             {{/if}}
           </nav>
         </div>
-      </header>
+      </header> --}}
 
       {{{body}}}
 
