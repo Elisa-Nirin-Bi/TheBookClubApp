@@ -12,10 +12,10 @@ const schema = new mongoose.Schema({
     required: true
   },
   commentaries: {
-    [{ type: String,
+    type: String,
     required: true
   },
- 
+
   publisher: {
     type: String
   },
