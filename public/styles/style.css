@@ -129,6 +129,16 @@ body {
   border-bottom-color: #fff;
 }
 
+.homepage {
+  background-image: url("./../images/homepage-picture.jpg");
+  background-size: cover;
+  background-position: 0%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-signin {
   width: 100%;
   max-width: 330px;

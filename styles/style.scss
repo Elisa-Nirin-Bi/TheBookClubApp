@@ -132,6 +132,18 @@ body {
   border-bottom-color: #fff;
 }
 
+//homepage
+
+.homepage {
+  background-image: url('./../images/homepage-picture.jpg');
+  background-size: cover;
+  background-position: 0%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 // Forms
 
 // Sign-in
