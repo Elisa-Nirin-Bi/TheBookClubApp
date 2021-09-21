@@ -9,25 +9,26 @@ from the medium breakpoint up. --}}
 
   {{> searchBooks}}
 
-  <h3>Your Results</h3>
+  <h3>Your results:</h3>
 
       
   <div class="row">
    {{#each books}}
-   <div class='col-md-4'>
-    <div class='card text-dark bg-light w-50'>
-        {{!-- <div class='col-mb-4 g-3'> --}}
-          <img class='card-img-top'
+   <div class='col-md-3 g-2'>
+    <div class='card text-dark gray-300 w-10 mb-4'>
+
+          <img class='img-fluid rounded-start w-3'
+            style='height:fit-content'
             src='{{volumeInfo.imageLinks.smallThumbnail}}'
             alt='{{volumeInfo.title}}'
           />
-            {{!-- <div class="col-md-10"> --}}
-              <div class='card-body'>
-                <p class='card-text'>{{volumeInfo.authors}}</p>
-                <h5 class='card-title'>{{volumeInfo.title}}</h5>
-                <p class='text-muted'>{{volumeInfo.publisher}}</p>
+
+              <div class='px-1'>
+                <p class='my-0'>{{volumeInfo.authors}}</p> 
+                <p class='pb-0'><b>{{volumeInfo.title}}</b></p>
+                <p class='my-0'><em>{{volumeInfo.publisher}}</em></p>
               </div>
-            {{!-- </div> --}}
+
           <form method='POST' enctype='multipart/form-data'>
 
             <input
@@ -72,9 +73,9 @@ from the medium breakpoint up. --}}
               style='display: none;'
             />
 
-            <button class='w-80 btn btn-lg btn-primary'>Add to Book List</button>
+            <button class='mt-2 w-60 btn btn-sm btn-primary'>Add to Book List</button>
           </form>
-        {{!-- </div> --}}
+
       </div>
     </div>
   
