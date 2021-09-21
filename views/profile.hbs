@@ -1,4 +1,4 @@
-{{> profileNavbar}}
+{{!-- {{> homeNavbar}} --}}
 
 <h1>{{user.name}}'s Profile</h1>
 
@@ -24,11 +24,14 @@
   {{user.bio}}
 </p>
 
+<form method='GET'>
 
-{{#each userList}}
-<a href='/booklist/{{user._id}}'>{{listName}}</a>
-{{/each}}
+  {{#each lists}}
+    <span>
+      <a href='/booklist/{{this._id}}'>{{listName}}</a>
+    </span>
+  {{/each}}
 
-
+</form>
 
 <a href='/edit-profile'>Edit Profile</a>

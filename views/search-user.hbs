@@ -1,8 +1,5 @@
-
-{{> searchUserNavbar}}
-
 <nav class='navbar navbar-expand-lg navbar-light bg-light rounded d-flex'>
-    <div
+  <div
     class='container-fluid d-grip gap-1 d-flex justify-content-between align-items-center'
   >
     <img
@@ -11,21 +8,28 @@
       height='40'
       class='mb-1'
     />
-<form method='GET' class='d-flex bd-highlight w-100 pt-2'>
+    <form method='GET' class='d-flex bd-highlight w-100 pt-2'>
 
-  <input class='form-control' id='user-list' aria-label='Search' type='text' name='name' placeholder='Search for another member' />
+      <input
+        class='form-control'
+        id='user-list'
+        aria-label='Search'
+        type='text'
+        name='name'
+        placeholder='Search for another member'
+      />
 
-  <button class='btn btn-outline-success'>Search</button>
-</form>
-</div>
+      <button class='btn btn-outline-success'>Search</button>
+    </form>
+  </div>
 </nav>
 
 {{#if user}}
-{{#each user}}
-<h3>Here is what we found:</h3>
-  <h3><a href='/profile/{{_id}}'>{{name}}</a></h3>
-  <p>Clic on the username to consult the profile.</p>
-{{/each}}
+  {{#each user}}
+    <h3>Here is what we found:</h3>
+    <h3><a href='/profile/{{_id}}'>{{name}}</a></h3>
+    <p>Click on the username to consult the profile.</p>
+  {{/each}}
 {{else}}
-<h3>We don't have any member with that name.</h3>
+  <h3>We don't have any member with that name.</h3>
 {{/if}}

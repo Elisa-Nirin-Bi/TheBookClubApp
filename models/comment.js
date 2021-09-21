@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema(
   {
-    review: {
+    book: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'Review'
+      ref: 'Book'
     },
     message: {
       type: String,

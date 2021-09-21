@@ -11,17 +11,20 @@ const bookRouter = express.Router();
 
 // to get to the page to search for books
 bookRouter.get('/search-book', routeGuard, (req, res, next) => {
-  res.render('search-book');
+  res.render('search-book', { searchBook: true });
 });
 
 // to display results yielded from search
 bookRouter.get('/results', routeGuard, (req, res) => {
   const topic = req.query.topic;
+  const userLists = req.user.userLists;
+  console.log(userLists);
   axios
     .get(`https://www.googleapis.com/books/v1/volumes?q=${topic}`)
     .then((resp) => {
       res.render('results', {
-        books: resp.data.items
+        books: resp.data.items,
+        userLists
       });
       console.log(resp.data.items);
     })
@@ -52,8 +55,8 @@ bookRouter.get('/booklist/:listName', routeGuard, (req, res, next) => {
     .populate('creator')
     // .populate('bookList')
     .then((books) => {
-      res.render('user-book-list', { books });
-      console.log(books);
+      res.render('user-book-list', { books, listName });
+      // console.log(books);
     })
     .catch((error) => {
       next(error);
@@ -67,24 +70,18 @@ bookRouter.post(
   upload.single('image'),
   (req, res, next) => {
     const id = req.user._id;
-    const { title, authors, publisher, image } = req.body;
+    const { title, authors, publisher, image, bookList } = req.body;
     // let bookList = 'poop';
-    List.create({
-      // listName: // bookList,
-      listCreator: id
+    Book.create({
+      title,
+      authors,
+      publisher,
+      image,
+      bookList,
+      creator: id
     })
-      .then((list) => {
-        Book.create({
-          title,
-          authors,
-          publisher,
-          image,
-          bookList: list,
-          creator: id
-        });
-      })
-      .then((books) => {
-        res.redirect(`/booklist/${id}`);
+      .then((book) => {
+        res.redirect(`/booklist/${bookList}`);
         // res.redirect(`/booklist/${bookList}`);
       })
       .catch((error) => {

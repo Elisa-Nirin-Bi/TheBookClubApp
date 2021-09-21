@@ -6,11 +6,12 @@ const axios = require('axios');
 const bcryptjs = require('bcryptjs');
 const Book = require('../models/book');
 const User = require('../models/user');
+const List = require('../models/list');
 const routeGuard = require('./../middleware/route-guard');
 const upload = require('./../middleware/file-upload');
 
 router.get('/', (req, res, next) => {
-  res.render('home', { title: 'The Book Club' });
+  res.render('home', { title: 'Hello World!', home: true });
 });
 
 router.get('/search-user', routeGuard, (req, res, next) => {
@@ -18,7 +19,8 @@ router.get('/search-user', routeGuard, (req, res, next) => {
   User.find({ name })
     .then((user) => {
       res.render('search-user', {
-        user
+        users,
+        searchUser: true
       });
     })
     .catch((error) => {
@@ -28,9 +30,9 @@ router.get('/search-user', routeGuard, (req, res, next) => {
 
 router.get('/profile/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  User.findById(id)
-    .then((user) => {
-      res.render('profile', { user });
+  List.find({})
+    .then((lists) => {
+      res.render('profile', { lists, profile: true });
     })
     .catch((error) => {
       next(error);
@@ -40,9 +42,9 @@ router.get('/profile/:id', routeGuard, (req, res, next) => {
 // to rework - not working correctly:
 /*router.get('/profile/:id', routeGuard, (req, res, next) => {
   const id = req.user._id;
-  User.findById(id)
-    .then((userList) => {
-      res.render('profile', { userList });
+  User.find({ id })
+    .then((lists) => {
+      res.render('profile', { lists });
     })
     .catch((error) => {
       next(error);

@@ -1,41 +1,47 @@
-{{> signUpNavbar}}
-<main class="form-signin">
+<main class='form-signin'>
 
-    <img class="mb-4" src=".././images/logo.jpg" alt="logo" width="100" >
+  <img class='mb-4' src='.././images/logo.jpg' alt='logo' width='100' />
 
-<form action="/authentication/sign-up" method="POST">
-  <h1 class="h2 mb-5 fw-light">Create an account</h1>
-  
-  <div class="form-floating">
-  {{!-- <label for="floatingInput">Name</label> --}}
-  <input type="text"   
-  class='form-control'
-  id='floatingInput'  
-  name="name" 
-  placeholder="Your Name" />
-  </div>
-  {{!-- <label for="floatingEmail">Email</label> --}}
-  <div class="form-floating">
-  <input type="email" 
-  id="floatingEmail" 
-  class="form-control"
-  name="email" 
-  placeholder="Your Email" />
-  </div>
+  <form action='/authentication/sign-up' method='POST'>
+    <h1 class='h2 mb-5 fw-light'>Create an account</h1>
 
-  <div class="form-floating"> 
-  {{!-- <label for="floatingPassword">Password</label> --}}
-  <input type="password" 
-  name="password" 
-  class="form-control"
-  id="floatingPassword" 
-  placeholder="A strong Password" />
-  </div>
-
-  <button class="w-100 btn btn-lg btn-primary">Sign Up</button>
-<div class="checkbox mt-3 mb-3">
-      <span>Already a member? Please sign in <a href=/authentication/sign-in>here.</a></span>
+    <div class='form-floating'>
+      {{! <label for="floatingInput">Name</label> }}
+      <input
+        type='text'
+        class='form-control'
+        id='floatingInput'
+        name='name'
+        placeholder='Your Name'
+      />
+    </div>
+    {{! <label for="floatingEmail">Email</label> }}
+    <div class='form-floating'>
+      <input
+        type='email'
+        id='floatingEmail'
+        class='form-control'
+        name='email'
+        placeholder='Your Email'
+      />
     </div>
 
-</form>
+    <div class='form-floating'>
+      {{! <label for="floatingPassword">Password</label> }}
+      <input
+        type='password'
+        name='password'
+        class='form-control'
+        id='floatingPassword'
+        placeholder='A strong Password'
+      />
+    </div>
+
+    <button class='w-100 btn btn-lg btn-primary'>Sign Up</button>
+    <div class='checkbox mt-3 mb-3'>
+      <span>Already a member? Please sign in
+        <a href='/authentication' sign-in>here.</a></span>
+    </div>
+
+  </form>
 </main>

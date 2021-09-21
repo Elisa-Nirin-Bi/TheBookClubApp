@@ -1,6 +1,4 @@
-{{> profileNavbar}}
-
-<h1>{{user.name}}'s Book List</h1>
+<h1>{{book.bookList}}</h1>
 <br />
 <div class='added-books'>
   {{#each books}}
@@ -24,17 +22,17 @@
       </i>
     </p>
     <ul>
-  {{#each comments}}
-  <h3>hi</h3>
-  <li>
-    <span>{{message}}</span>
-    <br />
-    <span>{{creator.name}}</span>
-    <br />
-    <span>{{creationDate}}</span>
-  </li>
-  {{/each}}
-</ul>
+      {{#each comments}}
+        <h3>hi</h3>
+        <li>
+          <span>{{message}}</span>
+          <br />
+          <span>{{creator.name}}</span>
+          <br />
+          <span>{{creationDate}}</span>
+        </li>
+      {{/each}}
+    </ul>
     {{#if review}}
       <a class='btn' href='/booklist/{{this._id}}/edit'>Change Review</a>
       <a class='btn' href='/booklist/{{this._id}}/addcomment'>Add a comment to

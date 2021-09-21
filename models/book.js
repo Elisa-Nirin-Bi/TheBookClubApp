@@ -22,10 +22,11 @@ const schema = new mongoose.Schema({
     maxlength: 300
   },
   bookList: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String
+    // type: mongoose.Schema.Types.ObjectId,
     // default: 'booklist',
     // required: true,
-    ref: 'List'
+    // ref: 'List'
   },
   creator: {
     type: mongoose.Schema.Types.ObjectId,

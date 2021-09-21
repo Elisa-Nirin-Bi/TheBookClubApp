@@ -21,10 +21,6 @@ const schema = new mongoose.Schema({
   },
   profilePhoto: {
     type: String
-  },
-  userLists: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'List'
   }
 });
 
