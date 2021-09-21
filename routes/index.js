@@ -11,14 +11,15 @@ const routeGuard = require('./../middleware/route-guard');
 const upload = require('./../middleware/file-upload');
 
 router.get('/', (req, res, next) => {
-  res.render('home', { title: 'Hello World!' });
+  res.render('home', { title: 'Hello World!', home: true });
 });
 
 router.get('/search-user', (req, res, next) => {
   User.find({})
     .then((users) => {
       res.render('search-user', {
-        users
+        users,
+        searchUser: true
       });
     })
     .catch((error) => {
@@ -28,9 +29,9 @@ router.get('/search-user', (req, res, next) => {
 
 router.get('/profile/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  User.findById(id)
-    .then((user) => {
-      res.render('profile', { user });
+  List.find({})
+    .then((lists) => {
+      res.render('profile', { lists, profile: true });
     })
     .catch((error) => {
       next(error);

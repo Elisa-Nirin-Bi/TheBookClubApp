@@ -11,7 +11,7 @@ const upload = require('../middleware/file-upload');
 // to create new model for lists? to rework the below and create-list.hbs
 
 listRouter.get('/create-list', routeGuard, (req, res, next) => {
-  res.render('create-list');
+  res.render('create-list', { list: true });
 });
 
 listRouter.post('/create-list', routeGuard, (req, res, next) => {
@@ -21,7 +21,7 @@ listRouter.post('/create-list', routeGuard, (req, res, next) => {
     listName,
     listCreator: id
   })
-    .then((lists) => {
+    .then(() => {
       res.redirect(`/profile/${id}`);
     })
     .catch((error) => {

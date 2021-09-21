@@ -1,4 +1,3 @@
-{{> searchBookNavbar}}
 <h1>Your Results</h1>
 <div class='results-data'>
   {{#each books}}
@@ -31,10 +30,19 @@
         type='text'
         name='bookList'
         id='input-bookList'
-        value='{{bookList}}'
-        placeholder='bookList'
-        style='display: none;'
+        {{! value='bookList' }}
+        placeholder='choose a bookList'
+        {{! style='display: none;' }}
       />
+      {{!-- 
+      <select name='bookList'>
+        {{#select userLists}}
+           {{#each userLists}} 
+            <option value='{{listName}}'> {{listName}} </option>
+          {{/each}} 
+        {{/select}}
+      </select>
+ --}}
 
       <input
         type='text'

@@ -8,7 +8,7 @@ const User = require('./../models/user');
 const router = new Router();
 
 router.get('/sign-up', (req, res, next) => {
-  res.render('sign-up');
+  res.render('sign-up', { signUp: true });
 });
 
 router.post('/sign-up', (req, res, next) => {
@@ -32,7 +32,7 @@ router.post('/sign-up', (req, res, next) => {
 });
 
 router.get('/sign-in', (req, res, next) => {
-  res.render('sign-in');
+  res.render('sign-in', { signIn: true });
 });
 
 router.post('/sign-in', (req, res, next) => {

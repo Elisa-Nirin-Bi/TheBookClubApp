@@ -21,6 +21,12 @@ const app = express();
 
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
+hbs.registerHelper('select', (selected, options) => {
+  return options
+    .fn(this)
+    .replace(new RegExp(' value="' + selected + '"'), '$& selected="selected"');
+});
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
