@@ -40,21 +40,24 @@ router.post('/sign-in', (req, res, next) => {
   const { email, password } = req.body;
   User.findOne({ email })
     .then((document) => {
-      if (!document) {
-        return Promise.reject(new Error("There's no user with that email."));
+      user = document;
+      if (!user) {
+        res.render('sign-in', { message: 'Invalid Email' });
+        //throw new Error('Invalid login');
       } else {
-        user = document;
         return bcryptjs.compare(password, user.passwordHashAndSalt);
       }
     })
-    .then((result) => {
-      if (result) {
+    .then((comparisonResult) => {
+      if (comparisonResult) {
         req.session.userId = user._id;
-        res.redirect(`/profile/${user._id}`);
+        res.redirect('/');
       } else {
-        return Promise.reject(new Error('Wrong password.'));
+        res.render('sign-in', { message: 'Invalid password' });
+        //throw new Error('Invalid login');
       }
     })
+
     .catch((error) => {
       next(error);
     });

@@ -77,10 +77,13 @@ app.use((req, res, next) => {
 // Catch all error handler
 app.use((error, req, res, next) => {
   // Set error information, with stack only available in development
-  res.locals.message = error.message;
+
+  // if (Error.type == 'e-mail not found') res.render('error-no-user');
+  // else (res.locals.message = error.message;
   res.locals.error = req.app.get('env') === 'development' ? error : {};
+  console.log(error);
   res.status(error.status || 500);
-  res.render('error');
+  res.render('error', { error: error });
 });
 
 module.exports = app;

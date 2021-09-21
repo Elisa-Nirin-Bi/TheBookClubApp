@@ -14,9 +14,10 @@ router.get('/', (req, res, next) => {
   res.render('home', { title: 'Hello World!', home: true });
 });
 
-router.get('/search-user', (req, res, next) => {
-  User.find({})
-    .then((users) => {
+router.get('/search-user', routeGuard, (req, res, next) => {
+  const name = req.query.name;
+  User.find({ name })
+    .then((user) => {
       res.render('search-user', {
         users,
         searchUser: true

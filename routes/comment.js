@@ -3,30 +3,47 @@
 const express = require('express');
 const axios = require('axios');
 const Book = require('../models/book');
+const Review = require('../models/review');
+const Comment = require('../models/comment');
 const routeGuard = require('./../middleware/route-guard');
 
 const commentRouter = express.Router();
 
-// to get to page to add a comment
-commentRouter.get('/bookList/:id/edit', routeGuard, (req, res, next) => {
+commentRouter.get('/bookList/:id/addcomment', routeGuard, (req, res, next) => {
+  res.render('comment-add');
+});
+// to create a comment
+commentRouter.get('/bookList/:id/addcomment', routeGuard, (req, res, next) => {
   const id = req.params.id;
+  let book;
   Book.findById(id)
-    .then((book) => {
-      res.render('comment-add', { book });
+
+    .then((document) => {
+      book = document;
+      return Comment.find({ book: id });
+    })
+    .then((comments) => {
+      res.render('user-book-list', {
+        book,
+        comments
+      });
     })
     .catch((error) => {
       next(error);
     });
 });
-
 // to create the book comment on a review
+
 commentRouter.post('/bookList/:id/addcomment', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  const userId = req.user._id;
-  const { review, bookList } = req.body;
-  Book.findByIdAndUpdate(id, { review, bookList })
+  const message = req.body.message;
+  Comment.create({
+    book: id,
+    message,
+    creator: req.user._id
+  })
     .then(() => {
-      res.redirect(`/booklist/${userId}`);
+      res.redirect(`/booklist/${id}`);
     })
     .catch((error) => {
       next(error);
