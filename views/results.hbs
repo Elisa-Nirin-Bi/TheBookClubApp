@@ -7,87 +7,80 @@ from the medium breakpoint up. --}}
 
 <div class='container'>
 
-<h3>New search:</h3>
+  <h3>New search:</h3>
 
-{{> searchBooks}}
+  {{> searchBooks}}
 
-       <h3>Your Results</h3>
+  <h3>Your Results</h3>
 
-    
- <div class='row row-cols-1 row-cols-md-3 g-4'>
-{{!--                   <div class='col'> --}}
+      
+  <div class="row">
+   {{#each books}}
+   <div class='col-md-4'>
+    <div class='card text-dark bg-light w-50'>
+        {{!-- <div class='col-mb-4 g-3'> --}}
+          <img class='card-img-top'
+            src='{{volumeInfo.imageLinks.smallThumbnail}}'
+            alt='{{volumeInfo.title}}'
+          />
+            {{!-- <div class="col-md-10"> --}}
+              <div class='card-body'>
+                <p class='card-text'>{{volumeInfo.authors}}</p>
+                <h5 class='card-title'>{{volumeInfo.title}}</h5>
+                <p class='text-muted'>{{volumeInfo.publisher}}</p>
+              </div>
+            {{!-- </div> --}}
+          <form method='POST' enctype='multipart/form-data'>
 
-         {{#each books}}
-              <div class='card h-100 text-dark bg-light mt-3 mb-3'>
+            <input
+              type='text'
+              name='title'
+              id='input-title'
+              value='{{volumeInfo.title}}'
+              placeholder='Title'
+              style='display: none;'
+            />
 
-                <div class='row g-0'>
-                  <div class='col-mb-4 g-3'>
-<img class='img-fluid-rouded-start'
-      src='{{volumeInfo.imageLinks.smallThumbnail}}'
-      alt='{{volumeInfo.title}}'
-    />
-<div class="col-md-10">
-    <div class='card-body'>
-      <p class='card-text'>{{volumeInfo.authors}}</p>
-    <h5 class='card-title'>{{volumeInfo.title}}</h5>
-    <p class='card-text-muted'>{{volumeInfo.publisher}}</p>
-                  </div>
-                </div>
+            <input
+              type='text'
+              name='authors'
+              id='input-authors'
+              value='{{volumeInfo.authors}}'
+              placeholder='authors'
+              style='display: none;'
+            />
+            <input
+              type='text'
+              name='bookList'
+              id='input-bookList'
+              value='{{bookList}}'
+              placeholder='bookList'
+              style='display: none;'
+            />
 
+            <input
+              type='text'
+              name='publisher'
+              id='input-publisher'
+              value='{{volumeInfo.publisher}}'
+              placeholder='publisher'
+              style='display: none;'
+            />
 
+            <input
+              type='text'
+              name='image'
+              value='{{volumeInfo.imageLinks.smallThumbnail}}'
+              style='display: none;'
+            />
 
-
-    <form method='POST' enctype='multipart/form-data'>
-
-      <input
-        type='text'
-        name='title'
-        id='input-title'
-        value='{{volumeInfo.title}}'
-        placeholder='Title'
-        style='display: none;'
-      />
-
-      <input
-        type='text'
-        name='authors'
-        id='input-authors'
-        value='{{volumeInfo.authors}}'
-        placeholder='authors'
-        style='display: none;'
-      />
-      <input
-        type='text'
-        name='bookList'
-        id='input-bookList'
-        value='{{bookList}}'
-        placeholder='bookList'
-        style='display: none;'
-      />
-
-      <input
-        type='text'
-        name='publisher'
-        id='input-publisher'
-        value='{{volumeInfo.publisher}}'
-        placeholder='publisher'
-        style='display: none;'
-      />
-
-      <input
-        type='text'
-        name='image'
-        value='{{volumeInfo.imageLinks.smallThumbnail}}'
-        style='display: none;'
-      />
-
-      <button class='w-80 btn btn-lg btn-primary'>Add to Book List</button>
-    </form>
+            <button class='w-80 btn btn-lg btn-primary'>Add to Book List</button>
+          </form>
+        {{!-- </div> --}}
+      </div>
     </div>
-</div>
- </div>
- 
-     {{/each}}
-   </div>
+  
+    {{/each}}
   </div>
- </div>
+</div>
+
