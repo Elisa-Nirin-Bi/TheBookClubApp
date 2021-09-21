@@ -10,7 +10,7 @@ const routeGuard = require('./../middleware/route-guard');
 const upload = require('./../middleware/file-upload');
 
 router.get('/', (req, res, next) => {
-  res.render('home', { title: 'Hello World!' });
+  res.render('home', { title: 'The Book Club' });
 });
 
 router.get('/search-user', routeGuard, (req, res, next) => {

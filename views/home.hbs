@@ -1,7 +1,12 @@
 {{> homeNavbar}}
-<div class="homepage">
+<main class="homepage">
     <h1 class="mb-5">Welcome to The Book Club</h1>
+    <p class="lead">
 
-    {{!-- <img src="./../images/homepage-picture.jpg" class="img-fluid" alt="library"> --}}
-
-</div>
+        {{#if user}}
+    <a href="/search-book" class="w-100 btn btn-lg btn-primary">Search for books</a>
+    {{else}}
+        <a href="/authentication/sign-in" class="w-100 btn btn-lg btn-primary">Sign in</a>
+        {{/if}}
+</p>
+</main>
