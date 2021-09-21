@@ -13,18 +13,18 @@ commentRouter.get('/bookList/:id/addcomment', routeGuard, (req, res, next) => {
   res.render('comment-add');
 });
 // to create a comment
-commentRouter.get('/bookList/:id', routeGuard, (req, res, next) => {
+commentRouter.get('/bookList/:id/addcomment', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  let review;
-  Review.findById(id)
+  let book;
+  Book.findById(id)
 
     .then((document) => {
-      review = document;
-      return Comment.find({ review: id });
+      book = document;
+      return Comment.find({ book: id });
     })
     .then((comments) => {
-      res.render('/user-book-list', {
-        review,
+      res.render('user-book-list', {
+        book,
         comments
       });
     })
@@ -38,7 +38,7 @@ commentRouter.post('/bookList/:id/addcomment', routeGuard, (req, res, next) => {
   const id = req.params.id;
   const message = req.body.message;
   Comment.create({
-    review: id,
+    book: id,
     message,
     creator: req.user._id
   })
