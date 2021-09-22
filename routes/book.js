@@ -31,7 +31,7 @@ bookRouter.get('/results', routeGuard, (req, res) => {
     });
 });
 
-// to display books added to main book list
+// to display books added to a book list
 bookRouter.get('/booklist/:bookListId', routeGuard, (req, res, next) => {
   const bookListId = req.params.bookListId;
   let bookListPage;
@@ -39,19 +39,32 @@ bookRouter.get('/booklist/:bookListId', routeGuard, (req, res, next) => {
     .then((list) => {
       bookListPage = list;
       return Book.find({
-        creator: req.user._id,
+        // creator: req.user._id,
         bookList: bookListId
       }).populate('creator');
     })
     .then((books) => {
-      res.render('user-book-list', { books, bookListPage });
+      console.log(req.user._id, bookListPage.listCreator);
+      if (String(req.user._id) === String(bookListPage.listCreator)) {
+        res.render('user-book-list', {
+          books,
+          bookListPage,
+          authorizedUser: true
+        });
+      } else {
+        res.render('user-book-list', {
+          books,
+          bookListPage,
+          authorizedUser: false
+        });
+      }
     })
     .catch((error) => {
       next(error);
     });
 });
 
-// to create books from search results to main book list
+// to create books from search results, added to a book list
 bookRouter.post(
   '/results',
   routeGuard,
@@ -93,7 +106,11 @@ bookRouter.get(
     const id = req.params.id;
     Book.findById(id)
       .then((book) => {
-        res.render('review-add', { book });
+        if (String(req.user._id) === String(book.creator)) {
+          res.render('review-add', { book });
+        } else {
+          throw new Error('UNAUTHORIZED_USER');
+        }
       })
       .catch((error) => {
         next(error);
@@ -109,9 +126,13 @@ bookRouter.post(
     const listId = req.params.listId;
     const id = req.params.id;
     const { review } = req.body;
-    Book.findByIdAndUpdate(id, { review })
-      .then(() => {
-        res.redirect(`/booklist/${listId}`);
+    return Book.findByIdAndUpdate(id, { review })
+      .then((book) => {
+        if (String(req.user._id) === String(book.creator)) {
+          res.redirect(`/booklist/${listId}`);
+        } else {
+          throw new Error('UNAUTHORIZED_USER');
+        }
       })
       .catch((error) => {
         next(error);
@@ -119,15 +140,21 @@ bookRouter.post(
   }
 );
 
-// to delete a book from main book list
+// to delete a book from a list
 bookRouter.post(
   '/bookList/:listId/:title/:id/delete',
   routeGuard,
   (req, res, next) => {
     const { listId, id } = req.params;
-    Book.findByIdAndDelete(id)
-      .then(() => {
-        res.redirect(`/booklist/${listId}`);
+    return Book.findById(id)
+      .then((book) => {
+        if (String(req.user._id) === String(book.creator)) {
+          Book.findByIdAndDelete(id).then(() => {
+            res.redirect(`/booklist/${listId}`);
+          });
+        } else {
+          throw new Error('UNAUTHORIZED_USER');
+        }
       })
       .catch((error) => {
         next(error);
@@ -135,18 +162,4 @@ bookRouter.post(
   }
 );
 
-bookRouter.post('/bookList/:listId/delete', routeGuard, (req, res, next) => {
-  const { listId } = req.params;
-  const userId = req.user._id;
-  return Book.deleteMany({ bookList: listId })
-    .then((book) => {
-      return List.findByIdAndDelete(listId);
-    })
-    .then(() => {
-      res.redirect(`/profile/${userId}`);
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
 module.exports = bookRouter;

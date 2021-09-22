@@ -1,11 +1,12 @@
 {{#if bookListPage}}
-
-  <h1>{{listName}}</h1>
+  <h1>{{bookListPage.listName}}</h1>
   <br />
   <div>
-    <form method='POST' action='/booklist/{{id}}/delete'>
-      <button type='submit'>Delete List</button>
-    </form>
+    {{#if authorizedUser}}
+      <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
+        <button type='submit'>Delete List</button>
+      </form>
+    {{/if}}
   </div>
 {{/if}}
 
@@ -52,18 +53,23 @@
         href='/booklist/{{bookList}}/{{title}}/{{this._id}}/addcomment'
       >Add a comment to the review</a>
     {{else}}
+
       <a
         class='btn'
         href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
       >Add Review</a>
-    {{/if}}
 
-    <form
-      method='POST'
-      action='/booklist/{{bookList}}/{{title}}/{{this._id}}/delete'
-    >
-      <button type='submit'>Delete Book</button>
-    </form>
+    {{/if}}
+    <div>
+
+      <form
+        method='POST'
+        action='/booklist/{{bookList}}/{{title}}/{{this._id}}/delete'
+      >
+        <button type='submit'>Delete Book</button>
+      </form>
+
+    </div>
   {{/each}}
 
 </div>

@@ -1,5 +1,3 @@
-{{!-- {{> homeNavbar}} --}}
-
 <h1>{{user.name}}'s Profile</h1>
 
 {{#if user.profilePhoto}}
@@ -27,9 +25,9 @@
 <form method='GET'>
 
   {{#each lists}}
-    <span>
+    <ul>
       <a href='/booklist/{{this._id}}'>{{listName}}</a>
-    </span>
+    </ul>
   {{/each}}
 
 </form>

@@ -17,19 +17,37 @@ listRouter.get('/create-list', routeGuard, (req, res, next) => {
 listRouter.post('/create-list', routeGuard, (req, res, next) => {
   const id = req.user._id;
   const { listName } = req.body;
-  List.findOne({ listName }, { listName })
+  List.findOne({ listName, listCreator: id })
     .then((listExists) => {
       if (listExists) {
         console.log('list name already exists: ', listName);
         throw new Error('LIST_NAME_ALREADY_EXISTS');
-      } else {
-        List.create({
-          listName,
-          listCreator: id
-        }).then(() => {
-          res.redirect(`/profile/${id}`);
-        });
       }
+    })
+    .then(() => {
+      List.create({
+        listName,
+        listCreator: id
+      });
+    })
+    .then(() => {
+      res.redirect(`/profile/${id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+// to delete a list, can somehow delete another user's list - check authentication
+listRouter.post('/bookList/:listId/delete', routeGuard, (req, res, next) => {
+  const { listId } = req.params;
+  const userId = req.user._id;
+  return Book.deleteMany({ bookList: listId })
+    .then((book) => {
+      return List.findByIdAndDelete(listId);
+    })
+    .then(() => {
+      res.redirect(`/profile/${userId}`);
     })
     .catch((error) => {
       next(error);

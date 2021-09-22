@@ -17,23 +17,17 @@ router.get('/', (req, res, next) => {
 router.get('/search-user', routeGuard, (req, res, next) => {
   let name = req.query.name;
   console.log(name);
+  let noInput;
   User.find({ name })
     .then((userSearched) => {
       console.log(name);
       if (!name) {
-        res.render('search-user', {
-          userSearched: false,
-          searchUser: true
-        });
-      } else {
-        res.render('search-user', {
-          userSearched,
-          searchUser: true
-        });
+        noInput = true;
       }
-      // userSearched,
-      // searchUser: true
-      // });
+      res.render('search-user', {
+        userSearched,
+        noInput
+      });
     })
     .catch((error) => {
       next(error);
@@ -42,7 +36,7 @@ router.get('/search-user', routeGuard, (req, res, next) => {
 
 router.get('/profile/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  List.find({})
+  List.find({ listCreator: id })
     .then((lists) => {
       res.render('profile', { lists, profile: true });
     })
@@ -51,17 +45,21 @@ router.get('/profile/:id', routeGuard, (req, res, next) => {
     });
 });
 
-// to rework - not working correctly:
-/*router.get('/profile/:id', routeGuard, (req, res, next) => {
-  const id = req.user._id;
-  User.find({ id })
+router.get('/userprofilepage/:id', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  let user;
+  return User.findById(id)
+    .then((friend) => {
+      user = friend;
+      return List.find({ listCreator: id });
+    })
     .then((lists) => {
-      res.render('profile', { lists });
+      res.render('profile', { user, lists, profile: true });
     })
     .catch((error) => {
       next(error);
     });
-});*/
+});
 
 router.get('/edit-profile', routeGuard, (req, res, next) => {
   res.render('edit-profile');

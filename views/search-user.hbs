@@ -24,12 +24,12 @@
   </div>
 </nav>
 
-{{#if userSearched}}
+{{#if noInput}}{{else}}
   {{#each userSearched}}
     <h3>Here is what we found:</h3>
-    <h3><a href='/profile/{{_id}}'>{{name}}</a></h3>
+    <h3><a href='/userprofilepage/{{id}}'>{{name}}</a></h3>
     <p>Click on the username to consult the profile.</p>
+  {{else}}
+    <h3>We don't have any member with that name.</h3>
   {{/each}}
 {{/if}}
-{{#unless userSearched}}
-  <h3>We don't have any member with that name.</h3>
