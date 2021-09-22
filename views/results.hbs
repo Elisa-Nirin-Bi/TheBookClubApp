@@ -5,96 +5,81 @@ from the medium breakpoint up. --}}
 
 <div class='container'>
 
-<h3>New search:</h3>
+  <h3>New search:</h3>
 
-{{> searchBooks}}
+  {{> searchBooks}}
 
-       <h3>Your Results</h3>
+  <h3>Your results:</h3>
 
-    
- <div class='row row-cols-1 row-cols-md-3 g-4'>
-{{!--                   <div class='col'> --}}
+      
+  <div class="row">
+   {{#each books}}
+   <div class='col-md-3 g-2'>
+    <div class='card text-dark gray-300 w-10 mb-4'>
 
-         {{#each books}}
-              <div class='card h-100 text-dark bg-light mt-3 mb-3'>
+          <img class='img-fluid rounded-start w-3'
+            style='height:fit-content'
+            src='{{volumeInfo.imageLinks.smallThumbnail}}'
+            alt='{{volumeInfo.title}}'
+          />
 
-                <div class='row g-0'>
-                  <div class='col-mb-4 g-3'>
-<img class='img-fluid-rouded-start'
-      src='{{volumeInfo.imageLinks.smallThumbnail}}'
-      alt='{{volumeInfo.title}}'
-    />
-<div class="col-md-10">
-    <div class='card-body'>
-      <p class='card-text'>{{volumeInfo.authors}}</p>
-    <h5 class='card-title'>{{volumeInfo.title}}</h5>
-    <p class='card-text-muted'>{{volumeInfo.publisher}}</p>
-                  </div>
-                </div>
+              <div class='px-1'>
+                <p class='my-0'>{{volumeInfo.authors}}</p> 
+                <p class='pb-0'><b>{{volumeInfo.title}}</b></p>
+                <p class='my-0'><em>{{volumeInfo.publisher}}</em></p>
+              </div>
 
+          <form method='POST' enctype='multipart/form-data'>
 
+            <input
+              type='text'
+              name='title'
+              id='input-title'
+              value='{{volumeInfo.title}}'
+              placeholder='Title'
+              style='display: none;'
+            />
 
+            <input
+              type='text'
+              name='authors'
+              id='input-authors'
+              value='{{volumeInfo.authors}}'
+              placeholder='authors'
+              style='display: none;'
+            />
+            <input
+              type='text'
+              name='bookList'
+              id='input-bookList'
+              value='{{bookList}}'
+              placeholder='bookList'
+              style='display: none;'
+            />
 
-    <form method='POST' enctype='multipart/form-data'>
+            <input
+              type='text'
+              name='publisher'
+              id='input-publisher'
+              value='{{volumeInfo.publisher}}'
+              placeholder='publisher'
+              style='display: none;'
+            />
 
-      <input
-        type='text'
-        name='title'
-        id='input-title'
-        value='{{volumeInfo.title}}'
-        placeholder='Title'
-        style='display: none;'
-      />
+            <input
+              type='text'
+              name='image'
+              value='{{volumeInfo.imageLinks.smallThumbnail}}'
+              style='display: none;'
+            />
 
-      <input
-        type='text'
-        name='authors'
-        id='input-authors'
-        value='{{volumeInfo.authors}}'
-        placeholder='authors'
-        style='display: none;'
-      />
-      <input
-        type='text'
-        name='bookList'
-        id='input-bookList'
-        {{! value='bookList' }}
-        placeholder='choose a bookList'
-        {{! style='display: none;' }}
-      />
-      {{!-- 
-      <select name='bookList'>
-        {{#select userLists}}
-           {{#each userLists}} 
-            <option value='{{listName}}'> {{listName}} </option>
-          {{/each}} 
-        {{/select}}
-      </select>
- --}}
+            <button class='mt-2 w-60 btn btn-sm btn-primary'>Add to Book List</button>
+          </form>
 
-      <input
-        type='text'
-        name='publisher'
-        id='input-publisher'
-        value='{{volumeInfo.publisher}}'
-        placeholder='publisher'
-        style='display: none;'
-      />
-
-      <input
-        type='text'
-        name='image'
-        value='{{volumeInfo.imageLinks.smallThumbnail}}'
-        style='display: none;'
-      />
-
-      <button class='w-80 btn btn-lg btn-primary'>Add to Book List</button>
-    </form>
+      </div>
     </div>
-</div>
- </div>
- 
-     {{/each}}
-   </div>
+  
+    {{/each}}
   </div>
- </div>
+</div>
+
