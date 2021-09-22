@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const listSchema = new mongoose.Schema({
   listName: {
     type: String,
-    default: 'bookList',
+    // default: 'bookList',
     required: true
   },
   listAvatar: {

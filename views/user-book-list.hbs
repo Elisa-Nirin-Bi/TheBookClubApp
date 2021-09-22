@@ -1,5 +1,14 @@
-<h1>{{book.bookList}}</h1>
-<br />
+{{#if bookListPage}}
+
+  <h1>{{listName}}</h1>
+  <br />
+  <div>
+    <form method='POST' action='/booklist/{{id}}/delete'>
+      <button type='submit'>Delete List</button>
+    </form>
+  </div>
+{{/if}}
+
 <div class='added-books'>
   {{#each books}}
     <h4>{{title}}</h4>
@@ -34,14 +43,25 @@
       {{/each}}
     </ul>
     {{#if review}}
-      <a class='btn' href='/booklist/{{this._id}}/edit'>Change Review</a>
-      <a class='btn' href='/booklist/{{this._id}}/addcomment'>Add a comment to
-        the review</a>
+      <a
+        class='btn'
+        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+      >Change Review</a>
+      <a
+        class='btn'
+        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/addcomment'
+      >Add a comment to the review</a>
     {{else}}
-      <a class='btn' href='/booklist/{{this._id}}/edit'>Add Review</a>
+      <a
+        class='btn'
+        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+      >Add Review</a>
     {{/if}}
 
-    <form method='POST' action='/booklist/{{this._id}}/delete'>
+    <form
+      method='POST'
+      action='/booklist/{{bookList}}/{{title}}/{{this._id}}/delete'
+    >
       <button type='submit'>Delete Book</button>
     </form>
   {{/each}}

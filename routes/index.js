@@ -15,13 +15,25 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/search-user', routeGuard, (req, res, next) => {
-  const name = req.query.name;
+  let name = req.query.name;
+  console.log(name);
   User.find({ name })
-    .then((user) => {
-      res.render('search-user', {
-        users,
-        searchUser: true
-      });
+    .then((userSearched) => {
+      console.log(name);
+      if (!name) {
+        res.render('search-user', {
+          userSearched: false,
+          searchUser: true
+        });
+      } else {
+        res.render('search-user', {
+          userSearched,
+          searchUser: true
+        });
+      }
+      // userSearched,
+      // searchUser: true
+      // });
     })
     .catch((error) => {
       next(error);

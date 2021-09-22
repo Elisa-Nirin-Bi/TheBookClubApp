@@ -17,12 +17,19 @@ listRouter.get('/create-list', routeGuard, (req, res, next) => {
 listRouter.post('/create-list', routeGuard, (req, res, next) => {
   const id = req.user._id;
   const { listName } = req.body;
-  List.create({
-    listName,
-    listCreator: id
-  })
-    .then(() => {
-      res.redirect(`/profile/${id}`);
+  List.findOne({ listName }, { listName })
+    .then((listExists) => {
+      if (listExists) {
+        console.log('list name already exists: ', listName);
+        throw new Error('LIST_NAME_ALREADY_EXISTS');
+      } else {
+        List.create({
+          listName,
+          listCreator: id
+        }).then(() => {
+          res.redirect(`/profile/${id}`);
+        });
+      }
     })
     .catch((error) => {
       next(error);
