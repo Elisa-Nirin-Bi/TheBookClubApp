@@ -1,0 +1,42 @@
+<h1>{{searchedUser.name}}'s Profile</h1>
+
+{{#if searchedUser.profilePhoto}}
+  <figure>
+    <img
+      src='{{searchedUser.profilePhoto}}'
+      width='90'
+      height='120px'
+      alt='profPic'
+    />
+  </figure>
+{{/if}}
+
+<div>
+  My Friends
+</div>
+
+<span><strong>Name</strong>: {{searchedUser.name}}</span>
+<span><strong>Email</strong>: {{searchedUser.email}}</span>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h3>About Me</h3>
+<br />
+<p>
+  {{searchedUser.bio}}
+</p>
+
+<form method='GET'>
+
+  {{#each lists}}
+    <ul>
+      <a href='/booklist/{{this._id}}'>{{listName}}</a>
+    </ul>
+  {{/each}}
+
+</form>

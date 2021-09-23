@@ -26,7 +26,8 @@ router.get('/search-user', routeGuard, (req, res, next) => {
       }
       res.render('search-user', {
         userSearched,
-        noInput
+        noInput,
+        searchUser: true
       });
     })
     .catch((error) => {
@@ -47,14 +48,14 @@ router.get('/profile/:id', routeGuard, (req, res, next) => {
 
 router.get('/userprofilepage/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  let user;
+  let searchedUser;
   return User.findById(id)
     .then((friend) => {
-      user = friend;
+      searchedUser = friend;
       return List.find({ listCreator: id });
     })
     .then((lists) => {
-      res.render('profile', { user, lists, profile: true });
+      res.render('profile-friend', { searchedUser, lists, searchUser: true });
     })
     .catch((error) => {
       next(error);

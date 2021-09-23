@@ -31,13 +31,16 @@
           <nav class='nav nav-masthead justify-content-center float-md-end'>
             <a class='nav-link {{#if home}} active {{/if}}' aria-current='page' href='/'>Home</a>
             {{#if user}}
-              <a class='nav-link {{#if profile}} active {{/if}}' href='/profile/{{user.id}}'><img
+              <a class='nav-link {{#if profile}} active {{/if}}' href='/profile/{{user.id}}'>
+              {{#if user.profilePhoto}} 
+              <img
                   src='{{user.profilePhoto}}'
                   width='18'
                   height='24'
                   alt='profPic'
                 />
-                {{user.name}}'s Profile</a>
+                {{/if}}
+                My Profile</a>
               <a class='nav-link {{#if list}} active {{/if}}' href='/create-list'>Organize Books</a>
               <a class='nav-link {{#if searchBook}} active {{/if}}' href='/search-book'>Search Book</a>
               <a class='nav-link {{#if searchUser}} active {{/if}}' href='/search-user'>Search User</a>
