@@ -16,30 +16,26 @@ commentRouter.get(
     res.render('comment-add');
   }
 );
-// to create a comment
-commentRouter.get(
-  '/bookList/:listId/:title/:id/addcomment',
-  routeGuard,
-  (req, res, next) => {
-    const id = req.params.id;
-    let book;
-    Book.findById(id)
-
-      .then((document) => {
-        book = document;
-        return Comment.find({ book: id });
-      })
-      .then((comments) => {
-        res.render('user-book-list', {
-          book,
-          comments
-        });
-      })
-      .catch((error) => {
-        next(error);
+// to render a comment
+commentRouter.get('/book/:bookId/comments', routeGuard, (req, res, next) => {
+  //const id = req.params.id;
+  const bookId = req.params.bookId;
+  //let book;
+  Comment.find({ book: bookId })
+    .populate('book')
+    .populate('creator')
+    .then((comments) => {
+      console.log(comments);
+      res.render('comment-add', {
+        comments,
+        title: comments[0].book.title
       });
-  }
-);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 // to create the book comment on a review
 
 commentRouter.post(

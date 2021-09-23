@@ -31,27 +31,14 @@
         <h7>{{review}}</h7>
       </i>
     </p>
-    <ul>
-      {{#each comments}}
-        <h3>hi</h3>
-        <li>
-          <span>{{message}}</span>
-          <br />
-          <span>{{creator.name}}</span>
-          <br />
-          <span>{{creationDate}}</span>
-        </li>
-      {{/each}}
-    </ul>
+
     {{#if review}}
       <a
         class='btn'
         href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
       >Change Review</a>
-      <a
-        class='btn'
-        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/addcomment'
-      >Add a comment to the review</a>
+      <a class='btn' href='/book/{{this._id}}/comments'>See comments of this
+        review</a>
     {{else}}
 
       <a
