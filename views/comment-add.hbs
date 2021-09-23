@@ -1,3 +1,16 @@
+<h2>Comments for: </h2>
+<h2>{{title}}</h2>
+
+{{#each comments}}
+
+  <span>{{message}}</span>
+
+  <span>{{creator.name}}</span>
+
+  <span>{{creationDate}}</span>
+  <br />
+{{/each}}
+
 <form method='POST'>
   <label for='comment-input'>Your comment</label>
   <input id='comment-input' type='text' name='message' placeholder='comment' />

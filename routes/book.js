@@ -59,6 +59,7 @@ bookRouter.get('/booklist/:bookListId', routeGuard, (req, res, next) => {
         });
       }
     })
+
     .catch((error) => {
       next(error);
     });
