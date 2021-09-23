@@ -75,19 +75,25 @@ bookRouter.post(
     const { title, authors, publisher, image, bookList } = req.body;
     let bookListId;
     return List.findOne({ listName: bookList }, { listName: 1 })
+      .populate('booksOnList')
       .then((list) => {
-        const listId = list.id;
+        bookListId = list.id;
+        return Book.findOne({ bookList: bookListId, title, creator: id });
+      })
+      .then((bookExists) => {
+        if (bookExists) {
+          throw new Error('BOOK_ALREADY_EXISTS');
+        }
         return Book.create({
           title,
           authors,
           publisher,
           image,
-          bookList: listId,
+          bookList: bookListId,
           creator: id
         });
       })
       .then((book) => {
-        bookListId = book.bookList;
         return List.findByIdAndUpdate(bookListId, { booksOnList: book });
       })
       .then((list) => {

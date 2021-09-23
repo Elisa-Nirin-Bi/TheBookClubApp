@@ -17,6 +17,7 @@ listRouter.get('/create-list', routeGuard, (req, res, next) => {
 listRouter.post('/create-list', routeGuard, (req, res, next) => {
   const id = req.user._id;
   const { listName } = req.body;
+  let booksOnList;
   List.findOne({ listName, listCreator: id })
     .then((listExists) => {
       if (listExists) {
@@ -27,7 +28,8 @@ listRouter.post('/create-list', routeGuard, (req, res, next) => {
     .then(() => {
       List.create({
         listName,
-        listCreator: id
+        listCreator: id,
+        booksOnList
       });
     })
     .then(() => {
