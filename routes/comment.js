@@ -10,7 +10,7 @@ const routeGuard = require('./../middleware/route-guard');
 const commentRouter = express.Router();
 
 commentRouter.get(
-  '/bookList/:listId/:title/:id/addcomment',
+  '/bookList/:listId/:title/:id/comments',
   routeGuard,
   (req, res, next) => {
     res.render('comment-add');
@@ -38,24 +38,20 @@ commentRouter.get('/book/:bookId/comments', routeGuard, (req, res, next) => {
 
 // to create the book comment on a review
 
-commentRouter.post(
-  '/bookList/:listId/:title/:id/addcomment',
-  routeGuard,
-  (req, res, next) => {
-    const { id, listId } = req.params;
-    const message = req.body.message;
-    Comment.create({
-      book: id,
-      message,
-      creator: req.user._id
+commentRouter.post('/book/:bookId/comments', routeGuard, (req, res, next) => {
+  const { id, listId, bookId } = req.params;
+  const message = req.body.message;
+  Comment.create({
+    book: bookId,
+    message,
+    creator: req.user._id
+  })
+    .then(() => {
+      res.redirect(`/book/${bookId}/comments`);
     })
-      .then(() => {
-        res.redirect(`/booklist/${listId}`);
-      })
-      .catch((error) => {
-        next(error);
-      });
-  }
-);
+    .catch((error) => {
+      next(error);
+    });
+});
 
 module.exports = commentRouter;
