@@ -6,7 +6,7 @@
       name='viewport'
       content='width=device-width, initial-scale=1, shrink-to-fit=no'
     />
-    <title>{{title}}</title>
+    <title>The Book Club</title>
     <!-- Bootstrap CSS -->
     <link
       rel='stylesheet'
@@ -22,12 +22,11 @@
     <link rel='stylesheet' href='/styles/style.css' />
   </head>
 
-  <body class='d-flex text-center text-white bg-dark flex-column mx-auto'>
+  <body class='d-flex text-center text-white bg-dark flex-column mx-auto h-100'>
 
-    {{!-- <div class='cover-container d-flex p-3 mx-auto '> --}}
       <header class='mb-auto'>
         <div>
-          {{! <h3 class='float-md-start mb-0'>The book club</h3> }}
+
           <nav class='nav nav-masthead justify-content-center float-md-end'>
             <a class='nav-link {{#if home}} active {{/if}}' aria-current='page' href='/'>Home</a>
             {{#if user}}
@@ -59,8 +58,10 @@
 
       <!-- Footer -->
 
-      <footer class='mt-auto text-white-30 fs-6'>
-        <p>Created by Caroline, Elisa and Amélie.</p>
+      <footer class='footer mt-auto py-3'>
+        <div class='container'>
+        <span class='text-muted'>Created by Caroline, Elisa and Amélie.</span>
+        </div>
       </footer>
 
     {{!-- </div> --}}
