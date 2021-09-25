@@ -1,74 +1,108 @@
-{{#if bookListPage}}
-  <h1>{{bookListPage.listName}}</h1>
-  <br />
-  <div>
-    {{#if authorizedUser}}
-      <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
-        <button type='submit'>Delete List</button>
-      </form>
-    {{/if}}
-  </div>
-{{/if}}
-
-<div class='added-books'>
-  {{#each books}}
-    <h4>{{title}}</h4>
-    <h4>{{authors}}</h4>
-    <h6>{{publisher}}</h6>
-    <img src='{{image}}' alt='{{title}}' />
-
-    <p>
-      <style>
-        .checked { color: orange; }
-      </style>
-      <span class='fa fa-star'></span>
-      <span class='fa fa-star'></span>
-      <span class='fa fa-star'></span>
-      <span class='fa fa-star'></span>
-      <span class='fa fa-star'></span>
-      <br />
-      <i>
-        <h7>{{review}}</h7>
-      </i>
-    </p>
-
-    {{#if review}}
-      <a
-        class='btn'
-        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
-      >Change Review</a>
-      <a class='btn' href='/book/{{this._id}}/comments'>See comments of this
-        review</a>
-    {{else}}
-
-      <a
-        class='btn'
-        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
-      >Add Review</a>
-
-    {{/if}}
+<div class='container modal-content rounded-6 shadow text-dark'>
+  <div class='modal-body d-flex flex-column p-5'>
     <div>
+      {{#if bookListPage}}
+        <h1>{{bookListPage.listName}}</h1>
+        <div class='d-flex justify-content-center'>
+          {{#if authorizedUser}}
 
-      <form
-        method='POST'
-        action='/booklist/{{bookList}}/{{title}}/{{this._id}}/delete'
-      >
-        <button type='submit'>Delete Book</button>
-      </form>
+            <a href='/search-book'>
+              <button class='btn btn-primary mb-5 mr-3' type='submit'>Add a book</button>
+            </a>
 
+            <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
+              <button class='btn btn-danger mb-5 mr-3' type='submit'>Delete List</button>
+            </form>
+          {{/if}}
+        </div>
+      {{/if}}
     </div>
-  {{/each}}
 
+    {{!-- Render of the booklist with cards --}}
+
+      <div class="row">
+          {{#each books}}
+          <div class='col-md-3 g-2'>
+            <div class='card text-dark gray-300 w-10 mb-4'>
+                  <img class='img-fluid rounded-start w-3'
+                    style='height:fit-content'
+                    {{#if image}} 
+                      src='{{image}}' 
+                      {{else}} 
+                      src='https://data.europa.eu/sites/default/files/news/2020-08-06-edp_book_club.png'
+                    {{/if}}
+                    alt='{{title}}'
+                  />
+
+                  <div class='p-1'>
+                    <p class='my-0'>{{authors}}</p> 
+                    <p class='pb-0'><b>{{title}}</b></p>
+                    <p class='my-0'><em>{{publisher}}</em></p>
+                  </div>
+
+                  <div class="stars">
+                      <p class='py-2'>
+                        <style>
+                          .checked { color: orange; }
+                        </style>
+                        <span class='fa fa-star'></span>
+                        <span class='fa fa-star'></span>
+                        <span class='fa fa-star'></span>
+                        <span class='fa fa-star'></span>
+                        <span class='fa fa-star'></span>
+                        <i>
+                          <h7>{{review}}</h7>
+                        </i>
+                      </p>
+
+                      {{#if user}}
+                        <p>
+                          <script>
+                            let star = document.getElementsByTagName('span'); for (let i = 0; i <
+                            star.length; i++) { star[i].addEventListener('click', function (e) {
+                            if(e.target.classList.value == 'fa fa-star checked'){
+                            e.target.classList.remove("checked") }else{
+                            e.target.classList.add("checked") }})}
+
+                          </script>
+                        </p>
+                      {{/if}}
+                    </div>
+
+                    <div class='review'>
+                      {{#if review}}
+                        <a
+                          class='btn'
+                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+                        >Change Review</a>
+                        <a class='btn btn-outline-primary mb-2' href='/book/{{this._id}}/comments'>See comments of this
+                          review</a>
+                      {{else}}
+
+                        <a
+                          class='btn btn-outline-primary mb-2'
+                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+                        >Add Review</a>
+
+                      {{/if}}
+                    </div>
+                
+                    <div class='delete'>
+
+                      <form
+                        method='POST'
+                        action='/booklist/{{bookList}}/{{title}}/{{this._id}}/delete'
+                      >
+                        <button class='btn btn-outline-danger mb-2' type='submit'>Delete
+                          Book</button>
+                      </form>
+
+                    </div>
+
+            
+        </div>
+      </div>
+      {{/each}}
+
+  </div>
 </div>
-{{#if user}}
-  <p>
-    <script>
-      let star = document.getElementsByTagName('span'); for (let i = 0; i <
-      star.length; i++) { star[i].addEventListener('click', function (e) {
-      if(e.target.classList.value == 'fa fa-star checked'){
-      e.target.classList.remove("checked") }else{
-      e.target.classList.add("checked") }})}
-
-    </script>
-  </p>
-{{/if}}

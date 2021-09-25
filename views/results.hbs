@@ -19,11 +19,15 @@ from the medium breakpoint up. --}}
 
           <img class='img-fluid rounded-start w-3'
             style='height:fit-content'
-            src='{{volumeInfo.imageLinks.smallThumbnail}}'
+            {{#if volumeInfo.imageLinks.smallThumbnail}} 
+                      src='{{volumeInfo.imageLinks.smallThumbnail}}' 
+                      {{else}} 
+                      src='https://data.europa.eu/sites/default/files/news/2020-08-06-edp_book_club.png'
+                    {{/if}}
             alt='{{volumeInfo.title}}'
           />
 
-              <div class='px-1'>
+              <div class='p-1'>
                 <p class='my-0'>{{volumeInfo.authors}}</p> 
                 <p class='pb-0'><b>{{volumeInfo.title}}</b></p>
                 <p class='my-0'><em>{{volumeInfo.publisher}}</em></p>
