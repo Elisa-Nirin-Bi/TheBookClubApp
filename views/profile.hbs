@@ -48,7 +48,11 @@
 
     <div class='card text-white bg-dark flex-column p-3 m-3'>
       <h1>My friends</h1>
-      <p class='text-white'>Test friend 1</p>
+      <p class='text-white'>
+        {{#each friendList}}
+        <a href="/userprofilepage/{{friendsOnList.id}}"> {{friendsOnList.name}} </a>
+        {{/each}}
+      </p>
     </div>
   </div>
   </div>

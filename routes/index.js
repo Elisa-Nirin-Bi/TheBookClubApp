@@ -38,9 +38,16 @@ router.get('/search-user', routeGuard, (req, res, next) => {
 
 router.get('/profile/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
+  let lists;
   List.find({ listCreator: id })
-    .then((lists) => {
-      res.render('profile', { lists, profile: true });
+    .then((doc) => {
+      lists = doc;
+      return FriendList.find({ friendListOwner: req.user._id }).populate(
+        'friendsOnList'
+      );
+    })
+    .then((friendList) => {
+      res.render('profile', { friendList, lists, profile: true });
     })
     .catch((error) => {
       next(error);
@@ -50,13 +57,32 @@ router.get('/profile/:id', routeGuard, (req, res, next) => {
 router.get('/userprofilepage/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
   let searchedUser;
+  let lists;
   return User.findById(id)
     .then((friend) => {
       searchedUser = friend;
       return List.find({ listCreator: id });
     })
-    .then((lists) => {
-      res.render('profile-friend', { searchedUser, lists, searchUser: true });
+    .then((doc) => {
+      lists = doc;
+      return FriendList.find({ friendsOnList: searchedUser });
+    })
+    .then((existingFriend) => {
+      if (!existingFriend.length) {
+        res.render('profile-friend', {
+          friend: true,
+          searchedUser,
+          lists,
+          searchUser: true
+        });
+      } else {
+        res.render('profile-friend', {
+          friend: false,
+          searchedUser,
+          lists,
+          searchUser: true
+        });
+      }
     })
     .catch((error) => {
       next(error);
@@ -65,13 +91,16 @@ router.get('/userprofilepage/:id', routeGuard, (req, res, next) => {
 
 router.post('/userprofilepage/:id', routeGuard, (req, res, next) => {
   const id = req.params.id;
-  let searchedUser;
+  // let searchedUser;
   return User.findById(id)
     .then((friend) => {
-      searchedUser = friend;
-      return FriendList.find({ listCreator: id });
+      // searchedUser = friend;
+      return FriendList.create({
+        friendsOnList: friend,
+        friendListOwner: req.user._id
+      });
     })
-    .then((lists) => {
+    .then((friendList) => {
       res.redirect(`/profile/${id}`);
     })
     .catch((error) => {

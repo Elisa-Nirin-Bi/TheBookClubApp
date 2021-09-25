@@ -11,17 +11,23 @@
   </figure>
 {{/if}}
 
-<div>
-  My Friends
-</div>
-
 <span><strong>Name</strong>: {{searchedUser.name}}</span>
 <span><strong>Email</strong>: {{searchedUser.email}}</span>
 <br />
-<form method='POST' action=''>
 
-  <button>Add as Friend</button>
-</form>
+{{#if friend}}
+  <form method='POST'>
+    <button>Add as Friend</button>
+  </form>
+
+{{else}}
+  {{! to finish implementing delete friend option }}
+  <form method='POST' action='/userprofilepage/{{searchedUser.id}}/remove'>
+    <button>Remove Friend</button>
+  </form>
+
+{{/if}}
+
 <br />
 <br />
 <br />
