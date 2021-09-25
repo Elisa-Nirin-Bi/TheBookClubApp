@@ -13,7 +13,11 @@ body {
   margin: 0 auto;
   font-family: sans-serif;
   font-family: $font-sans;
-  line-height: 2;
+  line-height: 1.2;
+}
+
+ul {
+  list-style-type: none;
 }
 /*
 a {
@@ -38,12 +42,16 @@ nav {
 */
 h1,
 h2,
-h3,
-p {
-  margin: 0;
+h3 {
+  //  margin: 0;
   line-height: inherit;
   // &:not(:last-child) {
-  //   margin-bottom: 1rem;
+  margin: 2rem 0;
+}
+
+p {
+  line-height: inherit;
+  color: black;
 }
 /*
 img {
@@ -198,4 +206,32 @@ body {
   }
 }
 
-// -------- Book search results ----- //
+// -------- User Profile book lists & friends ----- //
+
+.list-group-checkable {
+  display: grid;
+  gap: 0.5rem;
+  border: 0;
+}
+.list-group-checkable .list-group-item {
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+.list-group-item-check {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+.list-group-item-check:hover + .list-group-item {
+  background-color: var(--bs-light);
+}
+.list-group-item-check:checked + .list-group-item {
+  color: #fff;
+  background-color: var(--bs-light);
+}
+.list-group-item-check[disabled] + .list-group-item,
+.list-group-item-check:disabled + .list-group-item {
+  pointer-events: none;
+  filter: none;
+  opacity: 0.5;
+}

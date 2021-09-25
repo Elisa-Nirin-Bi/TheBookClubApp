@@ -1,4 +1,4 @@
-<div class='container'>
+<div class='d-flex flex-wrap justify-content-center'>
   <div class='card text-dark bg-light'>
     <div class='p-3 mt-5'>
       {{#if user.profilePhoto}}
@@ -6,7 +6,7 @@
           src='{{user.profilePhoto}}'
           class='bg-light img-thumbnail m-1'
           alt='profile-picture'
-          style='max-height: 200px'/>
+          style='max-height: 200px'
         />
       {{else}}
           <img src='./../images/no-user-profile-pic.png'
@@ -24,34 +24,48 @@
             <li><h4><strong>Email</strong>: {{user.email}}</h3></li>
           </ul>
         </div>
-        <div>
+        <div class="d-flex flex-column">
             <h3><strong>About Me</strong></h3>
-            <p>
-              {{user.bio}}
-            </p>
+              <div class='d-flex flex-wrap justify-content-center px-3 mb-3'
+                <p>
+                  {{user.bio}}
+                </p>
+              </div> 
+              <div> 
+                <a href='/edit-profile' class='btn btn-outline-danger mb-5'>Edit Profile</a>
+              </div>
+          
         </div>
+
+    </div>
+
+
+  <div class="d-flex bg-dark flex-wrap align-items-start justify-content-center">
+    <div class='card text-dark bg-info flex-column p-3 m-3'>
+
+      <h1>My book lists</h1>
+
+      <div class='list-group list-group-checkable'>
+        <form method='GET'>
+          {{#each lists}}
+          <a href="/booklist/{{this._id}}">
+         <input class="list-group-item-check" type="/booklist/{{this._id}}" name="listGroupCheckableRadios" id="listGroupCheckableRadios1" value="" checked>
+          </a>
+          <label class="list-group-item py-3" for="listGroupCheckableRadios1">
+            <a href='/booklist/{{this._id}}'>{{listName}}</a>
+            <span class="d-block small opacity-50">Last added: </span>
+          </label>
+          {{/each}}
+        
+        </form>
+      </div>
+      
+    </div>
+
+    <div class='card text-white bg-dark flex-column p-3 m-3'>
+      <h1>My friends</h1>
+      <p class='text-white'>Test friend 1</p>
     </div>
   </div>
-
-  <div class='card text-dark bg-info'>
-
-    <h1>My book lists</h1>
-
-    <form method='GET'>
-
-      {{#each lists}}
-        <ul>
-          <a href='/booklist/{{this._id}}'>{{listName}}</a>
-        </ul>
-      {{/each}}
-
-    </form>
-
-    <a href='/edit-profile'>Edit Profile</a>
   </div>
-
-  <div>
-    <h1>My friends</h1>
-  </div>
-
 </div>

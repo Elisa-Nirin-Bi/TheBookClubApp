@@ -31,14 +31,21 @@
             <a class='nav-link {{#if home}} active {{/if}}' aria-current='page' href='/'>Home</a>
             {{#if user}}
               <a class='nav-link {{#if profile}} active {{/if}}' href='/profile/{{user.id}}'>
-              {{#if user.profilePhoto}} 
-              <img
-                  src='{{user.profilePhoto}}'
-                  width='18'
-                  height='24'
-                  alt='profPic'
-                />
-                {{/if}}
+              {{#if user.profilePhoto}}
+          <img
+          src='{{user.profilePhoto}}'
+          class='bg-light img-thumbnail m-1'
+          width="18"
+          height="24"
+          alt='profile-picture'
+          style='max-height: 200px'/>
+        
+      {{else}}
+          <img src='./../images/no-user-profile-pic.png'
+          class='bg-light img-thumbnail m-1'
+          alt= 'library'
+          style='max-height: 200px'/>
+      {{/if}}
                 My Profile</a>
               <a class='nav-link {{#if list}} active {{/if}}' href='/create-list'>Organize Books</a>
               <a class='nav-link {{#if searchBook}} active {{/if}}' href='/search-book'>Search Book</a>
