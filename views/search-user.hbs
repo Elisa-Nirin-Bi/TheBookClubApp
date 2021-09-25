@@ -28,7 +28,25 @@
   {{#if noInput}}{{else}}
     {{#each userSearched}}
       <h3>Here is what we found:</h3>
-      <h3><a href='/userprofilepage/{{id}}'>{{name}}</a></h3>
+      <h3><a href='/userprofilepage/{{id}}'>
+          {{#if profilePhoto}}
+            <img
+              src='{{profilePhoto}}'
+              class='bg-light img-thumbnail m-1'
+              alt='profile-picture'
+              style='max-height: 200px'
+            />
+
+          {{else}}
+            <img
+              src='./../images/no-user-profile-pic.png'
+              class='bg-light img-thumbnail m-1'
+              alt='library'
+              style='max-height: 200px'
+            />
+          {{/if}}
+          <br />
+          {{name}}</a></h3>
       <p>Click on the username to consult the profile.</p>
     {{else}}
       <h3>We don't have any member with that name.</h3>
