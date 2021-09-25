@@ -35,16 +35,18 @@
           <img
           src='{{user.profilePhoto}}'
           class='bg-light img-thumbnail m-1'
-          width="18"
-          height="24"
+          width="24"
+          height="22"
           alt='profile-picture'
-          style='max-height: 200px'/>
+          />
         
       {{else}}
           <img src='./../images/no-user-profile-pic.png'
-          class='bg-light img-thumbnail m-1'
-          alt= 'library'
-          style='max-height: 200px'/>
+          class='bg-light mx-1'
+          width="24"
+          height="22"
+          alt= 'default-profile-picture-alien'
+          />
       {{/if}}
                 My Profile</a>
               <a class='nav-link {{#if list}} active {{/if}}' href='/create-list'>Organize Books</a>
