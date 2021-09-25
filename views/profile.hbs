@@ -41,26 +41,10 @@
 
 
   <div class="d-flex bg-dark flex-wrap align-items-start justify-content-center">
-    <div class='card text-dark bg-info flex-column p-3 m-3'>
 
-      <h1>My book lists</h1>
-
-      <div class='list-group list-group-checkable'>
-        <form method='GET'>
-          {{#each lists}}
-          <a href="/booklist/{{this._id}}">
-         <input class="list-group-item-check" type="/booklist/{{this._id}}" name="listGroupCheckableRadios" id="listGroupCheckableRadios1" value="" checked>
-          </a>
-          <label class="list-group-item py-3" for="listGroupCheckableRadios1">
-            <a href='/booklist/{{this._id}}'>{{listName}}</a>
-            <span class="d-block small opacity-50">Last added: </span>
-          </label>
-          {{/each}}
-        
-        </form>
-      </div>
+    {{> myBookLists}}
       
-    </div>
+  </div>
 
     <div class='card text-white bg-dark flex-column p-3 m-3'>
       <h1>My friends</h1>

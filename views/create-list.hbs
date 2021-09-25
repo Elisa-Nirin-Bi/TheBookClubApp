@@ -1,16 +1,33 @@
-<h2>Organize Your Books with Custom Lists!</h2>
+<div>
+  <div class='modal-content rounded-6 shadow'>
+    <div class="modal-body p-5">
+      <div class='form-floating'>
+        <h1 class='h2 mb-5 text-dark fw-light'>Organize Your Books with custom lists</h1>
+      </div>
 
-<br />
+      <div class='form-floating'>
+        <form method='POST'>
 
-<form method='POST'>
+          <label for='input-list-name'>New List Name</label>
+          <input
+            id='input-list-name'
+            type='text'
+            name='listName'
+            class='form-control'
+            placeholder='Favorite Books, Highly Recommended Books, Books to Reread, etc.'
+          />
 
-  <label for='input-list-name'>New List Name</label>
-  <input
-    id='input-list-name'
-    type='text'
-    name='listName'
-    placeholder='Favorite Books, Highly Recommended Books, Books to Reread, etc.'
-  />
+          <button class='btn btn-outline-success mt-5'>Create New Book List</button>
+        </form>
+      </div>
+    </div>
+  
 
-  <button>Create New Book List</button>
-</form>
+
+  <div class="d-flex bg-dark flex-wrap align-items-start justify-content-center">
+
+    {{> myBookLists}}
+      
+  </div>
+
+</div>
