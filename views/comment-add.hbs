@@ -2,8 +2,25 @@
 <h2>{{title}}</h2>
 
 {{#each comments}}
+<span>{{message}}</span>
+<article class='publication-item'>
+  <aside>
+    <strong>{{score}}</strong>
+    <form method='POST' action='/book/{{_id}}/vote'>
+      <button>
+        <img src="/images/thumbs-up.png" style="width: 15" alt="like"/>
+      </button>
+    </form>
+  </aside>
 
-  <span>{{message}}</span>
+    <aside>
+    <strong>{{unlike}}</strong>
+    <form method='POST' action='/book/{{_id}}/dislike'>
+      <button>
+        <img src="/images/thumbs-down.png" style="width: 15" alt="like"/>
+      </button>
+    </form>
+  </aside>
 
   <span>{{creator.name}}</span>
 

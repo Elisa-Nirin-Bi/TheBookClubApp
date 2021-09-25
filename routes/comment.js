@@ -54,4 +54,32 @@ commentRouter.post('/book/:bookId/comments', routeGuard, (req, res, next) => {
     });
 });
 
+//to like a comment
+
+commentRouter.post('/book/:id/vote', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  Comment.findByIdAndUpdate(id, { $inc: { score: 1 } })
+    .then((comment) => {
+      console.log(comment);
+      const bookId = comment.book;
+      res.redirect(`/book/${bookId}/comments`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+commentRouter.post('/book/:id/dislike', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  Comment.findByIdAndUpdate(id, { $inc: { unlike: 1 } })
+    .then((comment) => {
+      console.log(comment);
+      const bookId = comment.book;
+      res.redirect(`/book/${bookId}/comments`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 module.exports = commentRouter;
