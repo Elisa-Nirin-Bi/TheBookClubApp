@@ -47,7 +47,7 @@ listRouter.post('/create-list', routeGuard, (req, res, next) => {
     });
 });
 
-// to delete a list, can somehow delete another user's list - check authentication
+// to delete a list
 listRouter.post('/bookList/:listId/delete', routeGuard, (req, res, next) => {
   const { listId } = req.params;
   const userId = req.user._id;

@@ -9,6 +9,48 @@ const routeGuard = require('./../middleware/route-guard');
 
 const commentRouter = express.Router();
 
+// to render comment page, for viewing, adding, deleting comments
+commentRouter.get('/book/:bookId/comments', routeGuard, (req, res, next) => {
+  const bookId = req.params.bookId;
+  let bookTitle;
+  return Book.findById(bookId)
+    .then((book) => {
+      bookTitle = book.title;
+      return Comment.find({ book: bookId }).populate('creator');
+    })
+    .then((comments) => {
+      res.render('comment-add', {
+        comments,
+        title: bookTitle
+      });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+// to create the book comment on a review
+commentRouter.post('/book/:bookId/comments', routeGuard, (req, res, next) => {
+  const { id, listId, bookId } = req.params;
+  const message = req.body.message;
+  Book.findById(bookId)
+    .then((book) => {
+      return Comment.create({
+        book,
+        message,
+        creator: req.user._id
+      });
+    })
+    .then((comment) => {
+      console.log(comment);
+      res.redirect(`/book/${bookId}/comments`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+/* Previous comment code
 commentRouter.get(
   '/bookList/:listId/:title/:id/comments',
   routeGuard,
@@ -53,6 +95,7 @@ commentRouter.post('/book/:bookId/comments', routeGuard, (req, res, next) => {
       next(error);
     });
 });
+*/
 
 //to like a comment
 

@@ -7,6 +7,7 @@ const bcryptjs = require('bcryptjs');
 const Book = require('../models/book');
 const User = require('../models/user');
 const List = require('../models/list');
+const FriendList = require('../models/friendList');
 const routeGuard = require('./../middleware/route-guard');
 const upload = require('./../middleware/file-upload');
 
@@ -56,6 +57,22 @@ router.get('/userprofilepage/:id', routeGuard, (req, res, next) => {
     })
     .then((lists) => {
       res.render('profile-friend', { searchedUser, lists, searchUser: true });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/userprofilepage/:id', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  let searchedUser;
+  return User.findById(id)
+    .then((friend) => {
+      searchedUser = friend;
+      return FriendList.find({ listCreator: id });
+    })
+    .then((lists) => {
+      res.redirect(`/profile/${id}`);
     })
     .catch((error) => {
       next(error);

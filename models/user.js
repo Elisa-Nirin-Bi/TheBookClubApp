@@ -25,6 +25,10 @@ const schema = new mongoose.Schema({
   userBookList: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'List'
+  },
+  friendList: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'FriendList'
   }
 });
 
