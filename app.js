@@ -19,6 +19,10 @@ const authenticationRouter = require('./routes/authentication');
 
 const app = express();
 
+hbs.registerHelper('date', (value) => {
+  return `${value.toLocaleDateString()}, ${value.toLocaleTimeString()}`;
+});
+
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 hbs.registerHelper('select', (selected, options) => {
