@@ -1,0 +1,24 @@
+Button class:
+
+-------------
+
+add => blue
+
+
+Full blue button: sign in / sign up / Add user
+btn btn-primary mb-2
+
+Outline: add review 
+btn btn-outline-primary mb-2
+
+--------------
+
+edit / delete => red
+
+Outline: edit profile 
+btn btn-outline-danger mb-5
+
+-------------
+
+search => green
+btn btn-outline-success
