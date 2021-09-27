@@ -8,7 +8,7 @@ add => blue
 Full blue button: sign in / sign up / Add as a friend
 btn btn-primary mb-2
 
-Outline: add review 
+Outline: add review / organize books
 btn btn-outline-primary mb-2
 
 --------------
@@ -21,4 +21,6 @@ btn btn-outline-danger mb-5
 -------------
 
 search => green
+
+search friends
 btn btn-outline-success

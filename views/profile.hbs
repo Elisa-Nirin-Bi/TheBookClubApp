@@ -1,59 +1,115 @@
-<div class='d-flex flex-wrap justify-content-center'>
-  <div class='card text-dark bg-light'>
-    <div class='p-3 mt-5'>
-      {{#if user.profilePhoto}}
-          <img
-          src='{{user.profilePhoto}}'
-          class='bg-light img-thumbnail m-1'
-          alt='profile-picture'
-          style='max-height: 200px'
-        />
-      {{else}}
-          <img src='./../images/no-user-profile-pic.png'
-          class='bg-light img-thumbnail m-1'
-          alt= 'library'
-          style='max-height: 200px'/>
-      {{/if}}
-    </div>
-  
-    <div>
-      <h1>My profile</h1>
+<div class='container'>
+  <div class='row justify-content-center'>
+    <h1>My profile</h1>
+  </div>
+  <div class='row row-flex'>
+
+    <!-- user --->
+
+    <div class='col-md-4'>
+
+      <div class='card content bg-light text-dark text-center'>
+        <h4><i class='bi bi-person-circle'></i>
+          My profile infos</h4>
+        <div class='card-body d-flex flex-column align-items-center justify-content-center'>
+          
+          
+          {{#if user.profilePhoto}}
+            <img
+              src='{{user.profilePhoto}}'
+              class='bg-light img-thumbnail m-1'
+              alt='profile-picture'
+              style='max-height: 100px'
+            />
+
+          {{else}}
+            <img
+              src='./../images/no-user-profile-pic.png'
+              class='bg-light img-thumbnail m-1'
+              alt='library'
+              style='max-height: 100px'
+            />
+          {{/if}}
+        
+        
+        
+        <ul class='list-group p-2'>
+        <li><strong>Name</strong>: {{user.name}}</li>
+        <li><strong>Email</strong>: {{user.email}}</li>
+        </ul>
+        
+
         <div>
-          <ul>
-            <li><h3><strong>Username</strong>: {{user.name}} </h3> </li>
-            <li><h4><strong>Email</strong>: {{user.email}}</h3></li>
-          </ul>
+          <h5 class='p-2'>About Me</h5>
+          {{#if user.bio}}
+            <p>
+              {{user.bio}}
+            </p>
+          {{else}}
+            <p><em>You didn't write any bio yet.</em></p>
+          {{/if}}
         </div>
-        <div class="d-flex flex-column">
-            <h3><strong>About Me</strong></h3>
-              <div class='d-flex flex-wrap justify-content-center px-3 mb-3'
-                <p>
-                  {{user.bio}}
-                </p>
-              </div> 
-              <div> 
-                <a href='/edit-profile' class='btn btn-outline-danger mb-5'>Edit Profile</a>
-              </div>
+       
+          <a href='/edit-profile' class='btn btn-outline-danger mt-auto'>Edit
+            Profile</a>
+        
+        </div>
+      </div>
+    </div>
+
+    <!--- User book lists -->
+
+    <div class='col-md-4'>
+      <div class='card content bg-light text-dark text-center'>
+        <h4 class=''><i class='bi bi-book'></i>
+          My book list</h4>
+        <div class='card-body d-flex flex-column align-items-center justify-content-center'>
+          <div class=''>
+          {{#if lists}}
+            <form method='GET'>
+              {{#each lists}}
+                <ul class='list-group'>
+                  <li class='list-group-item border border-primary'><a href='/booklist/{{this._id}}'>{{listName}}</a></li>
+                </ul>
+              {{/each}}
+            </form>
+          {{else}}
+            <p><em>You don't have any lists yet.</em></p>
+          {{/if}}
+          </div>
+          
+          <a href='/create-list' class='btn btn-outline-primary mt-auto'>Organize lists</a>
           
         </div>
+      </div>
+    </div>
+    <!----->
 
+    <div class='col-md-4'>
+      <div class='card content bg-light text-dark text-center'>
+        <h4><i class='bi bi-people-fill'></i> My friend list</h4>
+        <div class='card-body d-flex flex-column align-items-center justify-content-center'>
+          <div>
+          {{#if friendList}}
+            <form method="GET">
+              {{#each friendList}}
+                <ul class='list-group'>
+                  <li class='list-group-item border border-primary'><a href='/userprofilepage/{{friendsOnList.id}}'>
+                      {{friendsOnList.name}}</a></li>
+                </ul>
+              {{/each}}
+            </form>
+          {{else}}
+            <p><em>You don't have any friends yet.</em></p>
+          {{/if}}
+          </div>
+
+          <a href='/search-user' class='btn btn-outline-success mt-auto'>Search friends</a>
+         
+        </div>
+      </div>
     </div>
 
-
-  <div class="d-flex bg-dark flex-wrap align-items-start justify-content-center">
-
-    {{> myBookLists}}
-      
   </div>
 
-    <div class='card text-white bg-dark flex-column p-3 m-3'>
-      <h1>My friends</h1>
-      <p class='text-white'>
-        {{#each friendList}}
-        <a href="/userprofilepage/{{friendsOnList.id}}"> {{friendsOnList.name}} </a>
-        {{/each}}
-      </p>
-    </div>
-  </div>
-  </div>
 </div>
