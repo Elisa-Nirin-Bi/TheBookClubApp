@@ -1,39 +1,66 @@
-<form method='POST' enctype='multipart/form-data'>
-  <h3>My Bio</h3>
-  <br />
+<div class='container'>
+  <div class='row justify-content-center'>
+    <h1>Edit my profile</h1>
+  </div>
+  <div class='row row-flex'>
 
-  <label for='upload-profile-pic'>Upload a Profile Picture</label>
-  <input
-    id='upload-profile-pic'
-    type='file'
-    name='profilePhoto'
-    accept='image/*'
-  />
+    <div class='col-md-12'>
+      <div class='card content bg-light text-dark text-center'>
+        <h4><i class='bi bi-person-circle'></i></h4>
+        <div
+          class='card-body d-flex flex-column align-items-center justify-content-center'
+        >
+          <form method='POST' enctype='multipart/form-data'>
+            <h5 class='pb-2'>Upload a profile picture</h5>
+            <input
+              id='upload-profile-pic'
+              type='file'
+              name='profilePhoto'
+              accept='image/*'
+            />
 
-  <br />
-  <label for='update-name'>New Name</label>
-  <input
-    type='text'
-    name='name'
-    id='update-name'
-    placeholder='Input new name'
-    value='{{user.name}}'
-    required
-  />
-  <br />
+            <h5 class='pt-3 pb-2'>Change your name</h5>
+            <input
+              type='text'
+              name='name'
+              id='update-name'
+              class='border-primary'
+              placeholder='Choose a new name'
+              value='{{user.name}}'
+              required
+            />
 
-  <label for='update-email'>New Email</label>
-  <input
-    id='update-email'
-    type='email'
-    name='email'
-    placeholder='Input new email'
-    value='{{user.email}}'
-    required
-  />
-  <br />
+            <h5 class='pt-3 pb-2'>Change your email</h5>
+            <input
+              id='update-email'
+              type='email'
+              name='email'
+              class='border-primary'
+              placeholder='Enter your new email'
+              value='{{user.email}}'
+              required
+            />
+            <h5 class='pt-3 pb-2'>Edit bio</h5>
+            <textarea
+              id='input-bio'
+              name='bio'
+              class='border-primary'
+              rows='5'
+              cols='48'
+              maxlength='750'
+              placeholder='Write a few words about yourself!'
+            ></textarea>
+            <div>
+              <button class='btn btn-primary m-2'>Update Profile</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  {{!-- <label for="update-password">New Password</label>
+{{!-- <label for="update-password">New Password</label>
     <input id="update-password" type="password" name="passwordHashAndSalt" placeholder="Input new password">
 
     <br>
@@ -42,22 +69,3 @@
     <label for="update-password">Confirm New Password</label>
     <input id="update-password" type="password" name="passwordHashAndSalt" placeholder="Confirm new password">
     {{/if}} --}}
-
-  <br />
-
-  <label for='input-bio'>Edit Bio</label>
-  <br />
-  <textarea
-    id='input-bio'
-    name='bio'
-    rows='5'
-    cols='48'
-    maxlength='750'
-    placeholder='Write a few words about yourself!'
-  ></textarea>
-  <br />
-
-  <br />
-  <br />
-  <button>Update Profile</button>
-</form>

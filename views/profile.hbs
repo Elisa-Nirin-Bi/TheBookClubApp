@@ -68,7 +68,7 @@
           {{#if lists}}
             <form method='GET'>
               {{#each lists}}
-                <ul class='list-group'>
+                <ul class='list-group m-1'>
                   <li class='list-group-item border border-primary'><a href='/booklist/{{this._id}}'>{{listName}}</a></li>
                 </ul>
               {{/each}}
@@ -93,7 +93,7 @@
           {{#if friendList}}
             <form method="GET">
               {{#each friendList}}
-                <ul class='list-group'>
+                <ul class='list-group m-1'>
                   <li class='list-group-item border border-primary'><a href='/userprofilepage/{{friendsOnList.id}}'>
                       {{friendsOnList.name}}</a></li>
                 </ul>
