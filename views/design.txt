@@ -5,7 +5,7 @@ Button class:
 add => blue
 
 
-Full blue button: sign in / sign up / Add user
+Full blue button: sign in / sign up / Add as a friend
 btn btn-primary mb-2
 
 Outline: add review 
