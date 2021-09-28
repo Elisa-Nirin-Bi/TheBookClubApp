@@ -5,79 +5,89 @@ from the medium breakpoint up. --}}
 
 <div class='container'>
 
-  <h3>New search:</h3>
+  <div class="row justify-content-center">
+    <h2 class='mb-5 fw-light'>New search:</h2>
+  </div>
 
-  {{> searchBooks}}
+    {{> searchBooks}}
 
-  <h3>Your results:</h3>
+  <div class="row justify-content-center">
+    <h2 class='mb-5 fw-light'>Your results:</h2>
+  </div>
+
+
 
       
   <div class="row">
    {{#each books}}
-   <div class='col-md-3 g-2'>
-    <div class='card text-dark gray-300 w-10 mb-4'>
+    <div class='col-md-3 mb-4'>
+      <div class='card content bg-light text-dark text-center'>
+        <div class='card-body d-flex flex-column align-items-center justify-content-between'>
+          <div>
+            <img class='img-fluid rounded-start'
 
-          <img class='img-fluid rounded-start w-3'
-            style='height:fit-content'
-            {{#if volumeInfo.imageLinks.smallThumbnail}} 
-                      src='{{volumeInfo.imageLinks.smallThumbnail}}' 
-                      {{else}} 
-                      src='https://data.europa.eu/sites/default/files/news/2020-08-06-edp_book_club.png'
-                    {{/if}}
-            alt='{{volumeInfo.title}}'
-          />
-
-              <div class='p-1'>
-                <p class='my-0'>{{volumeInfo.authors}}</p> 
-                <p class='pb-0'><b>{{volumeInfo.title}}</b></p>
-                <p class='my-0'><em>{{volumeInfo.publisher}}</em></p>
-              </div>
-
+              {{#if volumeInfo.imageLinks.smallThumbnail}} 
+                        src='{{volumeInfo.imageLinks.smallThumbnail}}' 
+                        {{else}} 
+                        src='./../images/no-book-image.jpg'
+                        width='130px'
+                      {{/if}}
+              alt='{{volumeInfo.title}}'
+            />
+          </div>
+          
+          <div class='p-1'>
+            <p class='mb-1'>{{volumeInfo.authors}}</p> 
+            <p class='p-1'><b>{{volumeInfo.title}}</b></p>
+            <span class='mb-2'>{{volumeInfo.publisher}}</span>
+          </div>
+          <div class='d-flex text-left'>
           <form method='POST' enctype='multipart/form-data'>
+              <input
+                type='text'
+                name='title'
+                id='input-title'
+                value='{{volumeInfo.title}}'
+                placeholder='Title'
+                style='display: none;'
+              />
 
-            <input
-              type='text'
-              name='title'
-              id='input-title'
-              value='{{volumeInfo.title}}'
-              placeholder='Title'
-              style='display: none;'
-            />
+              <input
+                type='text'
+                name='authors'
+                id='input-authors'
+                value='{{volumeInfo.authors}}'
+                placeholder='authors'
+                style='display: none;'
+              />
+              <input
+                type='text'
+                name='bookList'
+                id='input-bookList'
+                class='form-control-sm border-primary mb-1'
+                placeholder='bookList'
+              />
 
-            <input
-              type='text'
-              name='authors'
-              id='input-authors'
-              value='{{volumeInfo.authors}}'
-              placeholder='authors'
-              style='display: none;'
-            />
-            <input
-              type='text'
-              name='bookList'
-              id='input-bookList'
-              placeholder='bookList'
-            />
+              <input
+                type='text'
+                name='publisher'
+                id='input-publisher'
+                value='{{volumeInfo.publisher}}'
+                placeholder='publisher'
+                style='display: none;'
+              />
 
-            <input
-              type='text'
-              name='publisher'
-              id='input-publisher'
-              value='{{volumeInfo.publisher}}'
-              placeholder='publisher'
-              style='display: none;'
-            />
+              <input
+                type='text'
+                name='image'
+                value='{{volumeInfo.imageLinks.smallThumbnail}}'
+                style='display: none;'
+              />
 
-            <input
-              type='text'
-              name='image'
-              value='{{volumeInfo.imageLinks.smallThumbnail}}'
-              style='display: none;'
-            />
-
-            <button class='mt-2 w-60 btn btn-sm btn-primary'>Add to Book List</button>
+              <button class='btn btn-primary mt-1'>Add to Book List</button>
           </form>
-
+          </div>
+        </div>
       </div>
     </div>
   
