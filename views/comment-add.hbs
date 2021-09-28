@@ -15,6 +15,14 @@
             <article class='publication-item'>
               <div>
 
+                <form method='POST' action='/book/{{_id}}/comments/delete'>
+                <button type='submit' class='btn btn-outline-danger mb-5'><a
+                  href='/book/{{_id}}/comments/edit'
+                >Edit</a></button>
+                <button type='submit' class='btn btn-danger mb-5'>Delete</button>
+                </form>
+                
+
                 <form method='POST' action='/book/{{_id}}/vote'>
                   <button class='btn btn-primary'>
                     <svg
@@ -34,9 +42,8 @@
                   </button>
                 </form>
 
-              </div>
 
-              <form method='POST' action='/book/{{_id}}/dislike'>
+              <form method='POST' action='/book/{{this._id}}/dislike'>
                 <button class='btn btn-primary'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
