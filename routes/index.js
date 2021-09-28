@@ -101,7 +101,19 @@ router.post('/userprofilepage/:id', routeGuard, (req, res, next) => {
       });
     })
     .then((friendList) => {
-      res.redirect(`/profile/${id}`);
+      res.redirect(`/userprofilepage/${id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.post('/userprofilepage/:id/remove', routeGuard, (req, res, next) => {
+  const id = req.params.id;
+  const userId = req.user._id;
+  return FriendList.findOneAndDelete({ friendsOnList: id })
+    .then(() => {
+      res.redirect(`/profile/${userId}`);
     })
     .catch((error) => {
       next(error);
