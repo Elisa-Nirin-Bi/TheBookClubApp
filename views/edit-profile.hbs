@@ -1,6 +1,6 @@
 <div class='container'>
   <div class='row justify-content-center'>
-    <h1>Edit my profile</h1>
+    <h2 class='mb-5 fw-light'>Edit my profile</h2>
   </div>
   <div class='row row-flex'>
 
@@ -24,7 +24,7 @@
               type='text'
               name='name'
               id='update-name'
-              class='border-primary'
+              class='form-control border-primary'
               placeholder='Choose a new name'
               value='{{user.name}}'
               required
@@ -35,7 +35,7 @@
               id='update-email'
               type='email'
               name='email'
-              class='border-primary'
+              class='form-control border-primary'
               placeholder='Enter your new email'
               value='{{user.email}}'
               required
@@ -44,14 +44,14 @@
             <textarea
               id='input-bio'
               name='bio'
-              class='border-primary'
+              class='form-control border-primary'
               rows='5'
               cols='48'
               maxlength='750'
               placeholder='Write a few words about yourself!'
             ></textarea>
             <div>
-              <button class='btn btn-primary m-2'>Update Profile</button>
+              <button class='btn btn-lg btn-primary m-3'>Update Profile</button>
             </div>
           </form>
         </div>

@@ -1,12 +1,19 @@
-Button class:
+Page titles:
 
+<h2 class='mb-5 fw-light'>
+
+============
+Button class:
+if enough space: btn-lg
 -------------
 
 add => blue
 
 
-Full blue button: sign in / sign up / Add as a friend
+Full blue button: sign in / sign up / Add as a friend / update profile
 btn btn-primary mb-2
+mt-auto: button sticks at the bottom
+
 
 Outline: add review / organize books
 btn btn-outline-primary mb-2
@@ -24,3 +31,9 @@ search => green
 
 search friends
 btn btn-outline-success
+
+
+============
+FORMS
+
+'form-control border-primary'
