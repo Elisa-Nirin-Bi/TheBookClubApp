@@ -2,6 +2,8 @@ Page titles:
 
 <h2 class='mb-5 fw-light'>
 
+undertitle: <h5 class='pb-2'>
+
 ============
 Button class:
 if enough space: btn-lg
@@ -37,3 +39,10 @@ btn btn-outline-success
 FORMS
 
 'form-control border-primary'
+
+
+============
+ICONS
+
+pen: <h4><i class='bi bi-pencil-fill'></i></h4>
+bubble (comment): <i class="bi bi-chat-dots-fill"></i>
