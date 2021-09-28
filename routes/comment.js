@@ -132,8 +132,32 @@ commentRouter.get(
     res.render('comment-edit');
   }
 );
-
 commentRouter.post(
+  '/book/:commentId/comments/edit',
+  routeGuard,
+  (req, res, next) => {
+    const commentId = req.params.commentId;
+    const { message } = req.body;
+    Comment.findById({ _id: commentId, creator: req.user._id })
+      .then((comment) => {
+        if (String(req.user._id) === String(comment.creator)) {
+          return Comment.findByIdAndUpdate(
+            { _id: commentId, creator: req.user._id },
+            { message }
+          ).then(() => {
+            const bookId = comment.book;
+            res.redirect(`/book/${bookId}/comments`);
+          });
+        } else {
+          throw new Error('UNAUTHORIZED_USER');
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
+/*commentRouter.post(
   '/book/:commentId/comments/edit',
   routeGuard,
   (req, res, next) => {
@@ -144,12 +168,36 @@ commentRouter.post(
       { message }
     )
       .then((comment) => {
-        if (comment) {
+        if (String(req.user._id) === String(comment.creator)) {
           const bookId = comment.book;
           res.redirect(`/book/${bookId}/comments`);
         } else {
-          console.log(commentId);
-          throw new Error('NOT_ALLOWED_TO_DELETE_PUBLICATION');
+          throw new Error('UNAUTHORIZED_USER');
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);*/
+
+commentRouter.post(
+  '/book/:commentId/comments/delete',
+  routeGuard,
+  (req, res, next) => {
+    const commentId = req.params.commentId;
+    Comment.findById({ _id: commentId, creator: req.user._id })
+      .then((comment) => {
+        if (String(req.user._id) === String(comment.creator)) {
+          return Comment.findByIdAndDelete({
+            _id: commentId,
+            creator: req.user._id
+          }).then(() => {
+            const bookId = comment.book;
+            res.redirect(`/book/${bookId}/comments`);
+          });
+        } else {
+          throw new Error('UNAUTHORIZED_USER');
         }
       })
       .catch((error) => {
@@ -158,7 +206,7 @@ commentRouter.post(
   }
 );
 
-commentRouter.post(
+/*commentRouter.post(
   '/book/:commentId/comments/delete',
   routeGuard,
   (req, res, next) => {
@@ -179,6 +227,6 @@ commentRouter.post(
         next(error);
       });
   }
-);
+);*/
 
 module.exports = commentRouter;
