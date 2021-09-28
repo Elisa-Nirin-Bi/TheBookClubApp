@@ -1,9 +1,38 @@
-<form method='POST'>
-  <label for='review-input'>Your Review</label>
-  <input id='review-input' type='text' name='review' placeholder='Review' />
-  <br />
-  <label for='move-to-list'>Move book to a new or existing list</label>
-  <input id='move-to-list' type='text' name='bookList' />
-  <br />
-  <button>Save Changes</button>
-</form>
+<div class='container'>
+  <div class='row justify-content-center'>
+    <h2 class='mb-5 fw-light'>Add a review</h2>
+  </div>
+  <div class='row row-flex'>
+    <div class='col-md-12'>
+      <div class='card content bg-light text-dark text-center'>
+        <h4><i class='bi bi-pencil-fill'></i></h4>
+
+        <div
+          class='card-body d-flex flex-column align-items-center justify-content-center'
+        >
+          <form method='POST'>
+            <h5 class='pb-1'>Your Review</h5>
+            <textarea
+              id='review-input'
+              type='text'
+              class='form-control border-primary'
+              rows='5'
+              cols='48'
+              name='review'
+              placeholder='Write something smart'
+            ></textarea>
+            <h5 class='pt-3'>Move book to a new or existing list</h5>
+            <input
+              id='move-to-list'
+              type='text'
+              name='bookList'
+              class='form-control border-primary'
+              placeholder='Enter here the name of the list'
+            />
+            <button class='btn btn-lg btn-primary m-3'>Add review</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
