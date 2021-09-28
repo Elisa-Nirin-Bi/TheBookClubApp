@@ -1,19 +1,29 @@
-<div class='card text-dark bg-info flex-column p-3 m-3'>
-
-      <h1>My book lists</h1>
-
-      <div class='list-group list-group-checkable'>
-        <form method='GET'>
-          {{#each lists}}
-          <a href="/booklist/{{this._id}}">
-         <input class="list-group-item-check" type="/booklist/{{this._id}}" 
-         name="listGroupCheckableRadios" id="listGroupCheckableRadios1" value="" checked>
-          </a>
-          <label class="list-group-item py-3" for="listGroupCheckableRadios1">
-            <a href='/booklist/{{this._id}}'>{{listName}}</a>
-            <span class="d-block small opacity-50">Last added: </span>
-          </label>
-          {{/each}}
-        
-        </form>
+<div class='col-md-4'>
+  <div class='card content bg-light text-dark text-center'>
+    <h4 class=''><i class='bi bi-book'></i>
+      My book list</h4>
+    <div
+      class='card-body d-flex flex-column align-items-center justify-content-center'
+    >
+      <div class=''>
+        {{#if lists}}
+          <form method='GET'>
+            {{#each lists}}
+              <ul class='list-group m-1'>
+                <li class='list-group-item border border-primary'><a
+                    href='/booklist/{{this._id}}'
+                  >{{listName}}</a></li>
+              </ul>
+            {{/each}}
+          </form>
+        {{else}}
+          <p><em>You don't have any lists yet.</em></p>
+        {{/if}}
       </div>
+
+      <a href='/create-list' class='btn btn-outline-primary mt-auto'>Organize
+        lists</a>
+
+    </div>
+  </div>
+</div>

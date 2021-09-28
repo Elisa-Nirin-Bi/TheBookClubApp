@@ -24,8 +24,19 @@
   </article>
   <span>{{creator.name}}</span>
 
-  <span>{{creationDate}}</span>
+  <span>{{date creationDate}}</span>
   <br />
+  <form method='POST'>
+    <label for='comment-input-delete'>Delete Comment</label>
+    <input
+      id='comment-input-delete'
+      type='text'
+      name='message'
+      placeholder='Delete comment'
+    />
+    <br />
+    <button>Delete comment</button>
+  </form>
 {{/each}}
 
 <form method='POST'>
