@@ -125,4 +125,60 @@ commentRouter.post('/book/:id/dislike', routeGuard, (req, res, next) => {
     });
 });
 
+commentRouter.get(
+  '/book/:commentId/comments/edit',
+  routeGuard,
+  (req, res, next) => {
+    res.render('comment-edit');
+  }
+);
+
+commentRouter.post(
+  '/book/:commentId/comments/edit',
+  routeGuard,
+  (req, res, next) => {
+    const commentId = req.params.commentId;
+    const { message } = req.body;
+    Comment.findByIdAndUpdate(
+      { _id: commentId, creator: req.user._id },
+      { message }
+    )
+      .then((comment) => {
+        if (comment) {
+          const bookId = comment.book;
+          res.redirect(`/book/${bookId}/comments`);
+        } else {
+          console.log(commentId);
+          throw new Error('NOT_ALLOWED_TO_DELETE_PUBLICATION');
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
+
+commentRouter.post(
+  '/book/:commentId/comments/delete',
+  routeGuard,
+  (req, res, next) => {
+    const commentId = req.params.commentId;
+    Comment.findByIdAndDelete({ _id: commentId, creator: req.user._id })
+
+      .then((comment) => {
+        if (comment) {
+          console.log(commentId);
+          const bookId = comment.book;
+          res.redirect(`/book/${bookId}/comments`);
+        } else {
+          console.log(commentId);
+          throw new Error('NOT_ALLOWED_TO_DELETE_PUBLICATION');
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
+
 module.exports = commentRouter;

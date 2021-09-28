@@ -3,6 +3,14 @@
 
 {{#each comments}}
   <span>{{message}}</span>
+  <div class='comment-btn'>
+    <form method='POST' action='/book/{{_id}}/comments/delete'>
+      <button type='submit'>Delete</button>
+    </form>
+    <button style='width: 50' type='submit'><a
+        href='/book/{{_id}}/comments/edit'
+      >Edit</a></button>
+  </div>
   <article class='publication-item'>
     <aside>
       <strong>{{score}}</strong>
@@ -15,7 +23,7 @@
 
     <aside>
       <strong>{{unlike}}</strong>
-      <form method='POST' action='/book/{{_id}}/dislike'>
+      <form method='POST' action='/book/{{this._id}}/dislike'>
         <button>
           <img src='/images/thumbs-down.png' style='width: 15' alt='like' />
         </button>
@@ -26,17 +34,7 @@
 
   <span>{{date creationDate}}</span>
   <br />
-  <form method='POST'>
-    <label for='comment-input-delete'>Delete Comment</label>
-    <input
-      id='comment-input-delete'
-      type='text'
-      name='message'
-      placeholder='Delete comment'
-    />
-    <br />
-    <button>Delete comment</button>
-  </form>
+
 {{/each}}
 
 <form method='POST'>
