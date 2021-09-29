@@ -42,6 +42,10 @@
         {{! The user didn't search anything yet: no message should appear: }}
         {{#if noInput}}{{else}}
           {{#each userSearched}}
+            {{!-- {{#if ownProfile}}
+              <h3>That's great that you're trying to find yourself, but this may
+                not be the best technique...</h3>
+            {{else}} --}}
             <h5 class='p-3'>We found your fellow book club member:</h5>
             <div class='card bg-light text-dark'>
 
@@ -72,6 +76,7 @@
                 >See profile</a>
               </div>
             </div>
+            {{!-- {{/if}} --}}
           {{else}}
             <h3>We don't have any member with that name.</h3>
           {{/each}}

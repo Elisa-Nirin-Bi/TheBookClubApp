@@ -19,9 +19,8 @@ router.get('/search-user', routeGuard, (req, res, next) => {
   let name = req.query.name;
   console.log(name);
   let noInput;
-  User.find({ name })
+  return User.find({ name })
     .then((userSearched) => {
-      console.log(name);
       if (!name) {
         noInput = true;
       }
@@ -68,6 +67,9 @@ router.get('/userprofilepage/:id', routeGuard, (req, res, next) => {
       return FriendList.find({ friendsOnList: searchedUser });
     })
     .then((existingFriend) => {
+      if (id === String(req.user._id)) {
+        res.redirect(`/profile/${id}`);
+      }
       if (!existingFriend.length) {
         res.render('profile-friend', {
           friend: true,
