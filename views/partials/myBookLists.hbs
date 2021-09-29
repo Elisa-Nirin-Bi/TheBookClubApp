@@ -2,25 +2,28 @@
   <div class='card content bg-light text-dark text-center'>
     <h4 class=''><i class='bi bi-book'></i>
       My book list</h4>
-    <div
-      class='card-body d-flex flex-column align-items-center justify-content-center'
-    >
+    <div class='card-body d-flex flex-column align-content-between'>
       <div class=''>
         {{#if lists}}
           {{#each lists}}
-            <form method='GET'>
-              <ul class='list-group m-1'>
-                <li class='list-group-item border border-primary'><a
-                    href='/booklist/{{this._id}}'
-                  >{{listName}}</a>
-                </li>
+            <div
+              class='d-flex flex-row align-items-center justify-content-between'
+            >
+              <form method='GET'>
+                <ul class='list-group'>
 
-              </ul>
-            </form>
+                  <li class='list-group-item border border-primary'><a
+                      href='/booklist/{{this._id}}'
+                    >{{listName}}</a>
+                  </li>
 
-            <form method='POST' action='/booklist/{{this._id}}/delete'>
-              <button class='btn btn-danger mb-5 mr-3' type='submit'>Delete List</button>
-            </form>
+                </ul>
+              </form>
+              <form method='POST' action='/booklist/{{this._id}}/delete'>
+                <button class='btn btn-danger' type='submit'>x</button>
+              </form>
+            </div>
+
           {{/each}}
         {{else}}
           <p><em>You don't have any lists yet.</em></p>
