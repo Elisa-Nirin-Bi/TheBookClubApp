@@ -74,7 +74,10 @@ bookRouter.post(
     const id = req.user._id;
     const { title, authors, publisher, image, bookList } = req.body;
     let bookListId;
-    return List.findOne({ listName: bookList }, { listName: 1 })
+    return List.findOne(
+      { listName: bookList, listCreator: id },
+      { listName: 1 }
+    )
       .populate('booksOnList')
       .then((list) => {
         bookListId = list.id;
