@@ -130,10 +130,15 @@ router.post(
   upload.single('profilePhoto'),
   (req, res, next) => {
     const id = req.user._id;
-    const { name, email, bio } = req.body;
+    const { name, email, bio, removeProfilePhoto } = req.body;
+    console.log(removeProfilePhoto);
     let profilePhoto;
     if (req.file) {
       profilePhoto = req.file.path;
+      console.log('req file path', req.file, req.file.path);
+    }
+    if (removeProfilePhoto === './../images/no-user-profile-pic.png') {
+      profilePhoto = '';
     }
     User.findByIdAndUpdate(id, {
       name,
