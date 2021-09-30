@@ -1,88 +1,88 @@
-<!-- Searchbar -->
+<div class='container'>
+  <div class='row justify-content-center'>
 
-<section class='searchbar'>
-  <div class='container'>
-    <nav class='navbar navbar-expand-lg navbar-light bg-light rounded d-flex'>
-      <div
-        class='container-fluid d-grip gap-1 d-flex justify-content-between align-items-center'
-      >
+    <!-- Searchbar -->
+    <div class='row justify-content-center'></div>
+      <nav class='navbar navbar-expand-lg navbar-light bg-light rounded d-flex my-5'>
+        <div class='container-fluid'>
 
-        <div class='collapse navbar-collapse'>
-          <img
-            src='./../images/logo.jpg'
-            alt='bookclub-logo'
-            height='40'
-            class='ms-auto mb-1'
-          />
+          <div class='collapse navbar-collapse'>
+            <img
+              src='./../images/logo.jpg'
+              alt='bookclub-logo'
+              height='40'
+              class='ms-auto mb-1'
+            />
+          </div>
+          <form method='GET' class='d-flex bd-highlight w-100 pt-2'>
+
+            <input
+              class='form-control'
+              id='user-list'
+              aria-label='Search'
+              autofocus='on'
+              type='text'
+              name='name'
+              placeholder='Search for another member'
+            />
+
+            <button class='btn btn-outline-success'>Search</button>
+          </form>
         </div>
-        <form method='GET' class='d-flex bd-highlight w-100 pt-2'>
-
-          <input
-            class='form-control'
-            id='user-list'
-            aria-label='Search'
-            autofocus='on'
-            type='text'
-            name='name'
-            placeholder='Search for another member'
-          />
-
-          <button class='btn btn-outline-success'>Search</button>
-        </form>
-      </div>
-    </nav>
-  </div>
-</section>
-
-<!-- Results users -->
-
-<section class='results-user'>
-  <div class='container'>
-    <div class='row text-center'>
-      <div class='col-md'>
-        {{! The user didn't search anything yet: no message should appear: }}
-        {{#if noInput}}{{else}}
-          {{#each userSearched}}
-            {{!-- {{#if ownProfile}}
-              <h3>That's great that you're trying to find yourself, but this may
-                not be the best technique...</h3>
-            {{else}} --}}
-            <h5 class='p-3'>We found your fellow book club member:</h5>
-            <div class='card bg-light text-dark'>
-
-              <div class='card-body text-center'>
-                <h4 class=''><i class='bi bi-person-circle'></i>
-                  {{name}}</h4>
-                <div>
-                  {{#if profilePhoto}}
-                    <img
-                      src='{{profilePhoto}}'
-                      class='bg-light img-thumbnail m-1'
-                      alt='profile-picture'
-                      style='max-height: 100px'
-                    />
-
-                  {{else}}
-                    <img
-                      src='./../images/no-user-profile-pic.png'
-                      class='bg-light img-thumbnail m-1'
-                      alt='library'
-                      style='max-height: 100px'
-                    />
-                  {{/if}}
-                </div>
-                <a
-                  href='/userprofilepage/{{id}}'
-                  class='btn btn-primary m-2'
-                >See profile</a>
-              </div>
-            </div>
-            {{!-- {{/if}} --}}
-          {{else}}
-            <h3>We don't have any member with that name.</h3>
-          {{/each}}
-        {{/if}}
-      </div>
+      </nav>
     </div>
-  </div>
-</section>
+
+    <!-- Results users -->
+
+    <section class='results-user'>
+      <div class='container'>
+        <div class='row text-center'>
+          <div class='col-md'>
+            {{! The user didn't search anything yet: no message should appear: }}
+            {{#if noInput}}{{else}}
+              {{#each userSearched}}
+                {{!-- {{#if ownProfile}}
+                  <h3>That's great that you're trying to find yourself, but this may
+                    not be the best technique...</h3>
+                {{else}} --}}
+                <h5 class='p-3 text-light'>We found your fellow book club member:</h5>
+                <div class='card bg-light text-dark'>
+
+                  <div class='card-body text-center'>
+                    <h4 class=''><i class='bi bi-person-circle'></i>
+                      {{name}}</h4>
+                    <div>
+                      {{#if profilePhoto}}
+                        <img
+                          src='{{profilePhoto}}'
+                          class='bg-light img-thumbnail m-1'
+                          alt='profile-picture'
+                          style='max-height: 100px'
+                        />
+
+                      {{else}}
+                        <img
+                          src='./../images/no-user-profile-pic.png'
+                          class='bg-light img-thumbnail m-1'
+                          alt='library'
+                          style='max-height: 100px'
+                        />
+                      {{/if}}
+                    </div>
+                    <a
+                      href='/userprofilepage/{{id}}'
+                      class='btn btn-primary m-2'
+                    >See profile</a>
+                  </div>
+                </div>
+                {{!-- {{/if}} --}}
+              {{else}}
+                <h3 class='text-light'>We don't have any member with that name.</h3>
+              {{/each}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>  
+</div>

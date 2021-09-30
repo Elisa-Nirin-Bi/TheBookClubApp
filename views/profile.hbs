@@ -1,6 +1,6 @@
 <div class='container'>
   <div class='row justify-content-center'>
-    <h2 class='mb-5 fw-light'>My Profile</h2>
+    <h2 class='my-5 text-light'>My Profile</h2>
   </div>
   <div class='row row-flex'>
 
@@ -61,6 +61,7 @@
 
     {{> myBookLists}}
     
+    
     <!---Friend list-->
 
     <div class='col-md-4'>
@@ -73,7 +74,7 @@
             <form method="GET">
               {{#each friendList}}
                 <ul class='list-group m-1'>
-                  <li class='list-group-item border border-primary'><a href='/userprofilepage/{{friendsOnList.id}}'>
+                  <li class='btn  btn-outline-primary mt-auto'><a href='/userprofilepage/{{friendsOnList.id}}'>
                       {{friendsOnList.name}}</a></li>
                 </ul>
               {{/each}}
