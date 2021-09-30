@@ -9,14 +9,10 @@
     <title>The Book Club</title>
     <!-- Bootstrap CSS -->
     <link
-      rel='stylesheet'
-      href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
-    />
+    
     <link
       rel='stylesheet'
-      href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'
-      integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh'
-      crossorigin='anonymous'
+      href='/styles/bootstrap.min.css'
     />
 
     <!-- Bootstrap icons -->
@@ -28,42 +24,54 @@
   <body class='d-flex text-center text-white flex-column mx-auto h-100'>
 
       <header class='mb-auto'>
-        <div>
-
-          <nav class='nav nav-masthead justify-content-center float-md-end'>
-            <a class='nav-link {{#if home}} active {{/if}}' aria-current='page' href='/'>Home</a>
-            {{#if user}}
-              <a class='nav-link {{#if profile}} active {{/if}}' href='/profile/{{user.id}}'>
-              {{#if user.profilePhoto}}
-          <img
-          src='{{user.profilePhoto}}'
-          class='bg-light img-thumbnail m-1'
-          width="24"
-          height="22"
-          alt='profile-picture'
-          />
         
-      {{else}}
-          <img src='./../images/no-user-profile-pic.png'
-          class='bg-light mx-1'
-          width="24"
-          height="22"
-          alt= 'default-profile-picture-alien'
-          />
-      {{/if}}
-                My Profile</a>
-              <a class='nav-link {{#if list}} active {{/if}}' href='/create-list'>Organize Books</a>
-              <a class='nav-link {{#if searchBook}} active {{/if}}' href='/search-book'>Search Book</a>
-              <a class='nav-link {{#if searchUser}} active {{/if}}' href='/search-user'>Search User</a>
-              <form action='/authentication/sign-out' method='POST'>
-                <button class='btn-secondary'>Sign Out</button>
-              </form>
-            {{else}}
-              <a class='nav-link {{#if signIn}} active {{/if}}' href='/authentication/sign-in'>Sign In</a>
-              <a class='nav-link {{#if signUp}} active {{/if}}' href='/authentication/sign-up'>Sign Up</a>
-            {{/if}}
-          </nav>
+
+        <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
+          <div class='container-fluid'>
+            <a class="navbar-brand" href="/">The Book Club</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" 
+              aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+                  <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                      <li class="nav-item">
+                        <a class="nav-link {{#if home}} active {{/if}}" aria-current='page' href='/'>Home
+                          <span class="visually-hidden">(current)</span>
+                        </a>  
+                      </li>
+                      {{#if user}} <!--- Menu if there is a connected user --->
+                      <li class="nav-item">
+                        <a class="nav-link {{#if profile}} active {{/if}}" href="/profile/{{user.id}}">My Profile</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link {{#if list}} active {{/if}}" href="/create-list">Organize Books</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link {{#if searchBook}} active {{/if}}" href="/search-book">Search Book</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link {{#if searchUser}} active {{/if}}" href="/search-user">Search User</a>
+                      </li>
+                    </ul>
+                      <form action='/authentication/sign-out' method='POST' class="d-flex align-items-center">
+                        <button class="btn btn-secondary mt-2 my-sm-0" type="submit">Sign out</button>
+                      </form>
+
+                        {{else}} <!--- Menu if the user doesn't have an account --->
+                        <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                          <a class="nav-link {{#if signIn}} active {{/if}}" href="/authentication/sign-in">Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link {{#if signUp}} active {{/if}}" href="/authentication/sign-up">Sign Up</a>
+                        </li>
+                      {{/if}}
+                        </ul>
+          </div>
         </div>
+      </nav>
       </header>
 
       {{{body}}}

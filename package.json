@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./server",
-    "dev": "nodemon ./server -e js,hbs,scss",
+    "dev": "nodemon ./server",
     "dev:debug": "DEBUG=bookclubapp* npm run dev",
     "lint": "eslint ."
   },
