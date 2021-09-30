@@ -1,6 +1,6 @@
 <div class='container'>
   <div class='row justify-content-center'>
-    <h2 class='mb-5 fw-light'>Add a review</h2>
+    <h2 class='mb-5 fw-light'>Thinking of restructuring?</h2>
   </div>
   <div class='row row-flex'>
     <div class='col-md-12'>
@@ -11,27 +11,17 @@
           class='card-body d-flex flex-column align-items-center justify-content-center'
         >
           <form method='POST'>
-            <h5 class='pb-1'>Your Review</h5>
-            <textarea
-              id='review-input'
-              type='text'
-              class='form-control border-primary'
-              rows='5'
-              cols='48'
-              name='review'
-              placeholder='Write something smart'
-            >{{book.review}}</textarea>
-            {{!-- <h5 class='pt-3'>Edit below to move this book to a new or existing
+            <h5 class='pt-3'>Edit below to move this book to a new or existing
               list:</h5>
             <input
               id='move-to-new-list'
               type='text'
               name='bookList'
               class='form-control border-primary'
-              value={{currentBookList}}
+              value='{{currentBookList}}'
               placeholder='Input desired list here'
-            /> --}}
-            <button class='btn btn-lg btn-primary m-3'>Add Review</button>
+            />
+            <button class='btn btn-lg btn-primary m-3'>Submit</button>
           </form>
         </div>
       </div>

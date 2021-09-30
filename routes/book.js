@@ -140,16 +140,39 @@ bookRouter.get(
       });
   }
 );
+// to get to page to move to new list
+bookRouter.get(
+  '/bookList/:listId/:title/:id/edit-list',
+  routeGuard,
+  (req, res, next) => {
+    const id = req.params.id;
+    let currentBookList;
+    Book.findById(id)
+      .populate('bookList')
+      .then((book) => {
+        if (String(req.user._id) === String(book.creator)) {
+          currentBookList = book.bookList.listName;
+          console.log(currentBookList);
+          res.render('move-to-new-list', { book, currentBookList });
+        } else {
+          throw new Error('UNAUTHORIZED_USER');
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
 
-// to create the book review
+// to move book to new list
 bookRouter.post(
-  '/bookList/:listId/:title/:id/edit',
+  '/bookList/:listId/:title/:id/edit-list',
   routeGuard,
   (req, res, next) => {
     const listId = req.params.listId;
     const id = req.params.id;
     let booksOnList;
-    const { review, bookList } = req.body;
+    const { bookList } = req.body;
     return List.findOne({ listName: bookList, listCreator: req.user._id })
       .then((newExistingList) => {
         if (!newExistingList) {
@@ -158,15 +181,38 @@ bookRouter.post(
             listCreator: req.user._id,
             booksOnList
           }).then((newList) => {
-            return Book.findByIdAndUpdate(id, { review, bookList: newList });
+            return Book.findByIdAndUpdate(id, { bookList: newList });
           });
         } else {
           return Book.findByIdAndUpdate(id, {
-            review,
             bookList: newExistingList
           });
         }
       })
+      .then((book) => {
+        if (String(req.user._id) === String(book.creator)) {
+          res.redirect(`/booklist/${listId}`);
+        } else {
+          throw new Error('UNAUTHORIZED_USER');
+        }
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+);
+
+// to create the book review
+bookRouter.post(
+  '/bookList/:listId/:title/:id/edit',
+  routeGuard,
+  (req, res, next) => {
+    const listId = req.params.listId;
+    const id = req.params.id;
+    const { review } = req.body;
+    return Book.findByIdAndUpdate(id, {
+      review
+    })
       .then((book) => {
         if (String(req.user._id) === String(book.creator)) {
           res.redirect(`/booklist/${listId}`);
