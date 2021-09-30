@@ -83,6 +83,7 @@ bookRouter.post(
   (req, res, next) => {
     const id = req.user._id;
     const { title, authors, publisher, image, bookList } = req.body;
+    const topic = req.query.topic;
     let bookListId;
     return List.findOne(
       { listName: bookList, listCreator: id },
@@ -90,27 +91,39 @@ bookRouter.post(
     )
       .populate('booksOnList')
       .then((list) => {
-        bookListId = list.id;
-        return Book.findOne({ bookList: bookListId, title, creator: id });
-      })
-      .then((bookExists) => {
-        if (bookExists) {
-          throw new Error('BOOK_ALREADY_EXISTS');
+        if (!list) {
+          axios
+            .get(`https://www.googleapis.com/books/v1/volumes?q=${topic}`)
+            .then((resp) => {
+              res.render('results', {
+                books: resp.data.items,
+                listNonExistant: true
+              });
+            });
+          // throw new Error('LIST_DOES_NOT_EXIST');
+        } else {
+          bookListId = list.id;
+          return Book.findOne({ bookList: bookListId, title, creator: id })
+            .then((bookExists) => {
+              if (bookExists) {
+                throw new Error('BOOK_ALREADY_EXISTS');
+              }
+              return Book.create({
+                title,
+                authors,
+                publisher,
+                image,
+                bookList: bookListId,
+                creator: id
+              });
+            })
+            .then((book) => {
+              return List.findByIdAndUpdate(bookListId, { booksOnList: book });
+            })
+            .then((list) => {
+              res.redirect(`/booklist/${bookListId}`);
+            });
         }
-        return Book.create({
-          title,
-          authors,
-          publisher,
-          image,
-          bookList: bookListId,
-          creator: id
-        });
-      })
-      .then((book) => {
-        return List.findByIdAndUpdate(bookListId, { booksOnList: book });
-      })
-      .then((list) => {
-        res.redirect(`/booklist/${bookListId}`);
       })
       .catch((error) => {
         next(error);

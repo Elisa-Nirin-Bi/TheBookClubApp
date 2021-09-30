@@ -11,20 +11,21 @@
         <div class='card-body d-flex flex-column align-items-center justify-content-center'>
           <nav class='navbar'>
             <div class='container-fluid'>
-              <form class='d-flex flex-column' method='POST'>
+              <div class='d-flex flex-column align-items-center'>
+                <h5 class='my-2' style="font-weight: 500">Enter list name: </h5>
+                <form class='d-flex flex-column justify-content-start' method='POST'>
+                  <input
+                    id='input-list-name'
+                    type='text'
+                    rows = '2'
+                    name='listName'
+                    class='form-control mb-3'
+                    autofocus='on'
+                    placeholder='e.g. Favorite books'
+                  />
 
-                <label for="input-list-name">List name:</label>
-                <input
-                  id='input-list-name'
-                  type='text'
-                  rows='2'
-                  name='listName'
-                  class='form-control border-primary my-5'
-                  autofocus='on'
-                  placeholder='e.g. Favorite Books'
-                />
-
-                <button class='btn btn-lg btn-outline-success'>Create</button>
+                <button class='btn btn-lg btn-outline-success mt-5'>Create</button>
+              </div>
               </form>
             </div>
           </nav>
