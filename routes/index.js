@@ -122,9 +122,14 @@ router.post('/userprofilepage/:id/remove', routeGuard, (req, res, next) => {
     });
 });
 
-router.get('/edit-profile', routeGuard, (req, res, next) => {
-  res.render('edit-profile');
-});
+router.get(
+  '/edit-profile',
+  routeGuard,
+
+  (req, res, next) => {
+    res.render('edit-profile');
+  }
+);
 
 router.post(
   '/edit-profile',
@@ -133,11 +138,10 @@ router.post(
   (req, res, next) => {
     const id = req.user._id;
     const { name, email, bio, removeProfilePhoto } = req.body;
-    console.log(removeProfilePhoto);
     let profilePhoto;
     if (req.file) {
       profilePhoto = req.file.path;
-      console.log('req file path', req.file, req.file.path);
+      // console.log('req file path is :', req.file, req.file.path);
     }
     if (removeProfilePhoto === './../images/no-user-profile-pic.png') {
       profilePhoto = '';

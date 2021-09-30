@@ -14,6 +14,16 @@ bookRouter.get('/search-book', routeGuard, (req, res, next) => {
   res.render('search-book', { searchBook: true });
 });
 
+// to get to the page to search for books to add to a particular book list
+bookRouter.get(
+  '/search-book/booklist/:bookListId',
+  routeGuard,
+  (req, res, next) => {
+    const bookListId = req.params.bookListId;
+    res.render('search-book', { searchBook: true, bookListId });
+  }
+);
+
 // to display results yielded from search
 bookRouter.get('/results', routeGuard, (req, res) => {
   const topic = req.query.topic;
@@ -114,10 +124,13 @@ bookRouter.get(
   routeGuard,
   (req, res, next) => {
     const id = req.params.id;
+    let currentBookList;
     Book.findById(id)
+      .populate('bookList')
       .then((book) => {
         if (String(req.user._id) === String(book.creator)) {
-          res.render('review-add', { book });
+          currentBookList = book.bookList.listName;
+          res.render('review-add', { book, currentBookList });
         } else {
           throw new Error('UNAUTHORIZED_USER');
         }
