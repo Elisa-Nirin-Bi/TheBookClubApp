@@ -14,8 +14,9 @@ from the medium breakpoint up. --}}
   <div class="row justify-content-center">
     <h2 class='mb-5 fw-light'>Your results:</h2>
   </div>
-
-
+    {{#if listNonExistant}}
+<h5>That list doesn't exist - click <a href="/create-list" style="color:chartreuse">here</a> to create a new list.</h5>
+{{/if}}
 
       
   <div class="row">
@@ -67,7 +68,7 @@ from the medium breakpoint up. --}}
                 id='input-bookList'
                 value="{{bookListPage.listName}}"
                 class='form-control-sm border-primary mb-1'
-                placeholder='bookList'
+                placeholder='Input book list'
               />
                 {{!-- {{else}}
               <input
