@@ -5,33 +5,39 @@
     <div class='card-body d-flex flex-column align-content-between'>
       <div class=''>
         {{#if lists}}
-          {{#each lists}}
-            <div
-              class='d-flex flex-row align-items-center justify-content-between'
-            >
-              <form method='GET'>
-                <ul class='list-group'>
-
-                  <li class='list-group-item border border-primary'><a
-                      href='/booklist/{{this._id}}'
-                    >{{listName}}</a>
-                  </li>
-
-                </ul>
-              </form>
-              <form method='POST' action='/booklist/{{this._id}}/delete'>
-                <button class='btn btn-danger' type='submit'>x</button>
-              </form>
-            </div>
-
-          {{/each}}
+          <ul class='pl-0'>
+            {{#each lists}}
+              <li class='mb-2'>
+                <div
+                  class='d-flex flex-row align-items-center justify-content-between'
+                >
+                  <a
+                    href='/booklist/{{this._id}}'
+                    class='btn btn-deepblue flex-grow-1'
+                  >{{listName}}</a>
+                  <form
+                    method='POST'
+                    action='/booklist/{{this._id}}/delete'
+                    class='mb-0 ml-2'
+                  >
+                    <button
+                      class='btn btn-outline-danger'
+                      type='submit'
+                    >x</button>
+                  </form>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
         {{else}}
           <p><em>You don't have any lists yet.</em></p>
         {{/if}}
       </div>
 
-      <a href='/create-list' class='btn btn-outline-primary mt-auto'>Organize
-        lists</a>
+      <a
+        href='/create-list'
+        class='btn btn-lg btn-outline-primary mt-auto'
+      >Organize lists</a>
 
     </div>
   </div>
