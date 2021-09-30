@@ -19,9 +19,8 @@ router.get('/search-user', routeGuard, (req, res, next) => {
   let name = req.query.name;
   console.log(name);
   let noInput;
-  User.find({ name })
+  return User.find({ name })
     .then((userSearched) => {
-      console.log(name);
       if (!name) {
         noInput = true;
       }
@@ -68,6 +67,9 @@ router.get('/userprofilepage/:id', routeGuard, (req, res, next) => {
       return FriendList.find({ friendsOnList: searchedUser });
     })
     .then((existingFriend) => {
+      if (id === String(req.user._id)) {
+        res.redirect(`/profile/${id}`);
+      }
       if (!existingFriend.length) {
         res.render('profile-friend', {
           friend: true,
@@ -130,10 +132,15 @@ router.post(
   upload.single('profilePhoto'),
   (req, res, next) => {
     const id = req.user._id;
-    const { name, email, bio } = req.body;
+    const { name, email, bio, removeProfilePhoto } = req.body;
+    console.log(removeProfilePhoto);
     let profilePhoto;
     if (req.file) {
       profilePhoto = req.file.path;
+      console.log('req file path', req.file, req.file.path);
+    }
+    if (removeProfilePhoto === './../images/no-user-profile-pic.png') {
+      profilePhoto = '';
     }
     User.findByIdAndUpdate(id, {
       name,

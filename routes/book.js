@@ -74,7 +74,10 @@ bookRouter.post(
     const id = req.user._id;
     const { title, authors, publisher, image, bookList } = req.body;
     let bookListId;
-    return List.findOne({ listName: bookList }, { listName: 1 })
+    return List.findOne(
+      { listName: bookList, listCreator: id },
+      { listName: 1 }
+    )
       .populate('booksOnList')
       .then((list) => {
         bookListId = list.id;
@@ -132,8 +135,25 @@ bookRouter.post(
   (req, res, next) => {
     const listId = req.params.listId;
     const id = req.params.id;
-    const { review } = req.body;
-    return Book.findByIdAndUpdate(id, { review })
+    let booksOnList;
+    const { review, bookList } = req.body;
+    return List.findOne({ listName: bookList, listCreator: req.user._id })
+      .then((newExistingList) => {
+        if (!newExistingList) {
+          return List.create({
+            listName: bookList,
+            listCreator: req.user._id,
+            booksOnList
+          }).then((newList) => {
+            return Book.findByIdAndUpdate(id, { review, bookList: newList });
+          });
+        } else {
+          return Book.findByIdAndUpdate(id, {
+            review,
+            bookList: newExistingList
+          });
+        }
+      })
       .then((book) => {
         if (String(req.user._id) === String(book.creator)) {
           res.redirect(`/booklist/${listId}`);

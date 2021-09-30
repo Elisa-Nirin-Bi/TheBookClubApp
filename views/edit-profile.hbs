@@ -11,13 +11,66 @@
           class='card-body d-flex flex-column align-items-center justify-content-center'
         >
           <form method='POST' enctype='multipart/form-data'>
-            <h5 class='pb-2'>Upload a profile picture</h5>
-            <input
-              id='upload-profile-pic'
-              type='file'
-              name='profilePhoto'
-              accept='image/*'
-            />
+            {{#if user.profilePhoto}}
+              <h5 class='pb-2'>Upload a profile picture</h5>
+              <div
+                class='d-flex flex-row align-items-end justify-content-center'
+              >
+                <div class='d-flex flex-column align-items-center'>
+                  <img
+                    class='bg-light img-thumbnail m-1'
+                    style='max-height: 100px'
+                    src='{{user.profilePhoto}}'
+                    alt='currentProfPic'
+                  />
+                  <label
+                    for='upload-profile-pic'
+                    class='btn btn-sm btn-primary m-2'
+                  >
+                    Update Profile Picture
+                  </label>
+                  <input
+                    id='upload-profile-pic'
+                    type='file'
+                    name='profilePhoto'
+                    accept='image/*'
+                    style='display:none;'
+                  />
+                </div>
+
+                <button
+                  class='btn btn-sm btn-outline-danger m-2'
+                  id='remove-profile-pic'
+                  name='removeProfilePhoto'
+                  value='./../images/no-user-profile-pic.png'
+                >
+                  Remove Profile Picture
+                </button>
+              </div>
+            {{else}}
+              <h5 class='pb-2'>Upload a profile picture</h5>
+              <label
+                for='upload-profile-pic'
+                class='btn btn-sm btn-primary m-2'
+              >
+                Choose a Profile Picture
+
+              </label>
+              <input
+                id='upload-profile-pic'
+                type='file'
+                name='profilePhoto'
+                accept='image/*'
+                style='display:none'
+              />
+            {{/if}}
+
+            {{! <img
+              src='./../images/no-user-profile-pic.png'
+              class='bg-light img-thumbnail m-1'
+              alt='library'
+              style='max-height: 100px'
+            /> }}
 
             <h5 class='pt-3 pb-2'>Change your name</h5>
             <input
