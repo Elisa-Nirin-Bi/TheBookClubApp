@@ -18,6 +18,10 @@ a {
   text-decoration: none;
 }
 
+.btn-deepblue {
+  color: #09203f;
+}
+
 /*
 nav {
   display: flex;
@@ -99,7 +103,7 @@ label {
 }
 
 body {
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(to bottom right, #09203f, #537895);
 }
 
 .cover-container {
