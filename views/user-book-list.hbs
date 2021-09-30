@@ -13,7 +13,7 @@
               {{#if authorizedUser}}
 
                 <a href='/search-book/bookList/{{bookListPage.id}}'>
-                  <button class='btn btn-lg btn-primary m-1 mb-4' type='submit'>Add a book</button>
+                  <button class='btn btn-lg btn-primary m-1 mb-4' type='submit' >Add a book</button>
                 </a>
 
                 <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
@@ -93,7 +93,7 @@
                         </a>
                         <a
                           class='btn btn-outline-primary mb-2'
-                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit-list'
                         >Move to another list</a>  
                       {{else}}
                         <div mb-2>
@@ -104,7 +104,7 @@
                         >Add a review</a>
                         <a
                           class='btn btn-outline-primary mb-2'
-                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit-list'
                         >Move to another list</a>
 
                       {{/if}}
