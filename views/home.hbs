@@ -1,15 +1,11 @@
 <main class='homepage'>
-  <h1 class='mb-5'>Welcome to The Book Club</h1>
+  <h1 class='mb-5 text-light'>Welcome to The Book Club</h1>
   <p class='lead'>
 
     {{#if user}}
-      <a href='/search-book' class='w-100 btn btn-lg btn-primary'>Search for
-        books</a>
+      <a href='/search-book' class='btn btn-lg btn-primary'>Search for books</a>
     {{else}}
-      <a
-        href='/authentication/sign-in'
-        class='w-100 btn btn-lg btn-primary'
-      >Sign in</a>
+      <a href='/authentication/sign-in' class='btn btn-lg btn-primary'>Sign in</a>
     {{/if}}
   </p>
 </main>
