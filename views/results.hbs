@@ -60,6 +60,16 @@ from the medium breakpoint up. --}}
                 placeholder='authors'
                 style='display: none;'
               />
+              {{!-- {{#if bookListPage}} --}}
+              <input
+                type='text'
+                name='bookList'
+                id='input-bookList'
+                value="{{bookListPage.listName}}"
+                class='form-control-sm border-primary mb-1'
+                placeholder='bookList'
+              />
+                {{!-- {{else}}
               <input
                 type='text'
                 name='bookList'
@@ -67,7 +77,7 @@ from the medium breakpoint up. --}}
                 class='form-control-sm border-primary mb-1'
                 placeholder='bookList'
               />
-
+              {{/if}} --}}
               <input
                 type='text'
                 name='publisher'

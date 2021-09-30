@@ -21,15 +21,17 @@
               name='review'
               placeholder='Write something smart'
             >{{book.review}}</textarea>
-            <h5 class='pt-3'>Move book to a new or existing list</h5>
+            <h5 class='pt-3'>Edit below to move this book to a new or existing
+              list:</h5>
             <input
               id='move-to-new-list'
               type='text'
               name='bookList'
               class='form-control border-primary'
+              value={{currentBookList}}
               placeholder='Input desired list here'
             />
-            <button class='btn btn-lg btn-primary m-3'>Add review</button>
+            <button class='btn btn-lg btn-primary m-3'>Submit</button>
           </form>
         </div>
       </div>
