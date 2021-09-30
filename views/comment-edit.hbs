@@ -1,11 +1,30 @@
-<form method='POST'>
-  <label for='comment-input-edit'>New comment</label>
-  <input
-    id='comment-input-edit'
-    type='text'
-    name='message'
-    placeholder='Edit comment'
-  />
-  <br />
-  <button>Edit comment</button>
-</form>
+<div class='container'>
+  <div class='row justify-content-center'>
+    <h2 class='mb-5 fw-light'>Edit your comment</h2>
+  </div>
+
+  <div class='row justify-content-center'>
+    <div class='col-md-6'>
+      <div class='card content bg-light text-dark text-center'>
+        <h4><i class='bi bi-chat-dots-fill'></i></h4>
+        <div
+          class='card-body d-flex flex-column align-items-center justify-content-center'
+        >
+
+          <form method='POST'>
+            <textarea
+              id='comment-input-edit'
+              type='text'
+              name='message'
+              class='form-control border-primary'
+              placeholder='Edit comment'
+            ></textarea>
+            <br />
+            <button class='btn btn-lg btn-primary mt-auto'>Edit comment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

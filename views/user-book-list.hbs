@@ -1,43 +1,54 @@
-<div class='container modal-content rounded-6 shadow text-dark'>
-  <div class='modal-body d-flex flex-column p-5'>
-    <div>
-      {{#if bookListPage}}
-        <h1>{{bookListPage.listName}}</h1>
-        <div class='d-flex justify-content-center'>
-          {{#if authorizedUser}}
+<div class="container">
+  <div class="row justify-content-center">
+    <h2 class='mb-5 fw-light'>Book list detail</h2>
+  </div>
+  
+  <div class="row row-flex">
+    <div class="col md-12">
+      <div class='card content bg-light text-dark text-center'>
+        {{#if bookListPage}}
+          <h4><i class="bi bi-book"></i>
+            {{bookListPage.listName}}</h4>
+            <div class='card-body d-flex align-items-center justify-content-center'>
+              {{#if authorizedUser}}
 
-            <a href='/search-book'>
-              <button class='btn btn-primary mb-5 mr-3' type='submit'>Add a book</button>
-            </a>
+                <a href='/search-book'>
+                  <button class='btn btn-lg btn-primary m-1 mb-4' type='submit'>Add a book</button>
+                </a>
 
-            <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
-              <button class='btn btn-danger mb-5 mr-3' type='submit'>Delete List</button>
-            </form>
+                <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
+                  <button class='btn btn-lg btn-danger mt-1 m-2' type='submit'>Delete List</button>
+                </form>
+              {{/if}}
           {{/if}}
-        </div>
-      {{/if}}
+            </div>   
+      </div>
     </div>
+  </div>  
 
     {{!-- Render of the booklist with cards --}}
 
-      <div class="row">
+  <div class="row mt-4">
           {{#each books}}
-          <div class='col-md-3 g-2'>
-            <div class='card text-dark gray-300 w-10 mb-4'>
-                  <img class='img-fluid rounded-start w-3'
-                    style='height:fit-content'
+          <div class='col-md-4 mb-4'>
+            <div class='card content bg-light text-dark text-center'>
+              <div class='card-body d-flex flex-column align-items-center justify-content-between'>   
+                <div>
+                  <img class='img-fluid rounded-start'
                     {{#if image}} 
                       src='{{image}}' 
                       {{else}} 
-                      src='https://data.europa.eu/sites/default/files/news/2020-08-06-edp_book_club.png'
+                      src='./../images/no-book-image.jpg'
+                      width='130px'
                     {{/if}}
                     alt='{{title}}'
                   />
+                </div>
 
                   <div class='p-1'>
-                    <p class='my-0'>{{authors}}</p> 
-                    <p class='pb-0'><b>{{title}}</b></p>
-                    <p class='my-0'><em>{{publisher}}</em></p>
+                    <p class='mb-1'>{{authors}}</p> 
+                    <p class='p-1'><b>{{title}}</b></p>
+                    {{!-- <span class='mb-2'>{{publisher}}</span> --}}
                   </div>
 
                   <div class="stars">
@@ -49,40 +60,52 @@
                         <span class='fa fa-star'></span>
                         <span class='fa fa-star'></span>
                         <span class='fa fa-star'></span>
-                        <span class='fa fa-star'></span>
-                        <i>
-                          <h7>{{review}}</h7>
-                        </i>
+                        <span class='fa fa-star'></span>        
                       </p>
-
                       {{#if user}}
                         <p>
                           <script>
-                            let star = document.getElementsByTagName('span'); for (let i = 0; i <
-                            star.length; i++) { star[i].addEventListener('click', function (e) {
+                            let star = document.getElementsByTagName('span'); 
+                            for (let i = 0; i < star.length; i++) { star[i].addEventListener('click', function (e) 
+                            {
                             if(e.target.classList.value == 'fa fa-star checked'){
                             e.target.classList.remove("checked") }else{
                             e.target.classList.add("checked") }})}
-
                           </script>
                         </p>
                       {{/if}}
-                    </div>
+                  </div>
+                    
+                      
+                    
 
                     <div class='review'>
                       {{#if review}}
-                        <a
-                          class='btn'
-                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
-                        >Change Review or Move to New Book List</a>
-                        <a class='btn btn-outline-primary mb-2' href='/book/{{this._id}}/comments'>See comments of this
-                          review</a>
-                      {{else}}
-
+                        <div>
+                          <h6><i class='bi bi-pencil-fill'></i> Your review:</h6>
+                            <p><em>{{review}}</em></p>
+                        </div>
                         <a
                           class='btn btn-outline-primary mb-2'
                           href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
-                        >Add Review or Move to New Book List</a>
+                        >Edit your review</a>
+                        <a class='btn btn-outline-primary mb-2' href='/book/{{this._id}}/comments'>See comments
+                        </a>
+                        <a
+                          class='btn btn-outline-primary mb-2'
+                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+                        >Move to another list</a>  
+                      {{else}}
+                        <div mb-2>
+                          <h6 class='mb-2'><i class='bi bi-pencil-fill'></i><em> No review yet</em></h6>
+                        </div>
+                        <a class='btn btn-primary mb-2'
+                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+                        >Add a review</a>
+                        <a
+                          class='btn btn-outline-primary mb-2'
+                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+                        >Move to another list</a>
 
                       {{/if}}
                     </div>
@@ -98,10 +121,9 @@
                       </form>
 
                     </div>
-
-            
-        </div>
-      </div>
+                </div>
+            </div>
+          </div>
       {{/each}}
 
   </div>

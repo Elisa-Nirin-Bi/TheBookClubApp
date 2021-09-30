@@ -1,4 +1,50 @@
-<div>
+<div class="container">
+  <div class="row justify-content-center">
+    <h2 class='mb-5 fw-light'>Organize your books with custom lists</h2>
+  </div>
+  <div class='row row-flex'>
+
+    <div class="col-md-8">
+      <div class='card content bg-light text-dark text-center'>
+        <h4><i class="bi bi-list-ul"></i>
+              Create a new list</h4>
+        <div class='card-body d-flex flex-column align-items-center justify-content-center'>
+          <nav class='navbar'>
+            <div class='container-fluid'>
+              <form class='d-flex flex-column' method='POST'>
+
+                
+                <input
+                  id='input-list-name'
+                  type='text'
+                  rows='2'
+                  name='listName'
+                  class='form-control my-5'
+                  autofocus='on'
+                  placeholder='Favorite Books, Highly Recommended Books, Books to Reread, etc.'
+                />
+
+                <button class='btn btn-lg btn-outline-success'>Create</button>
+              </form>
+            </div>
+          </nav>
+
+        </div>
+      </div>
+    </div>
+    
+    {{> myBookLists}}
+  
+  </div>
+
+
+
+</div>
+
+
+
+{{!-- 
+
   <div class='modal-content rounded-6 shadow'>
     <div class="modal-body p-5">
       <div class='form-floating'>
@@ -31,4 +77,4 @@
       
   </div>
 
-</div>
+</div> --}}
