@@ -17,7 +17,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/search-user', routeGuard, (req, res, next) => {
   let name = req.query.name;
-  console.log(name);
   let noInput;
   return User.find({ name })
     .then((userSearched) => {

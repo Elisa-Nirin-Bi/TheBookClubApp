@@ -34,11 +34,12 @@
         {{/if}}
       </div>
 
-      <a
-        href='/create-list'
-        class='btn btn-lg btn-outline-primary mt-auto'
-      >Organize lists</a>
-
+      {{#if profile}}
+        <a
+          href='/create-list'
+          class='btn btn-lg btn-outline-primary mt-auto'
+        >Organize lists</a>
+      {{/if}}
     </div>
   </div>
 </div>
