@@ -4,7 +4,7 @@
   </div>
   <div class='row row-flex'>
 
-    <!----->
+    <!--- Friend profile-->
 
     <div class='col-md-6'>
 
@@ -43,7 +43,7 @@
             </form>
 
           {{else}}
-            {{! to finish implementing delete friend option }}
+
             <form
               method='POST'
               action='/userprofilepage/{{searchedUser.id}}/remove'
@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <!---book lists -->
+    <!---ok lists -->
 
     <div class='col-md-6'>
       <div class='card content bg-light text-dark text-center'>
@@ -87,7 +87,9 @@
 
             </form>
           {{else}}
-            <p><em>{{searchedUser.name}} doesn't have any lists yet.</em></p>
+            <p><em>It's empty here... Maybe you could help
+                {{searchedUser.name}}
+                fill their book list?</em></p>
           {{/if}}
         </div>
       </div>

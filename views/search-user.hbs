@@ -1,9 +1,11 @@
 <div class='container'>
-  <div class='row justify-content-center'>
+  <div class='row row-flex justify-content-center mt-5'>
 
     <!-- Searchbar -->
-    <div class='row justify-content-center'></div>
-      <nav class='navbar navbar-expand-lg navbar-light bg-light rounded d-flex my-5'>
+    <div class='col-md-10 align-items-center justify-content-center mt-5'>
+      <nav
+        class='navbar navbar-expand-lg navbar-light bg-light rounded d-flex my-5'
+      >
         <div class='container-fluid'>
 
           <div class='collapse navbar-collapse'>
@@ -36,8 +38,8 @@
 
     <section class='results-user'>
       <div class='container'>
-        <div class='row text-center'>
-          <div class='col-md'>
+        <div class='row text-center align-items-center justify-content-center'>
+          <div class='col-md-6'>
             {{! The user didn't search anything yet: no message should appear: }}
             {{#if noInput}}{{else}}
               {{#each userSearched}}
@@ -45,7 +47,8 @@
                   <h3>That's great that you're trying to find yourself, but this may
                     not be the best technique...</h3>
                 {{else}} --}}
-                <h5 class='p-3 text-light'>We found your fellow book club member:</h5>
+                <h4 class='p-3 text-light'>We found your fellow book club
+                  member:</h4>
                 <div class='card bg-light text-dark'>
 
                   <div class='card-body text-center'>
@@ -75,14 +78,16 @@
                     >See profile</a>
                   </div>
                 </div>
-                {{!-- {{/if}} --}}
+                
               {{else}}
-                <h3 class='text-light'>We don't have any member with that name.</h3>
+                <h4 class='text-light'>We looked everywhere but we could'nt find
+                  your friend.
+                </h4>
               {{/each}}
             {{/if}}
           </div>
         </div>
       </div>
     </section>
-  </div>  
+  </div>
 </div>

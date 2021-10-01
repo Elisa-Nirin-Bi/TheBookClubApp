@@ -10,18 +10,12 @@
           <h4><i class="bi bi-book"></i>
             {{bookListPage.listName}}</h4>
             <div class='card-body d-flex align-items-center justify-content-center'>
-              {{#if authorizedUser}}
-                {{>searchBooks}}
-                
-                {{!-- <a href='/search-book/bookList/{{bookListPage.id}}'>
-                  <button class='btn btn-lg btn-primary m-1 mb-4' type='submit' >Add a book</button>
-                </a> --}}
 
                 <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
-                  <button class='btn btn-lg btn-danger mt-1 m-2' type='submit'>Delete List</button>
+                  <button class='btn btn-lg btn-outline-danger mt-1 m-2' type='submit'>Delete List</button>
                 </form>
-              {{/if}}
-          {{/if}}
+        {{/if}}
+          
             </div>   
       </div>
     </div>
@@ -30,21 +24,22 @@
     {{!-- Render of the booklist with cards --}}
 
   <div class="row mt-4">
+    {{#if books}}
           {{#each books}}
           <div class='col-md-4 mb-4'>
             <div class='card content bg-light text-dark text-center'>
               <div class='card-body d-flex flex-column align-items-center justify-content-between'>   
-                <div>
-                  <img class='img-fluid rounded-start'
-                    {{#if image}} 
-                      src='{{image}}' 
-                      {{else}} 
-                      src='./../images/no-book-image.jpg'
-                      width='130px'
-                    {{/if}}
-                    alt='{{title}}'
-                  />
-                </div>
+                  <div>
+                    <img class='img-fluid rounded-start'
+                      {{#if image}} 
+                        src='{{image}}' 
+                        {{else}} 
+                        src='./../images/no-book-image.jpg'
+                        width='130px'
+                      {{/if}}
+                      alt='{{title}}'
+                    />
+                  </div>
 
                   <div class='p-1'>
                     <p class='mb-1'>{{authors}}</p> 
@@ -80,52 +75,63 @@
                       
                     
 
-                    <div class='review'>
-                      {{#if review}}
-                        <div>
-                          <h6><i class='bi bi-pencil-fill'></i> Your review:</h6>
-                            <p><em>{{review}}</em></p>
-                        </div>
-                        <a
-                          class='btn btn-outline-primary mb-2'
-                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
-                        >Edit your review</a>
-                        <a class='btn btn-outline-primary mb-2' href='/book/{{this._id}}/comments'>See comments
-                        </a>
-                        <a
-                          class='btn btn-outline-primary mb-2'
-                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit-list'
-                        >Move to another list</a>  
-                      {{else}}
-                        <div mb-2>
-                          <h6 class='mb-2'><i class='bi bi-pencil-fill'></i><em> No review yet</em></h6>
-                        </div>
-                        <a class='btn btn-primary mb-2'
-                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
-                        >Add a review</a>
-                        <a
-                          class='btn btn-outline-primary mb-2'
-                          href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit-list'
-                        >Move to another list</a>
+                  <div class='review'>
+                    {{#if review}}
+                      <div>
+                        <h6><i class='bi bi-pencil-fill'></i> Your review:</h6>
+                          <p><em>{{review}}</em></p>
+                      </div>
+                      <a
+                        class='btn btn-outline-primary mb-2'
+                        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+                      >Edit your review</a>
+                      <a class='btn btn-outline-primary mb-2' href='/book/{{this._id}}/comments'>See comments
+                      </a>
+                      <a
+                        class='btn btn-outline-primary mb-2'
+                        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit-list'
+                      >Move to another list</a>  
+                    {{else}}
+                      <div mb-2>
+                        <h6 class='mb-2'><i class='bi bi-pencil-fill'></i><em> No review yet</em></h6>
+                      </div>
+                      <a class='btn btn-primary mb-2'
+                        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
+                      >Add a review</a>
+                      <a
+                        class='btn btn-outline-primary mb-2'
+                        href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit-list'
+                      >Move to another list</a>
 
-                      {{/if}}
-                    </div>
+                    {{/if}}
+                  </div>
+              
+                  <div class='delete'>
+
+                    <form
+                      method='POST'
+                      action='/booklist/{{bookList}}/{{title}}/{{this._id}}/delete'
+                    >
+                      <button class='btn btn-outline-danger mb-2' type='submit'>Delete
+                        Book</button>
+                    </form>
+                    
+                    
+                  
+                  
+                  </div>
+                  
                 
-                    <div class='delete'>
+              </div>
 
-                      <form
-                        method='POST'
-                        action='/booklist/{{bookList}}/{{title}}/{{this._id}}/delete'
-                      >
-                        <button class='btn btn-outline-danger mb-2' type='submit'>Delete
-                          Book</button>
-                      </form>
-
-                    </div>
-                </div>
+                
             </div>
+                
           </div>
-      {{/each}}
+  {{/each}}
+  {{else}}
+  <h4 class='my-5 text-light'><i class="bi bi-emoji-frown-fill"></i> An empty book list... how sad...</h4>
+  {{/if}}
 
-  </div>
+
 </div>
