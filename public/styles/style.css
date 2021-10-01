@@ -78,10 +78,6 @@ body {
   background-image: linear-gradient(to bottom right, #09203f, #537895);
 }
 
-.cover-container {
-  max-width: 42em;
-}
-
 .homepage {
   background-image: url("./../images/homepage-picture.jpg");
   background-size: cover;

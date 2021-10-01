@@ -1,31 +1,33 @@
-<nav class='navbar navbar-expand-lg navbar-light bg-light rounded d-flex'>
-  <div
-    class='container-fluid d-grip gap-1 d-flex justify-content-between align-items-center'
-  >
-    <div class='collapse navbar-collapse'>
-      <img
-        src='./../../images/logo.jpg'
-        alt='bookclub-logo'
-        height='40'
-        class='ms-auto mb-1'
-      />
+<div class='col-md-4'>
+  <nav class='navbar navbar-expand-lg navbar-light bg-light rounded'>
+    <div class='container-fluid'>
+      <div class='collapse navbar-collapse'>
+        <img
+          src='./../../images/logo.jpg'
+          alt='bookclub-logo'
+          height='38px'
+          class='ms-auto mb-1'
+        />
+      </div>
+
+      <form action='/results' class='d-flex w-100 pt-2'>
+        <input
+          class='form-control me-ms-2'
+          aria-label='Search'
+          type='text'
+          id='input-book-topic'
+          autofocus='on'
+          name='topic'
+          placeholder='Search a title or an author'
+        />
+        <button
+          class='btn btn-secondary my-2 my-sm-0'
+          type='submit'
+        >Search</button>
+      </form>
     </div>
-
-    <form action='/results' class='d-flex bd-highlight w-100 pt-2'>
-      <input
-        class='form-control'
-        aria-label='Search'
-        type='text'
-        id='input-book-topic'
-        autofocus='on'
-        name='topic'
-        placeholder='Search a title or an author'
-      />
-      <button class='btn btn-outline-success'>Search</button>
-    </form>
-  </div>
-</nav>
-
+  </nav>
+</div>
 {{! <div class='collapse navbar-collapse'>
         <img
           src='./../images/logo.jpg'
