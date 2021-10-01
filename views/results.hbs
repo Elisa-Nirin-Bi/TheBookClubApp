@@ -15,12 +15,12 @@ from the medium breakpoint up. --}}
     <h2 class='mb-5 fw-light'>Your results:</h2>
   </div>
     {{#if listNonExistant}}
-<h5>That list doesn't exist - click <a href="/create-list" style="color:chartreuse">here</a> to create a new list.</h5>
-{{/if}}
+      <h5>That list doesn't exist - click <a href="/create-list" style="color:chartreuse">here</a> to create a new list.</h5>
+    {{/if}}
 
       
   <div class="row">
-   {{#each books}}
+   {{#each books.books as |book bookId|}}
     <div class='col-md-3 mb-4'>
       <div class='card content bg-light text-dark text-center'>
         <div class='card-body d-flex flex-column align-items-center justify-content-between'>
@@ -43,7 +43,9 @@ from the medium breakpoint up. --}}
             <span class='mb-2'>{{volumeInfo.publisher}}</span>
           </div>
           <div class='d-flex text-left'>
-          <form method='POST' enctype='multipart/form-data'>
+
+
+          <form id="addBookForm" method='POST' enctype='multipart/form-data'>
               <input
                 type='text'
                 name='title'
@@ -61,24 +63,7 @@ from the medium breakpoint up. --}}
                 placeholder='authors'
                 style='display: none;'
               />
-              {{!-- {{#if bookListPage}} --}}
-              <input
-                type='text'
-                name='bookList'
-                id='input-bookList'
-                value="{{bookListPage.listName}}"
-                class='form-control-sm border-primary mb-1'
-                placeholder='Input book list'
-              />
-                {{!-- {{else}}
-              <input
-                type='text'
-                name='bookList'
-                id='input-bookList'
-                class='form-control-sm border-primary mb-1'
-                placeholder='bookList'
-              />
-              {{/if}} --}}
+ 
               <input
                 type='text'
                 name='publisher'
@@ -94,15 +79,22 @@ from the medium breakpoint up. --}}
                 value='{{volumeInfo.imageLinks.smallThumbnail}}'
                 style='display: none;'
               />
-
-              <button class='btn btn-primary mt-1'>Add to Book List</button>
+              <div class="dropdown">
+                <button class="btn btn-primary mt-1 dropdown-toggle" type='button' id="addBookDropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false"> Add to Book List </button>
+                <div class="dropdown-menu" aria-labelledby="addBookDropdownMenu">
+                  {{#each ../books.userLists}}
+                    <button class='dropdown-item' name="bookList" value="{{listName}}" type="submit">{{listName}}</button>
+                 {{/each}}
+                </div>
+              </div>
           </form>
           </div>
         </div>
       </div>
     </div>
-  
     {{/each}}
   </div>
 </div>
 
+            

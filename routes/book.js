@@ -27,14 +27,19 @@ bookRouter.get(
 // to display results yielded from search
 bookRouter.get('/results', routeGuard, (req, res) => {
   const topic = req.query.topic;
-  const userLists = req.user.userLists;
-  axios
-    .get(`https://www.googleapis.com/books/v1/volumes?q=${topic}`)
-    .then((resp) => {
-      res.render('results', {
-        books: resp.data.items,
-        userLists
-      });
+  let userLists;
+  return List.find({ listCreator: req.user._id })
+    .then((doc) => {
+      userLists = doc;
+      axios
+        .get(`https://www.googleapis.com/books/v1/volumes?q=${topic}`)
+        .then((resp) => {
+          console.log(userLists);
+          const books = resp.data.items;
+          res.render('results', {
+            books: { books, userLists }
+          });
+        });
     })
     .catch((error) => {
       console.log(error);

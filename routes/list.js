@@ -30,7 +30,7 @@ listRouter.post('/create-list', routeGuard, (req, res, next) => {
       }
     })
     .then(() => {
-      List.create({
+      return List.create({
         listName,
         listCreator: id,
         booksOnList
