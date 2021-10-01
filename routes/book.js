@@ -28,22 +28,26 @@ bookRouter.get(
 bookRouter.get('/results', routeGuard, (req, res) => {
   const topic = req.query.topic;
   let userLists;
-  return List.find({ listCreator: req.user._id })
-    .then((doc) => {
-      userLists = doc;
-      axios
-        .get(`https://www.googleapis.com/books/v1/volumes?q=${topic}`)
-        .then((resp) => {
-          console.log(userLists);
-          const books = resp.data.items;
-          res.render('results', {
-            books: { books, userLists }
+  if (topic) {
+    return List.find({ listCreator: req.user._id })
+      .then((doc) => {
+        userLists = doc;
+        axios
+          .get(`https://www.googleapis.com/books/v1/volumes?q=${topic}`)
+          .then((resp) => {
+            console.log(userLists);
+            const books = resp.data.items;
+            res.render('results', {
+              books: { books, userLists }
+            });
           });
-        });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    throw new Error('MUST_HAVE_SEARCH_INPUT');
+  }
 });
 
 // to display books added to a book list
