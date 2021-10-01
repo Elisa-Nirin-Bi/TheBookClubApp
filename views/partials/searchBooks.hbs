@@ -1,33 +1,71 @@
-<div class='col-md-4'>
-  <nav class='navbar navbar-expand-lg navbar-light bg-light rounded'>
-    <div class='container-fluid'>
-      <div class='collapse navbar-collapse'>
-        <img
-          src='./../../images/logo.jpg'
-          alt='bookclub-logo'
-          height='38px'
-          class='ms-auto mb-1'
-        />
-      </div>
+{{#if bookListPage}}
+  <div class='w-100'>
+    <nav class='navbar navbar-expand-lg navbar-light bg-light rounded'>
+      <div class='container-fluid'>
+        <div class='collapse navbar-collapse'>
+          <img
+            src='./../../images/logo.jpg'
+            alt='bookclub-logo'
+            height='38px'
+            class='ms-auto mb-1 mx-2'
+          />
+        </div>
 
-      <form action='/results' class='d-flex w-100 pt-2'>
-        <input
-          class='form-control me-ms-2'
-          aria-label='Search'
-          type='text'
-          id='input-book-topic'
-          autofocus='on'
-          name='topic'
-          placeholder='Search a title or an author'
-        />
-        <button
-          class='btn btn-secondary my-2 my-sm-0'
-          type='submit'
-        >Search</button>
-      </form>
-    </div>
-  </nav>
-</div>
+        <form action='/results' class='d-flex w-100 pt-2'>
+          <input
+            class='form-control me-ms-2'
+            aria-label='Search'
+            type='text'
+            id='input-book-topic'
+            autofocus='on'
+            name='topic'
+            placeholder='Search a title or an author to add to this list'
+          />
+
+          <button class='btn btn-secondary m-2 my-sm-0' type='submit'>Let's go!</button>
+
+        </form>
+      </div>
+    </nav>
+  </div>
+{{else}}
+  <div class='col-md-4'>
+    <nav class='navbar navbar-expand-lg navbar-light bg-light rounded'>
+      <div class='container-fluid'>
+        <div class='collapse navbar-collapse'>
+          <img
+            src='./../../images/logo.jpg'
+            alt='bookclub-logo'
+            height='38px'
+            class='ms-auto mb-1'
+          />
+        </div>
+
+        <form action='/results' class='d-flex w-100 pt-2'>
+          <input
+            class='form-control me-ms-2'
+            aria-label='Search'
+            type='text'
+            id='input-book-topic'
+            autofocus='on'
+            name='topic'
+            placeholder='Search a title or an author'
+          />
+
+          {{!-- {{#if bookListPage}}
+          <button class='btn btn-secondary my-2 my-sm-0' type='submit'>Add to
+            this List</button>
+        {{else}} --}}
+          <button
+            class='btn btn-secondary my-2 my-sm-0'
+            type='submit'
+          >Search</button>
+          {{!-- {{/if}} --}}
+        </form>
+      </div>
+    </nav>
+  </div>
+{{/if}}
 {{! <div class='collapse navbar-collapse'>
         <img
           src='./../images/logo.jpg'

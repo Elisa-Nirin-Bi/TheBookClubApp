@@ -11,10 +11,11 @@
             {{bookListPage.listName}}</h4>
             <div class='card-body d-flex align-items-center justify-content-center'>
               {{#if authorizedUser}}
-
-                <a href='/search-book/bookList/{{bookListPage.id}}'>
+                {{>searchBooks}}
+                
+                {{!-- <a href='/search-book/bookList/{{bookListPage.id}}'>
                   <button class='btn btn-lg btn-primary m-1 mb-4' type='submit' >Add a book</button>
-                </a>
+                </a> --}}
 
                 <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
                   <button class='btn btn-lg btn-danger mt-1 m-2' type='submit'>Delete List</button>

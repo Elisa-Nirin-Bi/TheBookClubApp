@@ -50,7 +50,7 @@ bookRouter.get('/results', routeGuard, (req, res) => {
 bookRouter.get('/booklist/:bookListId', routeGuard, (req, res, next) => {
   const bookListId = req.params.bookListId;
   let bookListPage;
-  List.findById(bookListId)
+  return List.findById(bookListId)
     .then((list) => {
       bookListPage = list;
       return Book.find({
@@ -164,14 +164,21 @@ bookRouter.get(
   routeGuard,
   (req, res, next) => {
     const id = req.params.id;
+    const userId = req.user._id;
     let currentBookList;
-    Book.findById(id)
-      .populate('bookList')
+    let bookLists;
+    return List.find({ listCreator: userId })
+      .then((doc) => {
+        bookLists = doc;
+      })
+      .then(() => {
+        return Book.findById(id).populate('bookList');
+      })
       .then((book) => {
         if (String(req.user._id) === String(book.creator)) {
           currentBookList = book.bookList.listName;
           console.log(currentBookList);
-          res.render('move-to-new-list', { book, currentBookList });
+          res.render('move-to-new-list', { book, bookLists, currentBookList });
         } else {
           throw new Error('UNAUTHORIZED_USER');
         }

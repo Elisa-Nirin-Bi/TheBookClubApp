@@ -10,19 +10,47 @@
         <div
           class='card-body d-flex flex-column align-items-center justify-content-center'
         >
-          <form method='POST'>
-            <h5 class='pt-3'>Edit below to move this book to a new or existing
-              list:</h5>
+          <form id='move-to-different-list' method='POST'>
+            <h5 class='pt-3'>Create a new list for this book, or choose from
+              existing lists in dropdown below:</h5>
             <input
               id='move-to-new-list'
               type='text'
               name='bookList'
               class='form-control border-primary'
-              value='{{currentBookList}}'
-              placeholder='Input desired list here'
+              {{!-- value='{{currentBookList}}' --}}
+              placeholder='Input new list name to create for this book here!'
             />
             <button class='btn btn-lg btn-primary m-3'>Submit</button>
           </form>
+
+          <div class='dropdown'>
+            <button
+              class='btn btn-primary mt-1 dropdown-toggle'
+              type='button'
+              id='moveBookDropdownMenu'
+              data-toggle='dropdown'
+              aria-haspopup='true'
+              aria-expanded='false'
+            > Move to Existing List </button>
+            <div class='dropdown-menu' aria-labelledby='moveBookDropdownMenu'>
+              {{#if bookLists}}
+                booklist exists
+              {{else}}
+                do not
+              {{/if}}
+              {{#each bookLists}}
+                <button
+                  class='dropdown-item'
+                  name='bookList'
+                  value='{{listName}}'
+                  form='move-to-different-list'
+                  type='submit'
+                >{{listName}}</button>
+              {{/each}}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
