@@ -23,9 +23,7 @@
 
   <body class='d-flex text-center text-white flex-column mx-auto'>
 
-      <header class='mb-auto'>
-        
-
+      {{!-- <header class='mb-auto'> --}}
         <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
           <div class='container-fluid'>
             <a class="navbar-brand" href="/">The Book Club</a>
@@ -37,7 +35,9 @@
                   <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                       <li class="nav-item">
-                        <a class="nav-link {{#if home}} active {{/if}}" aria-current='page' href='/'>Home
+                        <a class="nav-link {{#if home}} active {{/if}}" 
+                        aria-current='page' 
+                        href='/'>Home
                           <span class="visually-hidden">(current)</span>
                         </a>  
                       </li>
@@ -49,48 +49,52 @@
                         <a class="nav-link {{#if list}} active {{/if}}" href="/create-list">Organize Books</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link {{#if searchBook}} active {{/if}}" href="/search-book">Search Book</a>
+                        <a class="nav-link {{#if searchUser}} active {{/if}}" href="/search-user">Search User</a>
                       </li>
-                      <li class="nav-item">
-                        <nav class='navbar navbar-expand-lg navbar-light rounded py-0'>
-                          <form action='/results' class='d-flex'>
+                       <li class="nav-item">
+                        
+                        
+                      </li>
+                    </ul>
+                      {{!-- <li class="nav-item"> --}}
+                        {{!-- <nav class='navbar navbar-expand-lg navbar-light rounded py-0'> --}}
+                          
+                          <form class='d-flex mb-0 mr-3' action='/results'>
                             <input
-                              class='form-control'
+                              class='form-control me-sm-1'
                               aria-label='Search'
                               type='text'
                               id='input-book-topic'
                               name='topic'
-                              placeholder='Search a title or an author'
+                              placeholder='Search book'
                             />
                             <button
-                              class='btn btn-secondary'
+                              class='btn btn-dark'
                               type='submit'
                             >Search</button>
                           </form>
-                      </nav>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link {{#if searchUser}} active {{/if}}" href="/search-user">Search User</a>
-                      </li>
-                    </ul>
-                      <form action='/authentication/sign-out' method='POST' class="d-flex align-items-center">
-                        <button class="btn btn-secondary mt-2 my-sm-0" type="submit">Sign out</button>
+                      {{!-- </nav> --}}
+                      {{!-- </li> --}}
+                      
+                    
+                      <form action='/authentication/sign-out' method='POST' class='mb-0' >
+                        <button class="btn btn-secondary mx-2 ms-auto" type="submit">Sign out</button>
                       </form>
 
                         {{else}} <!--- Menu if the user doesn't have an account --->
-                        <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                          <a class="nav-link {{#if signIn}} active {{/if}}" href="/authentication/sign-in">Sign In</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link {{#if signUp}} active {{/if}}" href="/authentication/sign-up">Sign Up</a>
-                        </li>
-                      {{/if}}
-                        </ul>
+                          <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                              <a class="nav-link {{#if signIn}} active {{/if}}" href="/authentication/sign-in">Sign In</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link {{#if signUp}} active {{/if}}" href="/authentication/sign-up">Sign Up</a>
+                            </li>
+                          </ul>
+                        {{/if}}
+            </div>
           </div>
-        </div>
-      </nav>
-      </header>
+        </nav>
+      {{!-- </header> --}}
 
       {{{body}}}
 
@@ -120,6 +124,7 @@
       integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6'
       crossorigin='anonymous'
     ></script>
+
   </body>
 
 </html>
