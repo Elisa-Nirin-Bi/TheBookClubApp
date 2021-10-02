@@ -10,10 +10,11 @@
           <h4><i class="bi bi-book"></i>
             {{bookListPage.listName}}</h4>
             <div class='card-body d-flex align-items-center justify-content-center'>
-
+              {{#if authorizedUser}}
                 <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
                   <button class='btn btn-lg btn-outline-danger mt-1 m-2' type='submit'>Delete List</button>
                 </form>
+                {{/if}}
         {{/if}}
           
             </div>   
@@ -71,8 +72,16 @@
                         </p>
                    
                   </div>
+
+                  {{!-- <div class="container">
+                    <span id="rateMe1"></span>
+                  </div>
+
                     
-                      
+<!-- rating.js file -->
+                  <script src="js/addons/rating.js"></script>
+                             <script type="modules" src="modules/mdb.js"></script>         
+                       --}}
                     
 
                   <div class='review'>
