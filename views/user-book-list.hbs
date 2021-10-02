@@ -97,7 +97,7 @@
                         href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
                       >Edit your review</a>
                       {{/if}}
-                      <a class='btn btn-outline-primary mb-2' href='/book/{{this._id}}/comments'>See comments
+                      <a class='btn btn-outline-primary mb-2' href='/book/{{this._id}}/comments'>{{#if ../authorizedUser}} See comments {{else}} Comment this review {{/if}}
                       </a>
                       {{#if ../authorizedUser}}
                       <a
