@@ -10,10 +10,11 @@
           <h4><i class="bi bi-book"></i>
             {{bookListPage.listName}}</h4>
             <div class='card-body d-flex align-items-center justify-content-center'>
-
+              {{#if authorizedUser}}
                 <form method='POST' action='/booklist/{{bookListPage.id}}/delete'>
                   <button class='btn btn-lg btn-outline-danger mt-1 m-2' type='submit'>Delete List</button>
                 </form>
+                {{/if}}
         {{/if}}
           
             </div>   
@@ -58,7 +59,7 @@
                         <span class='fa fa-star'></span>
                         <span class='fa fa-star'></span>        
                       </p>
-                      {{#if user}}
+              
                         <p>
                           <script>
                             let star = document.getElementsByTagName('span'); 
@@ -69,32 +70,46 @@
                             e.target.classList.add("checked") }})}
                           </script>
                         </p>
-                      {{/if}}
+                   
                   </div>
-                    
-                      
+
+                            {{!-- <div class="container">
+                              <span id="rateMe1"></span>
+                            </div>
+
+                              
+                              <!-- rating.js file -->
+                            <script src="js/addons/rating.js"></script>
+                                      <script type="modules" src="modules/mdb.js"></script>         
+                                --}}
                     
 
                   <div class='review'>
                     {{#if review}}
+
                       <div>
-                        <h6><i class='bi bi-pencil-fill'></i> Your review:</h6>
+                        <h6><i class='bi bi-pencil-fill'></i> {{#if ../authorizedUser}} Your review {{else}} Their review {{/if}}:</h6>
                           <p><em>{{review}}</em></p>
                       </div>
+                      {{#if ../authorizedUser}}
                       <a
                         class='btn btn-outline-primary mb-2'
                         href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
                       >Edit your review</a>
-                      <a class='btn btn-outline-primary mb-2' href='/book/{{this._id}}/comments'>See comments
+                      {{/if}}
+                      <a class='btn btn-outline-primary mb-2' href='/book/{{this._id}}/comments'>{{#if ../authorizedUser}} See comments {{else}} Comment this review {{/if}}
                       </a>
+                      {{#if ../authorizedUser}}
                       <a
                         class='btn btn-outline-primary mb-2'
                         href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit-list'
                       >Move to another list</a>  
+                      {{/if}}
                     {{else}}
                       <div mb-2>
                         <h6 class='mb-2'><i class='bi bi-pencil-fill'></i><em> No review yet</em></h6>
                       </div>
+                      {{#if ../authorizedUser}}
                       <a class='btn btn-primary mb-2'
                         href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit'
                       >Add a review</a>
@@ -102,12 +117,13 @@
                         class='btn btn-outline-primary mb-2'
                         href='/booklist/{{bookList}}/{{title}}/{{this._id}}/edit-list'
                       >Move to another list</a>
-
+                      {{/if}}
                     {{/if}}
                   </div>
-              
                   <div class='delete'>
 
+              
+              {{#if ../authorizedUser}}
                     <form
                       method='POST'
                       action='/booklist/{{bookList}}/{{title}}/{{this._id}}/delete'
@@ -115,12 +131,13 @@
                       <button class='btn btn-outline-danger mb-2' type='submit'>Delete
                         Book</button>
                     </form>
+                  {{/if}}
+                    
                     
                     
                   
                   
                   </div>
-                  
                 
               </div>
 

@@ -34,11 +34,6 @@
               aria-expanded='false'
             > Move to Existing List </button>
             <div class='dropdown-menu' aria-labelledby='moveBookDropdownMenu'>
-              {{#if bookLists}}
-                booklist exists
-              {{else}}
-                do not
-              {{/if}}
               {{#each bookLists}}
                 <button
                   class='dropdown-item'
